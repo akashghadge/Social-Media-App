@@ -3,7 +3,8 @@ const router = Router();
 
 // import userOtp madule for checking is email and otp match or not
 const User_OTP = require("../models/User_OTP");
-
+// importing mail sending features
+const SendMail = require("../middleware/SendMail");
 
 // this route used to verify email and otp  
 router.post("/mail/verification", (req, res) => {
@@ -19,12 +20,19 @@ router.post("/mail/verification", (req, res) => {
             }
             else {
                 res.status(200).json("otp match");
+                console.log("otp match");
                 console.log(data);
             }
         })
         .catch((err) => {
             console.log(err);
         })
+})
+
+router.post("/mail/resend", async (req, res) => {
+    const email = req.body.email;
+    SendMail(email);
+    res.status(200).json({});
 })
 
 module.exports = router;
