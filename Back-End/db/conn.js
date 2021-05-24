@@ -1,8 +1,7 @@
 // database connections
 const mongoose = require("mongoose");
 require("dotenv").config();
-const uri = process.env.MONGO_URI 
-// || "mongodb://localhost:27017/jwt";
+const uri = process.env.MONGO_URI || "mongodb://localhost:27017/jwt";
 mongoose.connect(uri, {
     useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false
 }).then((data) => {
