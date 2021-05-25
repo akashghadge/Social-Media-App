@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+
 // must needed packages
 const cros = require("cors");
 require("dotenv").config();
@@ -16,32 +17,22 @@ app.use(cros());
 app.use(cookieParser());
 
 
+// getting db connection
+require("./DB/conn");
+
+
 // mail verificatin
 const SendMail = require("./middleware/SendMail");
-const EmailRoute = require("./routes/Email.route");
-app.use("/api/", EmailRoute);
-
-// SendMail("akashsghadge06@gmail.com");
-// SendMail("akashsghadge06@gmail.com");
-
-// database connections
-const mongoose = require("mongoose");
-const uri = process.env.MONGO_URI;
-mongoose.connect("mongodb://localhost/email-verification", {
-    useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false
-}).then((data) => {
-    console.log("DB is connected..");
-}).catch((err) => {
-    console.log(err);
-});
-const connection = mongoose.connection;
-connection.once("open", () => {
-    console.log("Database connected sucessfully");
+SendMail("akashsghadge06@gmail.com").then(() => {
+    console.log("succefully send email");
+}).catch(() => {
+    console.log("mail not send ");
 })
 
 
-
-
+// api routers
+const EmailRoute = require("./routes/Email.route");
+app.use("/api/", EmailRoute);
 
 
 app.listen(port, () => {

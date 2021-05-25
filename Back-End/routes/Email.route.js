@@ -31,8 +31,11 @@ router.post("/mail/verification", (req, res) => {
 
 router.post("/mail/resend", async (req, res) => {
     const email = req.body.email;
-    SendMail(email);
-    res.status(200).json({});
+    SendMail(email).then(() => {
+        res.status(200).json("mail send");
+    }).catchl(() => {
+        res.status(404).json("error occured");
+    })
 })
 
 module.exports = router;
