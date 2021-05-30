@@ -10,7 +10,7 @@ const otpSchema = new Schema
         {
             type: Number
         },
-        createdAt: { type: Date, expires: 600, default: Date.now }//here using this data inserted at data base only remain for 10 min
+        createdAt: { type: Date, expires: 600, default: Date.now() }//here using this data inserted at data base only remain for 10 min
     })
 
 

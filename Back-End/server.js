@@ -22,18 +22,19 @@ require("./DB/conn");
 
 
 // mail verificatin
-const SendMail = require("./middleware/SendMail");
-SendMail("akashsghadge06@gmail.com").then(() => {
-    console.log("succefully send email");
-}).catch(() => {
-    console.log("mail not send ");
-})
+// const SendMail = require("./middleware/SendMail");
+// SendMail("akashsghadge06@gmail.com").then(() => {
+//     console.log("succefully send email");
+// }).catch(() => {
+//     console.log("mail not send ");
+// })
 
 
 // api routers
 const EmailRoute = require("./routes/Email.route");
+const User = require("./routes/User.route");
 app.use("/api/", EmailRoute);
-
+app.use("/api/user", User);
 
 app.listen(port, () => {
     console.log("Server is listening on port :", port);
