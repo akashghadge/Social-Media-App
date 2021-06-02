@@ -102,4 +102,34 @@ router.post("/add", (req, res) => {
 
 })
 
+
+router.post("/in", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    // getting user data
+    const user = await User.findOne({ username: username });
+    if (user) {
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (validPassword) {
+
+            /**
+             *issuesing the token
+             */
+            let payload = {
+                username: username
+            }
+
+            //create the access token with the shorter lifespan
+            let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 900 });
+            res.status(200).json({
+                "jwt": accessToken
+            })
+        }
+        else {
+            res.status(400).json({ err: "invalid password" });
+        }
+    } else {
+        res.status(401).json({ err: "user does not exists" })
+    }
+})
 module.exports = router;
