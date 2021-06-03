@@ -5,6 +5,10 @@ const bcrypt = require('bcrypt')
 // here i am creating new schema where i store users email and otp associat to it
 const UserSchema = new Schema
     ({
+        profilePic: {
+            type: String,
+            default: ""
+        },
         email: {
             type: String,
             required: [true, 'please enter an email'],

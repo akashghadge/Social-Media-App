@@ -33,8 +33,12 @@ require("./DB/conn");
 // api routers
 const EmailRoute = require("./routes/Email.route");
 const User = require("./routes/User.route");
+const Dashboard = require("./routes/Dashboard.route");
+const Post = require("./routes/Post.route");
 app.use("/api/", EmailRoute);
 app.use("/api/user", User);
+app.use("/api/dashboard", Dashboard);
+app.use("/api/post", Post);
 
 app.listen(port, () => {
     console.log("Server is listening on port :", port);
