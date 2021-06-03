@@ -35,10 +35,12 @@ const EmailRoute = require("./routes/Email.route");
 const User = require("./routes/User.route");
 const Dashboard = require("./routes/Dashboard.route");
 const Post = require("./routes/Post.route");
+const Follow = require("./routes/Follow.route")
 app.use("/api/", EmailRoute);
 app.use("/api/user", User);
 app.use("/api/dashboard", Dashboard);
 app.use("/api/post", Post);
+app.use("/api/follow", Follow);
 
 app.listen(port, () => {
     console.log("Server is listening on port :", port);

@@ -35,6 +35,8 @@ const UserSchema = new Schema
             type: String,
             requireed: [true, 'please enter username']
         },
+        following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+        followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         createdAt: { type: Date, default: Date.now }
     })
 // hashing password
