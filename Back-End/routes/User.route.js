@@ -1,37 +1,13 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const router = Router();
-
+const bcrypt = require("bcrypt");
 //models and middlewares  
-let User = require("../models/User.model");
+const User = require("../models/User.model");
 const TempUser = require("../models/TempUser.model");
 const SendMail = require("../middleware/SendMail");
 
-// error handler class
-const handleErrors = (err) => {
-    console.log(err.message, err.code);
-    let errors = { email: '', password: '' };
-    // incorrect email->login
-    if (err.message === 'incorrect Email') {
-        errors.email = 'this email is not registerd';
-    }
-    if (err.message === 'incorrect Password') {
-        errors.password = 'this is incorrect password';
-    }
-    // dublicate email->signup
-
-    if (err.code === 11000) {
-        errors.email = 'that email is already registred';
-        return errors;
-    }
-
-    if (err.message.includes('User validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message;
-        })
-    }
-    return errors;
-}
+const { handleErrors } = require("../helpers/handleErrors");
 
 // user addding route
 router.post("/add", (req, res) => {
@@ -108,6 +84,7 @@ router.post("/in", async (req, res) => {
     const password = req.body.password;
     // getting user data
     const user = await User.findOne({ username: username });
+    console.log(user._id);
     if (user) {
         const validPassword = await bcrypt.compare(password, user.password);
         if (validPassword) {
@@ -116,19 +93,24 @@ router.post("/in", async (req, res) => {
              *issuesing the token
              */
             let payload = {
-                username: username
+                username: username,
+                id: user._id
+                // id: user[0]._id
             }
 
             //create the access token with the shorter lifespan
             let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 900 });
+            console.log(username, "has sign in");
             res.status(200).json({
                 "jwt": accessToken
             })
         }
         else {
+            console.log("invalid password");
             res.status(400).json({ err: "invalid password" });
         }
     } else {
+        console.log("invalid username");
         res.status(401).json({ err: "user does not exists" })
     }
 })
