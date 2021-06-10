@@ -17,7 +17,7 @@ router.post("/add", (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-
+    const PicUrl = req.body.PicUrl;
 
     // finding for exiting user if not add it
     try {
@@ -45,6 +45,7 @@ router.post("/add", (req, res) => {
                                             email: email,
                                             username: username,
                                             password: password,
+                                            PicUrl: PicUrl,
                                             createdAt: Date.now()
                                         });
                                         newTempUser.save()
