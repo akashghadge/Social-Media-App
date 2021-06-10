@@ -33,6 +33,7 @@ router.post("/mail/verification", (req, res) => {
                         email: data[0].email,
                         username: data[0].username,
                         password: data[0].password,
+                        PicUrl: data[0].PicUrl,
                         createdAt: Date.now()
                     });
                     newUser.save()

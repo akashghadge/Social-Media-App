@@ -5,10 +5,6 @@ const bcrypt = require('bcrypt')
 // here i am creating new schema where i store users email and otp associat to it
 const UserSchema = new Schema
     ({
-        profilePic: {
-            type: String,
-            default: ""
-        },
         email: {
             type: String,
             required: [true, 'please enter an email'],
@@ -34,6 +30,10 @@ const UserSchema = new Schema
         {
             type: String,
             requireed: [true, 'please enter username']
+        },
+        PicUrl: {
+            type: String,
+            require: [true, 'please enter url']
         },
         following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],

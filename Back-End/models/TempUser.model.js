@@ -31,6 +31,10 @@ const TempUserSchema = new Schema
             type: String,
             requireed: [true, 'please enter username']
         },
+        PicUrl: {
+            type: String,
+            default: `http://localhost:5000/images/dp.jpg`
+        },
         createdAt: { type: Date, expires: 600, default: Date.now() }//here using this data inserted at data base only remain for 10 min
     })
 

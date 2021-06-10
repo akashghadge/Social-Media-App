@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import Sign from './Components/Auth/Sign';
 
 function App() {
   return (
     <>
-      <h1>App</h1>
+      <Sign></Sign>
     </>
   );
 }

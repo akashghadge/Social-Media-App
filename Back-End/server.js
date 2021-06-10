@@ -41,7 +41,7 @@ app.use("/api/user", User);
 app.use("/api/dashboard", Dashboard);
 app.use("/api/post", Post);
 app.use("/api/follow", Follow);
-
+app.use("/public/images", express.static(__dirname + '/public'));
 app.listen(port, () => {
     console.log("Server is listening on port :", port);
 })

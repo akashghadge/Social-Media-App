@@ -1,13 +1,49 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  padding: 0;
+  box-sizing: border-box; }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+.signButton {
+  outline: none;
+  color: white;
+  background-color: #3d81ff;
+  border: 1px solid #3d81ff;
+  border-radius: 0.2rem;
+  width: 5rem;
+  height: 2.5rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s; }
+  .signButton:hover {
+    outline: none;
+    border: none;
+    background-color: #3d81ff;
+    box-shadow: 0px 0px 5px 2px #3d81ff;
+    transform: scale(1.05); }
+
+.submitButton {
+  outline: none;
+  color: white;
+  background-color: #3d81ff;
+  border: 1px solid #3d81ff;
+  border-radius: 0.2rem;
+  width: 5rem;
+  height: 2.5rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s; }
+  .submitButton:hover {
+    outline: none;
+    border: none;
+    background-color: #34ff34;
+    box-shadow: 0px 0px 5px 2px #34ff34;
+    transform: scale(1.05); }
+
+.SignHeading {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0.5rem;
+  color: #3d81ff; }
