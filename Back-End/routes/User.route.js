@@ -1,6 +1,7 @@
 const { Router } = require("express");
-const jwt = require("jsonwebtoken");
 const router = Router();
+
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 //models and middlewares  
 const User = require("../models/User.model");
@@ -12,6 +13,7 @@ const { handleErrors } = require("../helpers/handleErrors");
 // user addding route
 router.post("/add", (req, res) => {
     // geting data from request
+    console.log(req.body);
     const fname = req.body.fname;
     const lname = req.body.lname;
     const email = req.body.email;
@@ -89,7 +91,6 @@ router.post("/in", async (req, res) => {
     if (user) {
         const validPassword = await bcrypt.compare(password, user.password);
         if (validPassword) {
-
             /**
              *issuesing the token
              */
