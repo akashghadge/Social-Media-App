@@ -85,17 +85,22 @@ const SignUp = () => {
                         <h1 className="SignHeading">Sign Up</h1>
                         <lable>Profile Photo</lable>
                         <input type="file" id="profilePic" onChange={fileInputChange} accept="image/*"></input>
+                        <br></br>
                         <label >First name</label>
                         <input type="text" className="form-control" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
+                        <br></br>
                         <label >Last name</label>
                         <input type="text" className="form-control" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
+                        <br></br>
                         <label >Email</label>
                         <input type="email" className="form-control" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
+                        <br></br>
                         <label >UserName</label>
                         <input type="text" className="form-control inputFieldSignInUp" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
+                        <br></br>
                         <label >Password</label>
                         <input type="password" className="form-control inputFieldSignInUp" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
-
+                        <br></br>
                         <button className="submitButton" onClick={SendUser}><Save></Save></button>
                     </div>
             }
