@@ -21,27 +21,22 @@ app.use(cookieParser());
 require("./DB/conn");
 
 
-// mail verificatin
-// const SendMail = require("./middleware/SendMail");
-// SendMail("akashsghadge06@gmail.com").then(() => {
-//     console.log("succefully send email");
-// }).catch(() => {
-//     console.log("mail not send ");
-// })
-
-
 // api routers
+const verify = require("./middleware/verify");
 const EmailRoute = require("./routes/Email.route");
 const User = require("./routes/User.route");
 const Dashboard = require("./routes/Dashboard.route");
 const Post = require("./routes/Post.route");
 const Follow = require("./routes/Follow.route")
+// routes setting
 app.use("/api/", EmailRoute);
 app.use("/api/user", User);
-app.use("/api/dashboard", Dashboard);
+app.use("/api/dashboard/", verify, Dashboard);
 app.use("/api/post", Post);
 app.use("/api/follow", Follow);
+//making public images 
 app.use("/public/images", express.static(__dirname + '/public'));
+
 app.listen(port, () => {
     console.log("Server is listening on port :", port);
 })

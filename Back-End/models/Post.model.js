@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     photo: { type: String, required: [true, 'photo is req'] },
     desc: { type: String, required: [true, 'text is req'] },
-    likes: [{ type: mongoose.Schema.ObjectId, ref: 'User', unique: true }],
+    likes: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     comments:
         [{
             text: String,
