@@ -1,9 +1,10 @@
 import './App.css';
 import MatchOTP from './Components/Auth/MatchOTP';
 import Sign from './Components/Auth/Sign';
-import Navbar from "./Components/Navbar/Navbar";
 import NavbarM from "./Components/Navbar/NavbarM";
 import { Switch, Route } from "react-router-dom";
+import CreatePost from './Components/Dashboard/CreatePost';
+import ProfileMain from './Components/Dashboard/ProfileMain';
 function App() {
   return (
     <>
@@ -12,6 +13,8 @@ function App() {
       <Switch>
         <Route exact path="/sign" component={Sign}></Route>
         <Route exact path="/match-otp" component={MatchOTP}></Route>
+        <Route exact path="/create-post" component={CreatePost}></Route>
+        <Route exact path="/profile" component={ProfileMain}></Route>
       </Switch>
     </>
   );

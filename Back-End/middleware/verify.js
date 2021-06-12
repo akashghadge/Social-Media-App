@@ -10,7 +10,8 @@ const verify = (req, res, next) => {
         //throws an error if the token has expired or has a invalid signature
         let payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
         console.log(payload);
-        res.locals.currentuser = payload;
+        res.locals.username = payload.username;
+        res.locals.id = payload.id;
         console.log("user verified succefully");
         next()
     }
