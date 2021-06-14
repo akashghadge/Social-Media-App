@@ -116,4 +116,11 @@ router.post("/in", async (req, res) => {
         res.status(401).json({ err: "user does not exists" })
     }
 })
+
+
+// TODO delete this part later
+router.post("/all", async (req, res) => {
+    let data = await User.find({});
+    res.status(200).json(data);
+})
 module.exports = router;

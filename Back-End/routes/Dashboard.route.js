@@ -19,8 +19,17 @@ router.post("/profile", async (req, res) => {
     }
 })
 // edit apis
-router.post("/edit/dp", (req, res) => {
-    const { url, username } = req.body;
+router.post("/edit", (req, res) => {
+    const { update, id } = req.body;
+    User.findByIdAndUpdate(id, update)
+        .then((data) => {
+            // console.log(data);
+            res.status(200).json("update succefully");
+        })
+        .catch((err) => {
+            // console.log(err);
+            res.status(500).json("update unsuccefully!!!!!");
+        })
 })
 
 

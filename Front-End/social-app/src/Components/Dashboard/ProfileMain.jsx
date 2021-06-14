@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 const ProfileMain = () => {
+    // history hook
+    let history = useHistory();
     // setting loading true when we request add new  in database
     let [isLoading, setLoading] = useState(false);
 
@@ -26,6 +29,7 @@ const ProfileMain = () => {
             .catch((err) => {
                 console.log(err);
                 setLoading(false);
+                history.push("/sign");
             })
     }, []);
 
