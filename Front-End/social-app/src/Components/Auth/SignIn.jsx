@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 const SignIn = () => {
     let history = useHistory();
     let [allCurrentData, setAllCurrentData] = useState({
@@ -58,6 +58,11 @@ const SignIn = () => {
                 <div className="my-3 mx-2">
                     <button id="addContactUs " className="" onClick={SendUser}>Save</button>
                 </div>
+            </div>
+            <div>
+                <NavLink to="/forget-password">
+                    Forget Password
+                </NavLink>
             </div>
         </>
     )

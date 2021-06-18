@@ -1,13 +1,16 @@
+// change url in production 
+//send mail to user whtn reset password is triggered 
+
+
 const { Router } = require("express");
 const router = Router();
-
+const crypto = require("crypto");
 // import userOtp madule for checking is email and otp match or not
 const User_OTP = require("../models/User_OTP");
 const TempUser = require("../models/TempUser.model")
 const User = require("../models/User.model")
 // importing mail sending features
-const SendMail = require("../middleware/SendMail");
-
+const { SendMail, SendMailGen } = require("../middleware/SendMail");
 
 // this route used to verify email and otp  
 router.post("/mail/verification", (req, res) => {
@@ -71,4 +74,68 @@ router.post("/mail/resend", async (req, res) => {
     })
 })
 
+router.post("/mail/forget-password", async (req, res) => {
+    const { email } = req.body;
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+            console.log(err);
+        }
+        const token = buffer.toString("hex");
+        User.findOne({ email: email })
+            .then((data) => {
+                if (!data) {
+                    return res.status(422).json({ error: "user does not exists" });
+                }
+                data.resetToken = token;
+                data.expireToken = Date.now() + 3600000;
+                data.save()
+                    .then((result) => {
+                        const dataForEmail = {
+                            subject: "Password Reset Request",
+                            text: `<p>Click link to reset your password</p>
+                            <a href="http://localhost:3000/reset-password/${token}">here</a>
+                            `  }
+
+                        SendMailGen(email, dataForEmail)
+                            .then((data) => {
+                                res.status(200).json({
+                                    m: "mail sent",
+                                    data: data
+                                });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                res.status(500).json("server error");
+                            })
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.status(500).json("server error");
+                    })
+            })
+    })
+})
+
+router.post("/mail/reset-password", async (req, res) => {
+    const { token, newPassword } = req.body;
+    console.log(token, newPassword);
+    User.findOne({ resetToken: token, expireToken: { $gt: Date.now() } })
+        .then((data) => {
+            if (!data) {
+                return res.status(400).json("token may be expired ");
+            }
+            data.password = newPassword;
+            data.resetToken = undefined;
+            data.expireToken = undefined;
+            data.save()
+                .then((data) => {
+                    console.log(data);
+                    res.status(200).json(data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).json(err);
+                })
+        })
+})
 module.exports = router;
