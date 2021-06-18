@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import saveUser from "../../actions/saveUser"
+
+
 const ProfileMain = () => {
+    // redux stuff
+    const LoggedUser = useSelector((state) => {
+        return state.User;
+    })
+    console.log(LoggedUser);
+    const dispatch = useDispatch();
+
     // history hook
     let history = useHistory();
     // setting loading true when we request add new  in database
@@ -24,6 +36,8 @@ const ProfileMain = () => {
             .then((data) => {
                 console.log(data);
                 setAllCurrentData(data.data);
+                // redux storing the user for all usecases
+                dispatch(saveUser(data.data));
                 setLoading(false);
             })
             .catch((err) => {

@@ -8,12 +8,15 @@ import ProfileMain from './Components/Dashboard/ProfileMain';
 import Settings from './Components/Dashboard/Settings';
 import ForgetPassword from './Components/Auth/ForgetPassword';
 import ResetPassword from './Components/Auth/ResetPassword';
+import Home from './Components/HomePage/Home';
+
 function App() {
   return (
     <>
       {/* <Navbar></Navbar> */}
       <NavbarM></NavbarM>
       <Switch>
+        <Route exact path="/" component={Home}></Route>
         <Route exact path="/sign" component={Sign}></Route>
         <Route exact path="/match-otp" component={MatchOTP}></Route>
         <Route exact path="/create-post" component={CreatePost}></Route>
@@ -22,6 +25,7 @@ function App() {
         <Route exact path="/forget-password" component={ForgetPassword}></Route>
         <Route path="/reset-password/:token" component={ResetPassword}></Route>
       </Switch>
+
     </>
   );
 }
