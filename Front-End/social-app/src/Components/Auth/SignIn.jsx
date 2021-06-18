@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { useHistory } from "react-router-dom";
 const SignIn = () => {
+    let history = useHistory();
     let [allCurrentData, setAllCurrentData] = useState({
         username: "",
         password: ""
@@ -31,6 +33,7 @@ const SignIn = () => {
                     password: ""
                 })
                 alert("user signed in succefully");
+                history.push("/profile");
             })
             .catch(() => {
                 alert("Incorrect username or password");

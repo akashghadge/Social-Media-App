@@ -123,4 +123,8 @@ router.post("/all", async (req, res) => {
     let data = await User.find({});
     res.status(200).json(data);
 })
+router.get("/allUsers", async (req, res) => {
+    let data = await User.find({});
+    res.status(200).json(data);
+})
 module.exports = router;

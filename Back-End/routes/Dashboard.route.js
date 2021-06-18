@@ -18,6 +18,17 @@ router.post("/profile", async (req, res) => {
         res.status(400).json({ err: "invalid user in profile section someone is tempting api" });
     }
 })
+// for editing profile
+router.post("/profile-edit", async (req, res) => {
+    const user = await User.findById({ _id: res.locals.id }).select("_id username fname lname");
+    if (user) {
+        res.status(200).json(user);
+    }
+    else {
+        console.log("invalid user in profile section someone is tempting api");
+        res.status(400).json({ err: "invalid user in profile section someone is tempting api" });
+    }
+})
 // edit apis
 router.post("/edit", (req, res) => {
     const { update, id } = req.body;
