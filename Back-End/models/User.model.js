@@ -35,6 +35,12 @@ const UserSchema = new Schema
             type: String,
             require: [true, 'please enter url']
         },
+        resetToken: {
+            type: String
+        },
+        expireToken: {
+            type: Date
+        },
         following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         createdAt: { type: Date, default: Date.now }

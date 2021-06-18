@@ -6,6 +6,8 @@ import { Switch, Route } from "react-router-dom";
 import CreatePost from './Components/Dashboard/CreatePost';
 import ProfileMain from './Components/Dashboard/ProfileMain';
 import Settings from './Components/Dashboard/Settings';
+import ForgetPassword from './Components/Auth/ForgetPassword';
+import ResetPassword from './Components/Auth/ResetPassword';
 function App() {
   return (
     <>
@@ -17,6 +19,8 @@ function App() {
         <Route exact path="/create-post" component={CreatePost}></Route>
         <Route exact path="/profile" component={ProfileMain}></Route>
         <Route exact path="/settings" component={Settings}></Route>
+        <Route exact path="/forget-password" component={ForgetPassword}></Route>
+        <Route path="/reset-password/:token" component={ResetPassword}></Route>
       </Switch>
     </>
   );

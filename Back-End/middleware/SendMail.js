@@ -44,7 +44,7 @@ const SendMail = (toMail) => {
                     console.log(data);
                     // check is we already send email or not if we send it then just update it
                     const fileter = { email: toMail };
-                    const update = { otp: otp, createdAt: Date.now()};
+                    const update = { otp: otp, createdAt: Date.now() };
                     let doc = await User_OTP.findOneAndUpdate(fileter, update, {
                         new: true, //By default, findOneAndUpdate() returns the document as it was before update was applied.
                         upsert: true//normal findOneAndUpdate() if it finds a document that matches filter. But, if no document matches filter, MongoDB will insert one by combining filter and update
@@ -57,4 +57,37 @@ const SendMail = (toMail) => {
         })
 }
 
-module.exports = SendMail;
+const SendMailGen = (toMail, dataTosend) => {
+    return new Promise
+        (function (resolve, reject) {
+            const transport = mailer.createTransport(
+                {
+                    service: "gmail",
+                    auth: {
+                        user: process.env.E_USER,
+                        pass: process.env.E_PASS
+                    }
+                }
+            )
+            // sending otp to user with this body
+            const body = {
+                from: process.env.E_USER,
+                to: toMail,
+                subject: dataTosend.subject,
+                html: dataTosend.text
+            }
+            transport.sendMail(body, async function (err, data) {
+                if (err) {
+                    console.log("error occured");
+                    console.log(err);
+                    reject();
+                }
+                else {
+                    console.log(data);
+                    resolve();
+                }
+            })
+        })
+}
+
+module.exports = { SendMail, SendMailGen };
