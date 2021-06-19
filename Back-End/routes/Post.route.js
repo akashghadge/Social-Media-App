@@ -7,6 +7,7 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 // for error handleing
 const { handleErrors, handleErrorsPost } = require("../helpers/handleErrors");
+const verify = require("../middleware/verify");
 // crud operation on post
 router.post("/new", async (req, res) => {
     const { photo, desc, postedById } = req.body;
@@ -55,7 +56,7 @@ router.post("/delete/:id", async (req, res) => {
 
 // get all posts
 router.post("/all", async (req, res) => {
-    let data = await Post.find({});
+    let data = await Post.find({}).populate("postedBy", "username _id").exec();
     res.json(data);
 })
 
@@ -69,8 +70,9 @@ router.post("/like", async (req, res) => {
     res.status(200).json(data.likes);
 })
 // add like
-router.post("/like/add", async (req, res) => {
-    const { idOfPost, idOfLiker } = req.body;
+router.post("/like/add", verify, async (req, res) => {
+    const { idOfPost } = req.body;
+    const idOfLiker = res.locals.id;
     let data = await Post.updateOne({ _id: idOfPost }, {
         $push:
             { likes: idOfLiker }
@@ -80,8 +82,9 @@ router.post("/like/add", async (req, res) => {
 });
 
 // remove like
-router.post("/like/remove", async (req, res) => {
-    const { idOfPost, idOfLiker } = req.body;
+router.post("/like/remove", verify, async (req, res) => {
+    const { idOfPost } = req.body;
+    const idOfLiker = res.locals.id;
     let data = await Post.updateOne({ _id: idOfPost }, {
         $pull:
         {
@@ -103,9 +106,17 @@ router.post("/like/count", async (req, res) => {
 // get all comments
 router.post("/comment", async (req, res) => {
     const { idOfPost } = req.body;
-    let data = await Post.findById(idOfPost);
-    console.log(idOfPost + " have " + data.comments + " comments");
-    res.status(200).json(data.comments);
+    let data = await Post.findById(idOfPost).populate(
+        {
+            path: "comments",
+            populate: {
+                path: "postedBy",
+                select: "username"
+            }
+        }
+    ).exec();
+    console.log(idOfPost + " have " + data + " comments");
+    res.status(200).json(data);
 });
 // add like
 router.post("/comment/add", async (req, res) => {

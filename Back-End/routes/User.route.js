@@ -117,6 +117,23 @@ router.post("/in", async (req, res) => {
     }
 })
 
+// public profile user
+router.post("/public-profile", async (req, res) => {
+    const { id } = req.body;
+    try {
+        let publicUser = await User.findById(id).select("-password -expireToken -resetToken -email -fname -lname");
+        if (!publicUser) {
+            return res.status(400).json("user not found");
+        }
+        console.log(publicUser);
+        res.status(200).json(publicUser);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json("internal server error")
+    }
+})
+
 
 // TODO delete this part later
 router.post("/all", async (req, res) => {
