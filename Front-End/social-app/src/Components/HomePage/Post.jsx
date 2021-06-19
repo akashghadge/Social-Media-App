@@ -86,9 +86,37 @@ const Post = () => {
         console.log(commentButton);
     }
 
+    // create comment
+    let [isCreateCommentOn, setCreateCommentOn] = useState(false);
+    function createCommentButton(e, id) {
+        setCreateCommentOn(!isCreateCommentOn);
+    }
+    let [newComment, setNewComment] = useState("");
+    function newCommentHandle(e, idOfPost) {
+        setNewComment(e.target.value);
+    }
 
+    // send comment
+    function addNewComment(e, idOfPost) {
+        const urlForAddNewComment = "http://localhost:5000/api/post/comment/add";
+        let token = localStorage.getItem("token");
+        const body =
+        {
+            token: token,
+            idOfPost: idOfPost,
+            text: newComment
+        };
+        axios.post(urlForAddNewComment, body)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
     return (
         <>
+
             {
                 (totalPosts === undefined) ? null : totalPosts.map((val, i, arr) => {
                     return (
@@ -100,6 +128,7 @@ const Post = () => {
                                 <NavLink exact to={`profile/${val.postedBy._id}`}>
                                     <h3>{val.postedBy.username}</h3>
                                 </NavLink>
+                                {/* like section */}
                                 {
                                     (val.likes.includes(LoggedUser._id))
                                         ?
@@ -107,6 +136,7 @@ const Post = () => {
                                         <button onClick={(e) => { addLike(e, val._id) }}>Like :{val.likes.length}</button>
                                 }
                                 <br></br>
+                                {/* comment section */}
                                 {
                                     <button onClick={(e) => {
                                         onCommentButton(e, val._id)
@@ -126,6 +156,23 @@ const Post = () => {
                                                     </>
                                                 )
                                             })
+                                        : null
+                                }
+                                <br></br>
+                                {/* create comment */}
+                                {
+                                    <button onClick={(e) => {
+                                        createCommentButton(e, val._id);
+                                    }}>Create Comment</button>
+                                }
+                                {
+                                    (isCreateCommentOn) ?
+                                        <>
+                                            <input type="text" onChange={newCommentHandle} value={newComment}></input>
+                                            <button onClick={(e) => {
+                                                addNewComment(e, val._id);
+                                            }} >Add Comment</button>
+                                        </>
                                         : null
                                 }
                             </div>

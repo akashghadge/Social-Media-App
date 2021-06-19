@@ -119,8 +119,9 @@ router.post("/comment", async (req, res) => {
     res.status(200).json(data);
 });
 // add like
-router.post("/comment/add", async (req, res) => {
-    const { idOfPost, idOfCommentor, text } = req.body;
+router.post("/comment/add", verify, async (req, res) => {
+    const { idOfPost, text } = req.body;
+    const idOfCommentor = res.locals.id;
     let comment = {
         text: text,
         postedBy: idOfCommentor
@@ -134,7 +135,7 @@ router.post("/comment/add", async (req, res) => {
 });
 // remove comment
 router.post("/comment/remove", async (req, res) => {
-    const { idOfPost, idOfComment } = req.body;
+    const { idOfPost, idOfComment, idOfCommentor } = req.body;
     let data = await Post.updateOne({ _id: idOfPost }, {
         $pull:
         {
