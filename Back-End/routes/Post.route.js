@@ -106,9 +106,17 @@ router.post("/like/count", async (req, res) => {
 // get all comments
 router.post("/comment", async (req, res) => {
     const { idOfPost } = req.body;
-    let data = await Post.findById(idOfPost);
-    console.log(idOfPost + " have " + data.comments + " comments");
-    res.status(200).json(data.comments);
+    let data = await Post.findById(idOfPost).populate(
+        {
+            path: "comments",
+            populate: {
+                path: "postedBy",
+                select: "username"
+            }
+        }
+    ).exec();
+    console.log(idOfPost + " have " + data + " comments");
+    res.status(200).json(data);
 });
 // add like
 router.post("/comment/add", async (req, res) => {

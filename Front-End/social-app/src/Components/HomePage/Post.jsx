@@ -37,7 +37,7 @@ const Post = () => {
         };
         axios.post(urlAddLike, body)
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setFlag(++flagForReq);
             })
             .catch((err) => {
@@ -54,7 +54,7 @@ const Post = () => {
         };
         axios.post(urlRemoveLike, body)
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setFlag(++flagForReq);
             })
             .catch((err) => {
@@ -62,6 +62,31 @@ const Post = () => {
                 alert(err);
             })
     }
+
+    // comment flag
+    let [commentButton, setCommentButton] = useState(false);
+    let [commentInfo, setCommentInfo] = useState("");
+    let [commentLoading, setCommentLoading] = useState(false);
+    function onCommentButton(e, postId) {
+        setCommentLoading(true);
+        setCommentButton(!commentButton);
+        const urlComment = "http://localhost:5000/api/post/comment";
+        const body = {
+            idOfPost: postId
+        };
+        axios.post(urlComment, body).then((data) => {
+            setCommentInfo(data.data.comments);
+            console.log(commentInfo)
+            setCommentLoading(false);
+        })
+            .catch((err) => {
+                console.log(err)
+                setCommentLoading(false);
+            });
+        console.log(commentButton);
+    }
+
+
     return (
         <>
             {
@@ -81,7 +106,32 @@ const Post = () => {
                                         <button onClick={(e) => { removeLike(e, val._id) }}>Unlike :{val.likes.length}</button> :
                                         <button onClick={(e) => { addLike(e, val._id) }}>Like :{val.likes.length}</button>
                                 }
+                                <br></br>
+                                {
+                                    <button onClick={(e) => {
+                                        onCommentButton(e, val._id)
+                                    }}>Comments : {val.comments.length}</button>
+                                }
+                                {
+                                    (commentButton) ?
+                                        commentLoading ? null :
+                                            commentInfo.map((comment, i) => {
+                                                return (
+                                                    <>
+                                                        <h3>{comment.text}</h3>
+                                                        <NavLink exact to={`profile/${comment.postedBy._id}`}>
+                                                            <p>{comment.postedBy.username}</p>
+                                                        </NavLink>
+                                                        <p>{comment.created}</p>
+                                                    </>
+                                                )
+                                            })
+                                        : null
+                                }
                             </div>
+                            <br></br>
+                            <br></br>
+                            <br></br>
                         </>
                     )
                 })
