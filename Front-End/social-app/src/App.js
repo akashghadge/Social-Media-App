@@ -9,6 +9,7 @@ import Settings from './Components/Dashboard/Settings';
 import ForgetPassword from './Components/Auth/ForgetPassword';
 import ResetPassword from './Components/Auth/ResetPassword';
 import Home from './Components/HomePage/Home';
+import PublicProfile from './Components/PublicProfile/PublicProfile';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/match-otp" component={MatchOTP}></Route>
         <Route exact path="/create-post" component={CreatePost}></Route>
         <Route exact path="/profile" component={ProfileMain}></Route>
+        <Route exact path="/profile/:id" component={PublicProfile}></Route>
         <Route exact path="/settings" component={Settings}></Route>
         <Route exact path="/forget-password" component={ForgetPassword}></Route>
         <Route path="/reset-password/:token" component={ResetPassword}></Route>

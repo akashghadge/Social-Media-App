@@ -1,7 +1,10 @@
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
 // redux stuff
 import { useSelector } from "react-redux";
+// components
+import Post from "./Post";
+import AllUsers from "./AllUsers";
+
 
 
 const Home = () => {
@@ -11,7 +14,8 @@ const Home = () => {
     })
     return (
         <>
-            <h1>Home</h1>
+            <Post></Post>
+            <AllUsers></AllUsers>
         </>
     )
 }

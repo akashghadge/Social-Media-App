@@ -11,7 +11,7 @@ const ProfileMain = () => {
     const LoggedUser = useSelector((state) => {
         return state.User;
     })
-    console.log(LoggedUser);
+    // console.log(LoggedUser);
     const dispatch = useDispatch();
 
     // history hook
@@ -27,7 +27,7 @@ const ProfileMain = () => {
         password: "",
         PicUrl: ""
     });
-    console.log(allCurrentData);
+    // console.log(allCurrentData);
     useEffect(() => {
         setLoading(true);
         let token = localStorage.getItem("token");
@@ -53,7 +53,7 @@ const ProfileMain = () => {
             {
                 isLoading ? <h1>Loading ..... </h1> :
                     <div>
-                        <img src={allCurrentData.PicUrl} alt="profile-pic"></img>
+                        <img src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
                         <h1>First Name :{allCurrentData.fname}</h1>
                         <h1>First Name :{allCurrentData.lname}</h1>
                         <h1>First Name :{allCurrentData.email}</h1>

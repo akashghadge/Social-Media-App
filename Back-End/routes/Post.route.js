@@ -55,7 +55,7 @@ router.post("/delete/:id", async (req, res) => {
 
 // get all posts
 router.post("/all", async (req, res) => {
-    let data = await Post.find({});
+    let data = await Post.find({}).populate("postedBy", "username _id").exec();
     res.json(data);
 })
 
