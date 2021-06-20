@@ -9,7 +9,7 @@ const User = require("../models/User.model");
 router.post("/followers/all", async (req, res) => {
     const { userId } = req.body;
     try {
-        let data = await User.findById(userId).select("followers -_id");
+        let data = await User.findById(userId).populate("followers", "username _id").select("followers -_id");
         console.log(data);
         res.status(200).json(data);
     } catch (error) {
@@ -21,7 +21,7 @@ router.post("/followers/all", async (req, res) => {
 router.post("/following/all", async (req, res) => {
     const { userId } = req.body;
     try {
-        let data = await User.findById(userId).select("following -_id");
+        let data = await User.findById(userId).populate("following", "username _id").select("following -_id");;
         console.log(data);
         res.status(200).json(data);
     } catch (error) {

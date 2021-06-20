@@ -98,6 +98,8 @@ const SinglePost = (props) => {
         };
         axios.post(urlForAddNewComment, body)
             .then((data) => {
+                setNewComment("");
+                setCreateCommentOn(!isCreateCommentOn);
                 setFlag(++flagForReq);
             })
             .catch((err) => {

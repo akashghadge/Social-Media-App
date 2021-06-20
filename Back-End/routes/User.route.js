@@ -121,7 +121,7 @@ router.post("/in", async (req, res) => {
 router.post("/public-profile", async (req, res) => {
     const { id } = req.body;
     try {
-        let publicUser = await User.findById(id).select("-password -expireToken -resetToken -email -fname -lname");
+        let publicUser = await User.findById(id).select("-password -expireToken -resetToken -email -fname -lname -followers -following");
         if (!publicUser) {
             return res.status(400).json("user not found");
         }
