@@ -4,7 +4,7 @@ import axios from "axios";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import saveUser from "../../actions/saveUser"
-
+import { NavLink } from "react-router-dom";
 
 const ProfileMain = () => {
     // redux stuff
@@ -18,6 +18,8 @@ const ProfileMain = () => {
     let history = useHistory();
     // setting loading true when we request add new  in database
     let [isLoading, setLoading] = useState(false);
+    let [followers, setFollowers] = useState([]);
+    let [following, setFollowing] = useState([]);
 
     let [allCurrentData, setAllCurrentData] = useState({
         fname: "",
@@ -36,6 +38,8 @@ const ProfileMain = () => {
             .then((data) => {
                 console.log(data);
                 setAllCurrentData(data.data);
+                setFollowers(data.data.followers);
+                setFollowing(data.data.following);
                 // redux storing the user for all usecases
                 dispatch(saveUser(data.data));
                 setLoading(false);
@@ -45,6 +49,26 @@ const ProfileMain = () => {
                 setLoading(false);
                 history.push("/sign");
             })
+        // const urlForFollower = "http://localhost:5000/api/follow/followers/all";
+        // const urlForFollowing = "http://localhost:5000/api/follow/following/all";
+        // const followBody = {
+        //     userId: allCurrentData.id
+        // };
+        // axios.post(urlForFollower, followBody)
+        //     .then((data) => {
+        //         // for getting follwers we also do check for is user alreasdy followed or not
+        //         setFollowers(data.data.followers);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
+        // axios.post(urlForFollowing, followBody)
+        //     .then((data) => {
+        //         setFollowing(data.data.following);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
     }, []);
 
 
@@ -58,6 +82,12 @@ const ProfileMain = () => {
                         <h1>First Name :{allCurrentData.lname}</h1>
                         <h1>First Name :{allCurrentData.email}</h1>
                         <h1>First Name :{allCurrentData.username}</h1>
+                        <NavLink exact to={`/profile/${allCurrentData._id}/followers/`}>
+                            <h1>Followers :{followers.length}</h1>
+                        </NavLink>
+                        <NavLink exact to={`/profile/${allCurrentData._id}/following/`}>
+                            <h1>Following :{following.length}</h1>
+                        </NavLink>
                     </div>
             }
         </>
