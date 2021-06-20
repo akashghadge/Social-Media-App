@@ -49,26 +49,6 @@ const ProfileMain = () => {
                 setLoading(false);
                 history.push("/sign");
             })
-        // const urlForFollower = "http://localhost:5000/api/follow/followers/all";
-        // const urlForFollowing = "http://localhost:5000/api/follow/following/all";
-        // const followBody = {
-        //     userId: allCurrentData.id
-        // };
-        // axios.post(urlForFollower, followBody)
-        //     .then((data) => {
-        //         // for getting follwers we also do check for is user alreasdy followed or not
-        //         setFollowers(data.data.followers);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     })
-        // axios.post(urlForFollowing, followBody)
-        //     .then((data) => {
-        //         setFollowing(data.data.following);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     })
     }, []);
 
 
