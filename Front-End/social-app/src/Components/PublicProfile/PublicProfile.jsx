@@ -6,16 +6,19 @@ import { useSelector } from "react-redux"
 import { useHistory } from "react-router";
 const PublicProfile = () => {
     let history = useHistory();
+    let params = useParams();
     // getting current user
     const LoggedUser = useSelector((state) => {
         return state.User;
     })
+    if (LoggedUser._id == params.id) {
+        history.push("/profile");
+    }
     // this function will helps us to check is user object is empty due to refreshing of the user
     function isEmpty(obj) {
         return (Object.entries(obj).length === 0 && obj.constructor === Object)
     }
 
-    let params = useParams();
     // main loading for whole page
     let [isLoading, setLoading] = useState(false);
     // public user data
