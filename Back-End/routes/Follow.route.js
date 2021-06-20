@@ -4,7 +4,7 @@ const router = Router();
 
 // database modules
 const User = require("../models/User.model");
-
+const verify = require("../middleware/verify");
 //get followers of user
 router.post("/followers/all", async (req, res) => {
     const { userId } = req.body;
@@ -88,13 +88,18 @@ const removeFollow = async (userSend, userReceive) => {
             }
         })
 }
-router.post("/following/add", async (req, res) => {
-    addFollow(req.body.userSend, req.body.userReceive)
+router.post("/following/is", async (req, res) => {
+    const { userSend, userReceive } = req.body;
+    
+})
+router.post("/following/add", verify, async (req, res) => {
+    addFollow(res.locals.id, req.body.userReceive)
         .then((data) => res.json(data))
         .catch((err) => res.status(400).json(err))
 });
-router.post("/following/remove", async (req, res) => {
-    removeFollow(req.body.userSend, req.body.userReceive)
+
+router.post("/following/remove", verify, async (req, res) => {
+    removeFollow(res.locals.id, req.body.userReceive)
         .then((data) => res.json(data))
         .catch((err) => res.status(400).json(err))
 });
