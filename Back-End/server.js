@@ -3,7 +3,16 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
+const socketio = require("socket.io");
 
+
+const http = require("http");
+const server = http.createServer(app);
+const io = socketio(server, {
+    cors: {
+        origins: ["http://localhost:3000", "http://localhost:3001"],
+    }
+})
 
 // must needed packages
 const cros = require("cors");
@@ -34,9 +43,18 @@ app.use("/api/user", User);
 app.use("/api/dashboard/", verify, Dashboard);
 app.use("/api/post", Post);
 app.use("/api/follow", Follow);
+
 //making public images 
 app.use("/public/images", express.static(__dirname + '/public'));
 
-app.listen(port, () => {
+
+// socket.io things
+const { main } = require("./routes/chatSocket");
+main(io);
+
+
+
+
+server.listen(port, () => {
     console.log("Server is listening on port :", port);
 })

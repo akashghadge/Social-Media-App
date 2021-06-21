@@ -43,6 +43,9 @@ const UserSchema = new Schema
         },
         following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+        chatId: {
+            type: String
+        },
         createdAt: { type: Date, default: Date.now }
     })
 // hashing password
