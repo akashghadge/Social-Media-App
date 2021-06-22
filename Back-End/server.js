@@ -10,7 +10,7 @@ const http = require("http");
 const server = http.createServer(app);
 const io = socketio(server, {
     cors: {
-        origins: ["http://localhost:3000", "http://localhost:3001"],
+        origins: ["http://localhost:3000/"]
     }
 })
 
@@ -37,13 +37,14 @@ const User = require("./routes/User.route");
 const Dashboard = require("./routes/Dashboard.route");
 const Post = require("./routes/Post.route");
 const Follow = require("./routes/Follow.route")
+const Chat = require("./routes/Chat.route");
 // routes setting
 app.use("/api/", EmailRoute);
 app.use("/api/user", User);
 app.use("/api/dashboard/", verify, Dashboard);
 app.use("/api/post", Post);
 app.use("/api/follow", Follow);
-
+app.use("/api/chat", Chat);
 //making public images 
 app.use("/public/images", express.static(__dirname + '/public'));
 
