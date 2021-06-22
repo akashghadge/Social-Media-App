@@ -144,4 +144,13 @@ router.get("/allUsers", async (req, res) => {
     let data = await User.find({});
     res.status(200).json(data);
 })
+
+router.get("/all-users-homepage", async (req, res) => {
+    try {
+        let data = await User.find({}).select("username _id");
+        res.status(200).json(data)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 module.exports = router;

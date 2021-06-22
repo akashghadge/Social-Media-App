@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react"
-// redux stuff
-import { useSelector } from "react-redux";
+import React, {  useEffect } from "react"
 // components
 import Post from "./Post";
 import AllUsers from "./AllUsers";
 
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 // redux
 import { useDispatch } from "react-redux";
@@ -15,10 +12,6 @@ import saveUser from "../../actions/saveUser"
 
 const Home = () => {
     // redux stuff
-    const LoggedUser = useSelector((state) => {
-        return state.User;
-    })
-    // console.log(LoggedUser);
     const dispatch = useDispatch();
 
     useEffect(() => {

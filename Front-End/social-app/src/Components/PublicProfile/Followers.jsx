@@ -29,17 +29,18 @@ const Followers = () => {
         <>
             <h1>Followers</h1>
             {
-                (followers.length === 0) ? <h1>No Followers are here</h1>
-                    :
-                    <>
-                        {
-                            followers.map((val, i) => {
-                                return <NavLink exact to={`/profile/${val._id}/`}>
-                                    <h1>{val.username}</h1>
-                                </NavLink>
-                            })
-                        }
-                    </>
+                isLoading ? <p>loading...</p> :
+                    (followers.length === 0) ? <h1>No Followers are here</h1>
+                        :
+                        <>
+                            {
+                                followers.map((val, i) => {
+                                    return <NavLink exact to={`/profile/${val._id}/`}>
+                                        <h1>{val.username}</h1>
+                                    </NavLink>
+                                })
+                            }
+                        </>
             }
         </>
     )

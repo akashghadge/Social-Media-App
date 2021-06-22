@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 // redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import saveUser from "../../actions/saveUser"
 import { NavLink } from "react-router-dom";
 
 const ProfileMain = () => {
-    // redux stuff
-    const LoggedUser = useSelector((state) => {
-        return state.User;
-    })
     // console.log(LoggedUser);
     const dispatch = useDispatch();
 

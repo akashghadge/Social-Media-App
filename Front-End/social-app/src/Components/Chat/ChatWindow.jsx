@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router';
 import { useSelector } from "react-redux"
 import { useHistory } from 'react-router';
 import axios from 'axios';
@@ -13,17 +12,45 @@ const ChatWindow = (props) => {
         return state.User;
     })
     const socket = useContext(SocketContext);
+    let [prevM, setPrevM] = useState([]);
+    let [reloadHelper, setReload] = useState(1);
+    let [isTyping, setTyping] = useState(false);
+    let [typerPerson, setTyperPerson] = useState("");
     useEffect(() => {
         if (!LoggedUser._id) {
             history.push("/profile");
         }
+        const prevChatMessages = "http://localhost:5000/api/chat/prev-messages";
+        axios.post(prevChatMessages, {
+            SenderId: LoggedUser._id,
+            RecId: props.recUser
+        })
+            .then((data) => {
+                setPrevM(data.data.chats);
+                // console.log(data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
         socket.on("rec-message", (data) => {
+            let newArr = prevM;
+            newArr.push(data);
+            setPrevM(newArr);
             console.log(data);
         });
-    }, [])
+        socket.on("rec-typing", (data) => {
+            console.log("typing...", data);
+            setTyperPerson(data.username);
+            setTyping(true);
+            setTimeout(() => {
+                setTyping(false);
+            }, 3000);
+        })
+    }, [props.recUser, reloadHelper])
 
     let [chatBoxInput, setChatBoxInput] = useState("");
     function inputChange(e) {
+        socket.emit("typing", props.recUser);
         setChatBoxInput(e.target.value);
     }
     function sendMessage(e) {
@@ -32,14 +59,35 @@ const ChatWindow = (props) => {
             text: chatBoxInput
         }
         socket.emit("send-message", payload);
+        setReload(++reloadHelper);
     }
     return (
         <>
             <div>
-
+                <h1>
+                    {props.recUserName}
+                </h1>
+            </div>
+            <div>
+                {
+                    isTyping ? <p>{typerPerson} Typing...</p> : null
+                }
             </div>
             <input type="text" value={chatBoxInput} onChange={inputChange}></input>
             <button onClick={sendMessage}> Send</button>
+            <div>
+                {
+                    prevM.map((val, i) => {
+                        return (
+                            <div>
+                                <h4>{val.text}</h4>
+                                <p>{val.sender.username}</p>
+                                <p>{val.created}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </>
     );
 }
