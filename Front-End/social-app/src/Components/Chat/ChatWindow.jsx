@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router';
 import { useSelector } from "react-redux"
 import { useHistory } from 'react-router';
 import axios from 'axios';
