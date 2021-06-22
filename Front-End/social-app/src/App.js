@@ -12,6 +12,8 @@ import Home from './Components/HomePage/Home';
 import PublicProfile from './Components/PublicProfile/PublicProfile';
 import Followers from "./Components/PublicProfile/Followers"
 import Following from "./Components/PublicProfile/Following"
+import ChatMain from './Components/Chat/ChatMain';
+import ChatWindow from './Components/Chat/ChatWindow';
 function App() {
   return (
     <>
@@ -29,6 +31,7 @@ function App() {
         <Route exact path="/settings" component={Settings}></Route>
         <Route exact path="/forget-password" component={ForgetPassword}></Route>
         <Route path="/reset-password/:token" component={ResetPassword}></Route>
+        <Route path="/messages" component={ChatMain}></Route>
       </Switch>
 
     </>
