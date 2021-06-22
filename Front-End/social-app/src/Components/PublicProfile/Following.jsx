@@ -25,17 +25,18 @@ const Following = () => {
         <>
             <h1>Following</h1>
             {
-                (following.length === 0) ? <h1>No Following are here</h1>
-                    :
-                    <>
-                        {
-                            following.map((val, i) => {
-                                return <NavLink exact to={`/profile/${val._id}/`}>
-                                    <h1>{val.username}</h1>
-                                </NavLink>
-                            })
-                        }
-                    </>
+                isLoading ? <p>loading...</p> :
+                    (following.length === 0) ? <h1>No Following are here</h1>
+                        :
+                        <>
+                            {
+                                following.map((val, i) => {
+                                    return <NavLink exact to={`/profile/${val._id}/`}>
+                                        <h1>{val.username}</h1>
+                                    </NavLink>
+                                })
+                            }
+                        </>
             }
         </>
     )

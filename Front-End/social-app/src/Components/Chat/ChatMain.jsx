@@ -38,16 +38,16 @@ const ChatMain = () => {
     }
     return (
         <>
-            <SocketContext.Provider value={getSocket(LoggedUser._id)}>
+            <SocketContext.Provider value={getSocket({ id: LoggedUser._id, username: LoggedUser.username })}>
                 <h2 style={{ textAlign: "center" }}>Chat App</h2>
                 {
-                    totalUsers != undefined ?
+                    totalUsers !== undefined ?
                         totalUsers.map((val, i) => {
                             return <li key={i} value={val._id} onClick={(e) => { changeChatUser(e, val._id, val.username) }}>{val.username}</li>
                         })
                         : null
                 }
-                <ChatWindow recUser={chatUser.id} recUserName={chatUser.username} ></ChatWindow>
+                <ChatWindow totalUsers={totalUsers} recUser={chatUser.id} recUserName={chatUser.username} ></ChatWindow>
             </SocketContext.Provider>
         </>
     )

@@ -14,6 +14,8 @@ const ChatWindow = (props) => {
     const socket = useContext(SocketContext);
     let [prevM, setPrevM] = useState([]);
     let [reloadHelper, setReload] = useState(1);
+    let [isTyping, setTyping] = useState(false);
+    let [typerPerson, setTyperPerson] = useState("");
     useEffect(() => {
         if (!LoggedUser._id) {
             history.push("/profile");
@@ -31,12 +33,24 @@ const ChatWindow = (props) => {
                 console.log(err);
             })
         socket.on("rec-message", (data) => {
+            let newArr = prevM;
+            newArr.push(data);
+            setPrevM(newArr);
             console.log(data);
         });
+        socket.on("rec-typing", (data) => {
+            console.log("typing...", data);
+            setTyperPerson(data.username);
+            setTyping(true);
+            setTimeout(() => {
+                setTyping(false);
+            }, 3000);
+        })
     }, [props.recUser, reloadHelper])
 
     let [chatBoxInput, setChatBoxInput] = useState("");
     function inputChange(e) {
+        socket.emit("typing", props.recUser);
         setChatBoxInput(e.target.value);
     }
     function sendMessage(e) {
@@ -53,6 +67,11 @@ const ChatWindow = (props) => {
                 <h1>
                     {props.recUserName}
                 </h1>
+            </div>
+            <div>
+                {
+                    isTyping ? <p>{typerPerson} Typing...</p> : null
+                }
             </div>
             <input type="text" value={chatBoxInput} onChange={inputChange}></input>
             <button onClick={sendMessage}> Send</button>

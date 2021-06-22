@@ -41,6 +41,7 @@ async function addMessageToDB(SenderId, RecId, text) {
 function main(io) {
     io.on("connection", (socket) => {
         const id = socket.handshake.query.id;
+        const username = socket.handshake.query.username;
         console.log(id);
         socket.join(id);
         socket.on("first-time-log", async (data) => {
@@ -52,7 +53,16 @@ function main(io) {
             addMessageToDB(id, payload.recipent, payload.text);
             socket.broadcast.to(payload.recipent).emit("rec-message", {
                 sender: id,
-                m: payload.text
+                text: payload.text,
+                created: Date.now()
+            });
+        })
+
+
+        socket.on("typing", (payload) => {
+            socket.broadcast.to(payload).emit("rec-typing", {
+                username: username,
+                id: id
             });
         })
     })

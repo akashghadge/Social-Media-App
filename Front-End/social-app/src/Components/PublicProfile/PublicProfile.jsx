@@ -11,7 +11,7 @@ const PublicProfile = () => {
     const LoggedUser = useSelector((state) => {
         return state.User;
     })
-    if (LoggedUser._id == params.id) {
+    if (LoggedUser._id === params.id) {
         history.push("/profile");
     }
     // this function will helps us to check is user object is empty due to refreshing of the user
