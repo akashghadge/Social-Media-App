@@ -39,7 +39,7 @@ const CreatePost = () => {
         setPhoto(e.target.files[0]);
     }
 
-    
+
     function SendPost(e) {
         setLoading(true);
         const urlUploadCloud = "https://api.cloudinary.com/v1_1/asghadge/image/upload";
@@ -89,7 +89,7 @@ const CreatePost = () => {
                         <h1>Create Post</h1>
                         <br></br>
                         <div className="">
-                            <label >Description : </label>
+                            <span >Description : </span>
                             <input type="text" className="" id="desc" onChange={inputChange} value={allCurrentData.desc} required></input>
                             <br></br>
                             <lable>Post Photo : </lable>

@@ -109,6 +109,19 @@ const SinglePost = (props) => {
                 console.log(err);
             })
     }
+    // deletee the post
+    function deletePost(e) {
+        const urlForDeletePost = `http://localhost:5000/api/post/delete/${props.val._id}`
+        axios.post(urlForDeletePost, {})
+            .then((data) => {
+                console.log(data);
+                setFlag(++flagForReq);
+                alert("post deleted");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
     function deleteComment(e, idOfComment, idOfCommentorReal) {
         // check user logged or not
         if (!LoggedUser._id) {
@@ -129,7 +142,7 @@ const SinglePost = (props) => {
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
-                
+
                 console.log(data);
             })
             .catch((err) => {
@@ -181,6 +194,7 @@ const SinglePost = (props) => {
                             })
                         : null
                 }
+                <br></br>
                 {/* create comment */}
                 {
                     <button onClick={(e) => {
@@ -197,6 +211,9 @@ const SinglePost = (props) => {
                         </>
                         : null
                 }
+                <br></br>
+                {/* delete post */}
+                <button onClick={deletePost}>Delete</button>
             </div>
             <br></br>
             <br></br>

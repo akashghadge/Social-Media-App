@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 // redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import saveUser from "../../actions/saveUser"
 import { NavLink } from "react-router-dom";
+import MyPost from "./MyPost"
 
 const ProfileMain = () => {
     // console.log(LoggedUser);
     const dispatch = useDispatch();
-
+    const LoggedUser = useSelector((state) => {
+        return state.User;
+    })
     // history hook
     let history = useHistory();
     // setting loading true when we request add new  in database
@@ -25,7 +28,15 @@ const ProfileMain = () => {
         password: "",
         PicUrl: ""
     });
-    // console.log(allCurrentData);
+    // this function will detect the change of flagForReqstate in child class
+    let [flagForReq, setFlag] = useState(0);
+
+    function handleChangeInPost(flagForReqFromState) {
+        setFlag(flagForReqFromState);
+    }
+    // posts my
+    let [myPosts, setMyPosts] = useState([]);
+    let [loadingPost, setLoadingPost] = useState(false);
     useEffect(() => {
         setLoading(true);
         let token = localStorage.getItem("token");
@@ -45,9 +56,28 @@ const ProfileMain = () => {
                 setLoading(false);
                 history.push("/sign");
             })
+
     }, []);
 
+    useEffect(() => {
+        setLoadingPost(true);
+        let token = localStorage.getItem("token");
+        const urlForPosts = "http://localhost:5000/api/post/myposts";
+        const payload = {
+            token: token
+        };
+        axios.post(urlForPosts, payload)
+            .then((data) => {
+                console.log(data);
+                setMyPosts(data.data);
+                setLoadingPost(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoadingPost(false);
+            })
 
+    }, [flagForReq])
     return (
         <>
             {
@@ -65,6 +95,12 @@ const ProfileMain = () => {
                             <h1>Following :{following.length}</h1>
                         </NavLink>
                     </div>
+            }
+            {/* post */}
+            {
+                myPosts.map((val, i) => {
+                    return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
+                })
             }
         </>
     )

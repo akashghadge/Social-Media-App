@@ -139,12 +139,42 @@ router.post("/comment/remove", async (req, res) => {
     let data = await Post.updateOne({ _id: idOfPost }, {
         $pull:
         {
-            comments: { _id: idOfComment }
+            comments: { _id: idOfComment, postedBy: idOfCommentor }
         }
     });
     console.log(data);
     res.status(200).json(data);
 });
 
+// user post only 
+router.post("/myposts", verify, async (req, res) => {
+    const fileter = {
+        postedBy: res.locals.id
+    }
+    try {
+        let posts = await Post.find(fileter).populate({
+            path: "postedBy",
+            select: "username"
+        });
+        res.status(200).json(posts);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+})
+
+// public use post
+router.post("/public-user-posts", async (req, res) => {
+    const { id } = req.body;
+    try {
+        let data = await Post.find({
+            postedBy: id
+        }).populate("postedBy", "username _id").exec();
+        res.json(data);
+    }
+    catch (err) {
+        res.status(500).json();
+    }
+})
 
 module.exports = router;
