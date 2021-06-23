@@ -4,7 +4,7 @@ import axios from "axios"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import moment from "moment"
-const SinglePost = (props) => {
+const PublicPost = (props) => {
     console.log(props);
     let history = useHistory();
     // getting current user
@@ -129,7 +129,7 @@ const SinglePost = (props) => {
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
-                
+
                 console.log(data);
             })
             .catch((err) => {
@@ -142,7 +142,7 @@ const SinglePost = (props) => {
                 <img src={props.val.photo} width="100px" height="100px" alt="profile-pic"></img>
                 <h3>{props.val.desc}</h3>
                 {/* do in production */}
-                <NavLink exact to={`profile/${props.val.postedBy._id}`}>
+                <NavLink exact to={`/profile/${props.val.postedBy._id}`}>
                     <h3>{props.val.postedBy.username}</h3>
                 </NavLink>
                 {/* created time */}
@@ -168,7 +168,7 @@ const SinglePost = (props) => {
                                 return (
                                     <>
                                         <h3>{comment.text}</h3>
-                                        <NavLink exact to={`profile/${comment.postedBy._id}`}>
+                                        <NavLink exact to={`/profile/${comment.postedBy._id}`}>
                                             <p>{comment.postedBy.username}</p>
                                         </NavLink>
                                         <p>{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
@@ -204,4 +204,4 @@ const SinglePost = (props) => {
         </>
     )
 }
-export default SinglePost;
+export default PublicPost;

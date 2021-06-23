@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import { SocketContext } from '../../contexts/SocketContext';
-
+const moment = require("moment");
 
 const ChatWindow = (props) => {
     let history = useHistory();
@@ -26,8 +26,14 @@ const ChatWindow = (props) => {
             RecId: props.recUser
         })
             .then((data) => {
-                setPrevM(data.data.chats);
-                // console.log(data.data);
+                // here if there is no chat then there is no user present there data.data is emtpy it tends to null.chats 
+                // so we check first
+                if (data.data === null) {
+                    setPrevM([]);
+                }
+                else {
+                    setPrevM(data.data.chats);
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -36,17 +42,15 @@ const ChatWindow = (props) => {
             let newArr = prevM;
             newArr.push(data);
             setPrevM(newArr);
-            console.log(data);
         });
         socket.on("rec-typing", (data) => {
-            console.log("typing...", data);
             setTyperPerson(data.username);
             setTyping(true);
             setTimeout(() => {
                 setTyping(false);
             }, 3000);
         })
-    }, [props.recUser, reloadHelper])
+    }, [props.recUser, props.recUserName, reloadHelper])
 
     let [chatBoxInput, setChatBoxInput] = useState("");
     function inputChange(e) {
@@ -77,12 +81,12 @@ const ChatWindow = (props) => {
             <button onClick={sendMessage}> Send</button>
             <div>
                 {
-                    prevM.map((val, i) => {
+                    prevM.length === 0 ? <p>No prev chats</p> : prevM.map((val, i) => {
                         return (
-                            <div>
+                            <div key={i}>
                                 <h4>{val.text}</h4>
                                 <p>{val.sender.username}</p>
-                                <p>{val.created}</p>
+                                <p>{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
                             </div>
                         )
                     })

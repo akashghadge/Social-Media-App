@@ -4,6 +4,7 @@ import axios from "axios"
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router";
+import PublicPost from "./PublicPost";
 const PublicProfile = () => {
     let history = useHistory();
     let params = useParams();
@@ -38,7 +39,7 @@ const PublicProfile = () => {
     // is follow mechanism
     let [loadingFollow, setLoadingFollow] = useState(true);//loading to check user already followed or not
     let [isFollow, setIsFollow] = useState(false);//flag for follow unfollow
-
+    let [flagForReq, setFlag] = useState(0);
     // useEffect for getting basic user info
     useEffect(() => {
         setLoading(true);
@@ -136,9 +137,33 @@ const PublicProfile = () => {
                 alert(err);
                 console.log(err);
             });
+
     }
+    // posts my
+    let [myPosts, setMyPosts] = useState([]);
+    let [loadingPost, setLoadingPost] = useState(false);
+    useEffect(() => {
+        setLoadingPost(true);
+        const urlForPosts = "http://localhost:5000/api/post/public-user-posts";
+        const payload = {
+            id: params.id
+        };
+        axios.post(urlForPosts, payload)
+            .then((data) => {
+                console.log(data);
+                setMyPosts(data.data);
+                setLoadingPost(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoadingPost(false);
+            })
 
-
+    }, [])
+    // this function will detect the change of flagForReqstate in child class
+    function handleChangeInPost(flagForReqFromState) {
+        setFlag(flagForReqFromState);
+    }
 
     return (
         <>
@@ -164,6 +189,12 @@ const PublicProfile = () => {
                             <h1>Following :{following.length}</h1>
                         </NavLink>
                     </div>
+            }
+            {/* post */}
+            {
+                myPosts.map((val, i) => {
+                    return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
+                })
             }
         </>
     )

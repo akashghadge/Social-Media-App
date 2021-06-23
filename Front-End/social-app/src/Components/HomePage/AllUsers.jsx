@@ -28,7 +28,7 @@ const AllUsers = () => {
                     loading ? <p>loading.....</p>
                         :
                         allUsers.map((val, i) => {
-                            return <NavLink to={`/profile/${val._id}`}>
+                            return <NavLink key={i} to={`/profile/${val._id}`}>
                                 <p>{val.username}</p>
                             </NavLink>
                         })

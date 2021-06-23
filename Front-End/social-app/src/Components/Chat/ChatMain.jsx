@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
-
 import axios from "axios"
 
 import ChatWindow from "./ChatWindow"

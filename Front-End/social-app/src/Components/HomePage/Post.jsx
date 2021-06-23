@@ -30,7 +30,7 @@ const Post = () => {
                 (totalPosts === undefined) ? null : totalPosts.map((val, i, arr) => {
                     return (
                         <>
-                            <SinglePost val={val} index={i} handleChangeInPost={handleChangeInPost} ></SinglePost>
+                            <SinglePost val={val} index={i} key={i} handleChangeInPost={handleChangeInPost} ></SinglePost>
                         </>
                     )
                 })
