@@ -5,6 +5,7 @@ const router = Router();
 // database modules
 const User = require("../models/User.model");
 const verify = require("../middleware/verify");
+const addNote = require("../helpers/addNotification");
 //get followers of user
 router.post("/followers/all", async (req, res) => {
     const { userId } = req.body;
@@ -50,6 +51,17 @@ const addFollow = async (userSend, userRecive) => {
                             followers: userSend
                         }
                     })
+                // adding the notification to the user who recieved on follwer
+                addNote({
+                    ID: userRecive,
+                    note: `1 person started following you check followers`
+                })
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
                 console.log(followerAdd);
                 resolve();
             }
@@ -80,6 +92,18 @@ const removeFollow = async (userSend, userReceive) => {
                         }
                     })
                 console.log(followerRemove);
+                
+                // notify user who lost one follower
+                addNote({
+                    ID: userReceive,
+                    note: `1 person started following you check followers`
+                })
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
                 resolve();
             }
             catch (err) {
@@ -90,7 +114,7 @@ const removeFollow = async (userSend, userReceive) => {
 }
 router.post("/following/is", async (req, res) => {
     const { userSend, userReceive } = req.body;
-    
+
 })
 router.post("/following/add", verify, async (req, res) => {
     addFollow(res.locals.id, req.body.userReceive)
