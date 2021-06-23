@@ -15,7 +15,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { AddBox, Dashboard, Home } from "@material-ui/icons"
 import { NavLink } from "react-router-dom"
-
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from "axios"
+import { useSelector } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
     AppBar: {
         color: "#ffffff",
@@ -92,13 +95,39 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 export default function PrimarySearchAppBar() {
+    let [notificationCount, setNotificationCount] = useState(0);
+    const LoggedUser = useSelector((state) => {
+        return state.User;
+    })
+    useEffect(() => {
+        console.log("use effect");
+        let token = localStorage.getItem("token");
+        if (token == null) {
+            setNotificationCount(0);
+        }
+        else {
+            const urlNotification = "http://localhost:5000/api/notification/all";
+            axios.post(urlNotification, {
+                token: token
+            })
+                .then((data) => {
+                    if (data.data == null || data.data.length == 0) {
+                        setNotificationCount(0);
+                    }
+                    else {
+                        setNotificationCount(data.data.length);
+                    }
+                })
+        }
+    }, [LoggedUser._id])
+
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -171,7 +200,7 @@ export default function PrimarySearchAppBar() {
             <NavLink exact to="/messages" className={classes.navlink}>
                 <MenuItem>
                     <IconButton aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={0} color="secondary">
                             <MailIcon />
                         </Badge>
                     </IconButton>
@@ -181,7 +210,7 @@ export default function PrimarySearchAppBar() {
             <NavLink exact to="/notifications" className={classes.navlink}>
                 <MenuItem>
                     <IconButton aria-label="show 11 new notifications" color="inherit">
-                        <Badge badgeContent={11} color="secondary">
+                        <Badge badgeContent={notificationCount} color="secondary">
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
@@ -253,14 +282,14 @@ export default function PrimarySearchAppBar() {
                         </NavLink>
                         <NavLink exact to="/messages" className={classes.navlink}>
                             <IconButton aria-label="show 4 new mails" color="inherit">
-                                <Badge badgeContent={4} color="secondary">
+                                <Badge badgeContent={0} color="secondary">
                                     <MailIcon />
                                 </Badge>
                             </IconButton>
                         </NavLink>
                         <NavLink exact to="/notifications" className={classes.navlink}>
                             <IconButton aria-label="show 17 new notifications" color="inherit">
-                                <Badge badgeContent={17} color="secondary">
+                                <Badge badgeContent={notificationCount} color="secondary">
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>

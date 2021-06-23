@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const User = require("../models/User.model");
+const addNote = require("../helpers/addNotification");
 // getting current user
 router.post("/me", (req, res) => {
     res.status(200).json({
@@ -36,6 +37,17 @@ router.post("/edit", (req, res) => {
         .then((data) => {
             // console.log(data);
             res.status(200).json("update succefully");
+            // adding notification
+            addNote({
+                ID: res.locals.id,
+                note: `Profile Updated..`
+            })
+                .then((data) => {
+                    console.log("notification added succefullly");
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
         })
         .catch((err) => {
             // console.log(err);

@@ -13,6 +13,7 @@ import PublicProfile from './Components/PublicProfile/PublicProfile';
 import Followers from "./Components/PublicProfile/Followers"
 import Following from "./Components/PublicProfile/Following"
 import ChatMain from './Components/Chat/ChatMain';
+import Notification from './Components/Dashboard/Notification';
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/forget-password" component={ForgetPassword}></Route>
         <Route path="/reset-password/:token" component={ResetPassword}></Route>
         <Route path="/messages" component={ChatMain}></Route>
+        <Route path="/notifications" component={Notification}></Route>
       </Switch>
 
     </>
