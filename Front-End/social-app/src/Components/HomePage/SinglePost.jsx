@@ -187,7 +187,6 @@ const SinglePost = (props) => {
                     }
                 );
                 return setOpen(true);
-                console.log(data);
             })
             .catch((err) => {
                 console.log(err);

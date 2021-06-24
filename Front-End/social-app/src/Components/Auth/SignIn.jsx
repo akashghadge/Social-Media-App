@@ -1,7 +1,18 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { useHistory, NavLink } from "react-router-dom";
+// mui
+// snack bar code
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const SignIn = () => {
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     let history = useHistory();
     let [allCurrentData, setAllCurrentData] = useState({
         username: "",
@@ -32,11 +43,14 @@ const SignIn = () => {
                     username: "",
                     password: ""
                 })
-                alert("user signed in succefully");
+                setSnackbarObj({ text: `hello ${allCurrentData.username}`, backgroundColor: "green" })
+                setOpen(true);
                 history.push("/profile");
             })
-            .catch(() => {
-                alert("Incorrect username or password");
+            .catch((err) => {
+                // axios error or some bug isssue
+                setSnackbarObj({ text: err.response.data, backgroundColor: "red" })
+                setOpen(true);
             })
 
     }
@@ -64,6 +78,10 @@ const SignIn = () => {
                     Forget Password
                 </NavLink>
             </div>
+
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }

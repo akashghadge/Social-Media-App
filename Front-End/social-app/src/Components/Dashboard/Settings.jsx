@@ -2,8 +2,16 @@ import React, { useEffect, useState } from "react"
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Save } from "@material-ui/icons";
-
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const Settings = () => {
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     let history = useHistory();
     let [isLoading, setLoading] = useState(false);
     let [allCurrentData, setAllCurrentData] = useState({
@@ -44,25 +52,35 @@ const Settings = () => {
         })
         console.log(allCurrentData);
     }
+    console.log(allCurrentData);
     function updateUser(e) {
-        setLoading(true);
-        const urlUpdateUser = "http://localhost:5000/api/dashboard/edit";
-        const updateData = {
-            id: allCurrentData._id,
-            update: allCurrentData,
-            token: token
-        };
-        axios.post(urlUpdateUser, updateData)
-            .then((data) => {
-                console.log(data);
-                setLoading(false);
-                alert("update succefully")
-            })
-            .catch((err) => {
-                console.log(err);
-                alert("no update")
-                setLoading(false);
-            })
+        if (allCurrentData.fname.length < 3 || allCurrentData.lname.length < 3) {
+            setSnackbarObj({ text: "First and Last name must have atleast 3 letters", backgroundColor: "red" });
+            setOpen(true);
+        }
+        else {
+
+            setLoading(true);
+            const urlUpdateUser = "http://localhost:5000/api/dashboard/edit";
+            const updateData = {
+                id: allCurrentData._id,
+                update: allCurrentData,
+                token: token
+            };
+            axios.post(urlUpdateUser, updateData)
+                .then((data) => {
+                    console.log(data);
+                    setSnackbarObj({ text: "Profile Updated", backgroundColor: "green" });
+                    setOpen(true);
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setSnackbarObj({ text: "No Update", backgroundColor: "red" });
+                    setOpen(true);
+                    setLoading(false);
+                })
+        }
     }
     return (
         <>
@@ -75,8 +93,6 @@ const Settings = () => {
 
                         <input type="text" id="lname" value={allCurrentData.lname} onChange={inputChange}></input>
                         <br></br>
-
-                        <input type="text" id="username" value={allCurrentData.username} onChange={inputChange}></input>
                         <br></br>
                         {/* 
                         <input type="password" id="password" value={allCurrentData.password} onChange={inputChange}></input>
@@ -84,6 +100,9 @@ const Settings = () => {
                         <button className="submitButton" onClick={updateUser}><Save></Save></button>
                     </div>
             }
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }
