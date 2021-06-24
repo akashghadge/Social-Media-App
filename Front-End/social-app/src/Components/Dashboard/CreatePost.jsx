@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react"
 import GetAuth from "../../helper/auth.helper";
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const CreatePost = () => {
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
+
     // setting loading true when we request add new  in database
     let [isLoading, setLoading] = useState(false);
-
-
     let [user, setUser] = useState({});
     useEffect(() => {
         GetAuth()
@@ -38,9 +46,13 @@ const CreatePost = () => {
     function fileInputChange(e) {
         setPhoto(e.target.files[0]);
     }
-
-
     function SendPost(e) {
+        if (allCurrentData.desc.length == 0) {
+            // notification
+            setSnackbarObj({ text: "Post Must Contain description", backgroundColor: "red" });
+            setOpen(true);
+            return;
+        }
         setLoading(true);
         const urlUploadCloud = "https://api.cloudinary.com/v1_1/asghadge/image/upload";
         const urlServerUploadPost = "http://localhost:5000/api/post/new";
@@ -68,17 +80,23 @@ const CreatePost = () => {
                 fetch(urlServerUploadPost, requestOptions)
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
+                        // notification
+                        setSnackbarObj({ text: "Post Created", backgroundColor: "green" });
+                        setOpen(true);
                         setLoading(false);
                     })
                     .catch((err) => {
-                        console.log(err)
+                        // notification
+                        setSnackbarObj({ text: "Post Not created", backgroundColor: "red" });
+                        setOpen(true);
                         setLoading(false);
                     })
             })
             .catch((err) => {
+                // notification
+                setSnackbarObj({ text: "Post Not created", backgroundColor: "red" });
+                setOpen(true);
                 setLoading(false);
-                console.log(err);
             })
     }
     return (
@@ -99,6 +117,9 @@ const CreatePost = () => {
                         </div>
                     </div>
             }
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>)
 }
 export default CreatePost;

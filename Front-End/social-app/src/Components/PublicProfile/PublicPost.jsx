@@ -4,8 +4,21 @@ import axios from "axios"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import moment from "moment"
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const PublicPost = (props) => {
-    console.log(props);
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
+    const ErrorObject =
+    {
+        backgroundColor: "red",
+        text: "Your Not Loggedin"
+    }
     let history = useHistory();
     // getting current user
     const LoggedUser = useSelector((state) => {
@@ -21,7 +34,8 @@ const PublicPost = (props) => {
     // we route it to profile
     const addLike = (event, idPost) => {
         if (!LoggedUser._id) {
-            history.push("/profile");
+            setSnackbarObj(ErrorObject);
+            return setOpen(true);
         }
         const urlAddLike = "http://localhost:5000/api/post/like/add";
         let token = localStorage.getItem("token");
@@ -33,6 +47,13 @@ const PublicPost = (props) => {
         axios.post(urlAddLike, body)
             .then((data) => {
                 setFlag(++flagForReq);
+                setSnackbarObj(
+                    {
+                        backgroundColor: "green",
+                        text: "You Liked Post"
+                    }
+                );
+                setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -41,7 +62,8 @@ const PublicPost = (props) => {
     }
     const removeLike = (event, idPost) => {
         if (!LoggedUser._id) {
-            history.push("/profile");
+            setSnackbarObj(ErrorObject);
+            return setOpen(true);
         }
         const urlRemoveLike = "http://localhost:5000/api/post/like/remove";
         let token = localStorage.getItem("token");
@@ -52,6 +74,13 @@ const PublicPost = (props) => {
         axios.post(urlRemoveLike, body)
             .then((data) => {
                 setFlag(++flagForReq);
+                setSnackbarObj(
+                    {
+                        backgroundColor: "gold",
+                        text: "you dislike post"
+                    }
+                );
+                setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -103,6 +132,13 @@ const PublicPost = (props) => {
                 setNewComment("");
                 setCreateCommentOn(!isCreateCommentOn);
                 setFlag(++flagForReq);
+                setSnackbarObj(
+                    {
+                        backgroundColor: "green",
+                        text: "You commented on Post"
+                    }
+                );
+                return setOpen(true);
             })
             .catch((err) => {
                 setFlag(++flagForReq);
@@ -112,12 +148,18 @@ const PublicPost = (props) => {
     function deleteComment(e, idOfComment, idOfCommentorReal) {
         // check user logged or not
         if (!LoggedUser._id) {
-            history.push("/profile");
+            setSnackbarObj(ErrorObject);
+            return setOpen(true);
         }
         // commentor id and Logged user is same or not
         if (LoggedUser._id !== idOfCommentorReal) {
-            alert("your not owner of this comment")
-            return "";
+            setSnackbarObj(
+                {
+                    backgroundColor: "red",
+                    text: "your not owner of comment so you will not able to delete it"
+                }
+            );
+            return setOpen(true);
         }
         // delete comment
         const payload = {
@@ -129,8 +171,13 @@ const PublicPost = (props) => {
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
-
-                console.log(data);
+                setSnackbarObj(
+                    {
+                        backgroundColor: "red",
+                        text: "Comment Removed"
+                    }
+                );
+                return setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -201,6 +248,9 @@ const PublicPost = (props) => {
             <br></br>
             <br></br>
             <br></br>
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }

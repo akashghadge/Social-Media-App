@@ -5,7 +5,21 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router";
 import PublicPost from "./PublicPost";
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const PublicProfile = () => {
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
+    const ErrorObject =
+    {
+        backgroundColor: "red",
+        text: "Your Not Loggedin"
+    }
     let history = useHistory();
     let params = useParams();
     // getting current user
@@ -106,6 +120,8 @@ const PublicProfile = () => {
         axios.post(urlForUnFollowUser, body)
             .then((data) => {
                 setReload(reloadForUseEffect + 1);
+                setSnackbarObj({ text: "Succefully Unfollow User", backgroundColor: "green" });
+                setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -132,6 +148,8 @@ const PublicProfile = () => {
         axios.post(urlForFollowUser, body)
             .then((data) => {
                 setReload(++reloadForUseEffect + 1);
+                setSnackbarObj({ text: "Succefully Follow User", backgroundColor: "green" });
+                setOpen(true);
             })
             .catch((err) => {
                 alert(err);
@@ -159,7 +177,7 @@ const PublicProfile = () => {
                 setLoadingPost(false);
             })
 
-    }, [])
+    }, [flagForReq])
     // this function will detect the change of flagForReqstate in child class
     function handleChangeInPost(flagForReqFromState) {
         setFlag(flagForReqFromState);
@@ -196,6 +214,9 @@ const PublicProfile = () => {
                     return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
                 })
             }
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }

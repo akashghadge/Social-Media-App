@@ -20,15 +20,18 @@ const UserSchema = new Schema
         },
         fname: {
             type: String,
+            minLength: [3, 'minimum password length is 3 charecters'],
             required: [true, 'please enter first name']
         },
         lname: {
             type: String,
+            minLength: [3, 'minimum password length is 3 charecters'],
             required: [true, 'please enter first name']
         },
         username:
         {
             type: String,
+            minLength: [6, 'minimum password length is 6 charecters'],
             requireed: [true, 'please enter username']
         },
         PicUrl: {

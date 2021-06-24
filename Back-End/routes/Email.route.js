@@ -23,7 +23,7 @@ router.post("/mail/verification", (req, res) => {
             if (data === null) {
                 console.log("otp missmatch");
                 res.status(404).json({
-                    m: "otp miss-match", data
+                    flag: false, m: "otp miss-match", data
                 })
             }
             else {
@@ -56,7 +56,9 @@ router.post("/mail/verification", (req, res) => {
                 })
                 console.log(data);
                 console.log("otp match");
-                res.status(200).json("otp match");
+                res.status(200).json({
+                    flag: true, m: "otp match", data
+                });
             }
         })
         .catch((err) => {

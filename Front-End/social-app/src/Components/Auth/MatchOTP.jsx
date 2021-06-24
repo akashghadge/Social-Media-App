@@ -1,5 +1,16 @@
 import React, { useState } from "react"
+// snack bar code
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+
 const MatchOTP = () => {
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     let [allCurrentData, setAllCurrentData] = useState({
         email: "",
         otp: 0,
@@ -25,12 +36,16 @@ const MatchOTP = () => {
         fetch(urlOtpMatch, requestOptions)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
-                alert(data.m)
+                let c = "red";
+                if (data.flag) {
+                    c = "green"
+                }
+                setSnackbarObj({ text: data.m, backgroundColor: c });
+                setOpen(true);
             })
             .catch((err) => {
-                console.log(err);
-                alert(err.m)
+                setSnackbarObj({ text: "OTP mismatch", backgroundColor: "red" });
+                setOpen(true);
             })
     }
     return (
@@ -40,6 +55,9 @@ const MatchOTP = () => {
             <label >OTP</label>
             <input type="number" name="otp" className="" id="otpMatchOTP" placeholder="" value={allCurrentData.otp} onChange={inputChange} required></input>
             <button type="submit" onClick={sendOtp}>Submit</button>
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }

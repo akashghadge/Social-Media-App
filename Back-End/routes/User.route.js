@@ -87,7 +87,6 @@ router.post("/in", async (req, res) => {
     const password = req.body.password;
     // getting user data
     const user = await User.findOne({ username: username });
-    console.log(user._id);
     if (user) {
         const validPassword = await bcrypt.compare(password, user.password);
         if (validPassword) {
@@ -97,7 +96,6 @@ router.post("/in", async (req, res) => {
             let payload = {
                 username: username,
                 id: user._id
-                // id: user[0]._id
             }
 
             //create the access token with the shorter lifespan
@@ -109,11 +107,11 @@ router.post("/in", async (req, res) => {
         }
         else {
             console.log("invalid password");
-            res.status(400).json({ err: "invalid password" });
+            res.status(400).json("invalid password");
         }
     } else {
         console.log("invalid username");
-        res.status(401).json({ err: "user does not exists" })
+        res.status(401).json("invalid username");
     }
 })
 

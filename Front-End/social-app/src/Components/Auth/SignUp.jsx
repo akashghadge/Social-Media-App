@@ -1,9 +1,23 @@
 import React, { useState } from "react"
 // import axios from "axios"
 import { Save } from "@material-ui/icons"
+import { useHistory } from "react-router-dom"
 // 	https://api.cloudinary.com/v1_1/asghadge
 // social-media
+// mui
+// snack bar code
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const SignUp = () => {
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
+    // history
+    let history = useHistory();
     // setting loading true when we request add new  in database
     let [isLoading, setLoading] = useState(false);
 
@@ -31,6 +45,17 @@ const SignUp = () => {
     }
 
     function SendUser(event) {
+        // length checking
+        if (allCurrentData.fname.length < 3 || allCurrentData.lname.length < 3) {
+            setSnackbarObj({ text: "First and Last Name min have 3 letters", backgroundColor: "red" });
+            setOpen(true);
+            return;
+        }
+        else if (allCurrentData.username.length < 6 || allCurrentData.password.length < 6) {
+            setSnackbarObj({ text: "Username and password have min 6 letters", backgroundColor: "red" });
+            setOpen(true);
+            return;
+        }
         setLoading(true);
         const urlUploadCloud = "https://api.cloudinary.com/v1_1/asghadge/image/upload";
         const urlServerUploadUser = "http://localhost:5000/api/user/add";
@@ -63,6 +88,7 @@ const SignUp = () => {
                     .then((data) => {
                         console.log(data);
                         setLoading(false);
+                        history.push("/match-otp");
                     })
                     .catch((err) => {
                         console.log(err)
@@ -104,6 +130,9 @@ const SignUp = () => {
                         <button className="submitButton" onClick={SendUser}><Save></Save></button>
                     </div>
             }
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }
