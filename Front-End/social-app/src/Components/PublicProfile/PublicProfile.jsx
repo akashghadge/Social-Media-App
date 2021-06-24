@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router";
 import PublicPost from "./PublicPost";
+import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
+import { Button } from "@material-ui/core"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const PublicProfile = () => {
     let [snackbarObj, setSnackbarObj] = useState({
