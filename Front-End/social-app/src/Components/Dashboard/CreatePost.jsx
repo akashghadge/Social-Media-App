@@ -69,7 +69,7 @@ const CreatePost = () => {
             .then((data) => {
                 let postData = {
                     postedById: user.id,
-                    photo: data.url,
+                    photo: data.zzz,
                     desc: allCurrentData.desc
                 }
                 const requestOptions = {

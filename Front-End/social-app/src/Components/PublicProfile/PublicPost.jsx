@@ -4,6 +4,8 @@ import axios from "axios"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import moment from "moment"
+import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
+import { Button } from "@material-ui/core"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const PublicPost = (props) => {
     let [snackbarObj, setSnackbarObj] = useState({
@@ -177,6 +179,7 @@ const PublicPost = (props) => {
                         text: "Comment Removed"
                     }
                 );
+                setCommentButton(false);
                 return setOpen(true);
             })
             .catch((err) => {
@@ -185,69 +188,74 @@ const PublicPost = (props) => {
     }
     return (
         <>
-            <div>
-                <img src={props.val.photo} width="100px" height="100px" alt="profile-pic"></img>
-                <h3>{props.val.desc}</h3>
-                {/* do in production */}
-                <NavLink exact to={`/profile/${props.val.postedBy._id}`}>
-                    <h3>{props.val.postedBy.username}</h3>
-                </NavLink>
-                {/* created time */}
-                <p>{moment(props.val.created).format("H:mm a, MMMM Do YYYY")}</p>
-                {/* like section */}
-                {
-                    (props.val.likes.includes(LoggedUser._id))
-                        ?
-                        <button onClick={(e) => { removeLike(e, props.val._id) }}>Unlike :{props.val.likes.length}</button> :
-                        <button onClick={(e) => { addLike(e, props.val._id) }}>Like :{props.val.likes.length}</button>
-                }
-                <br></br>
-                {/* comment section */}
-                {
-                    <button onClick={(e) => {
-                        onCommentButton(e, props.val._id)
-                    }}>Comments : {props.val.comments.length}</button>
-                }
-                {
-                    (commentButton) ?
-                        commentLoading ? null :
-                            commentInfo.map((comment, i) => {
-                                return (
-                                    <>
-                                        <h3>{comment.text}</h3>
-                                        <NavLink exact to={`/profile/${comment.postedBy._id}`}>
-                                            <p>{comment.postedBy.username}</p>
-                                        </NavLink>
-                                        <p>{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
-                                        <button onClick={(e) => {
-                                            deleteComment(e, comment._id, comment.postedBy._id)
-                                        }}>Delete Comment</button>
-                                        <br></br>
-                                    </>
-                                )
-                            })
-                        : null
-                }
-                {/* create comment */}
-                {
-                    <button onClick={(e) => {
-                        createCommentButton(e, props.val._id);
-                    }}>Create Comment</button>
-                }
-                {
-                    (isCreateCommentOn) ?
-                        <>
-                            <input type="text" onChange={newCommentHandle} value={newComment}></input>
-                            <button onClick={(e) => {
-                                addNewComment(e, props.val._id);
-                            }} >Add Comment</button>
-                        </>
-                        : null
-                }
+            <div className="postContainer">
+                <div className="singlePost">
+                    <NavLink className="singlePostUsername" exact to={`profile/${props.val.postedBy._id}`}>
+                        <h3>{props.val.postedBy.username}</h3>
+                    </NavLink>
+                    <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
+                    <hr></hr>
+                    <img src={props.val.photo} className="singlePostImage" alt="profile-pic"></img>
+                    <h3 className="singlePostDesc">{props.val.desc}</h3>
+                    {/* do in production */}
+                    {/* created time */}
+                    <p className="singlePostDate">{moment(props.val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                    {/* like section */}
+                    {
+                        (props.val.likes.includes(LoggedUser._id))
+                            ?
+                            <Button onClick={(e) => { removeLike(e, props.val._id) }}> <Favorite style={{ color: "red" }}></Favorite>:{props.val.likes.length}</Button> :
+                            <Button onClick={(e) => { addLike(e, props.val._id) }}><FavoriteBorder></FavoriteBorder> :{props.val.likes.length}</Button>
+                    }
+                    {/* comment section */}
+                    {
+                        <Button onClick={(e) => {
+                            onCommentButton(e, props.val._id)
+                        }}> <ChatBubbleOutline></ChatBubbleOutline>: {props.val.comments.length}</Button>
+                    }
+                    {/* create comment */}
+                    {
+                        <Button onClick={(e) => {
+                            createCommentButton(e, props.val._id);
+                        }}><AddComment></AddComment></Button>
+                    }
+                    <div className="singlePostCommentsCollection">
+                        {
+                            (commentButton) ?
+                                commentLoading ? null :
+                                    commentInfo.map((comment, i) => {
+                                        return (
+                                            <>
+                                                <div className="singlePostSingleComment">
+                                                    <h3 className="singlePostCommentText">{comment.text}</h3>
+                                                    <NavLink className="singlePostCommentUsername" exact to={`profile/${comment.postedBy._id}`}>
+                                                        <p>{comment.postedBy.username}</p>
+                                                    </NavLink>
+                                                    <p className="singlePostCommentDate">{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                                    <Button onClick={(e) => {
+                                                        deleteComment(e, comment._id, comment.postedBy._id)
+                                                    }}><Delete style={{ color: "red", fontSize: "0.8rem" }}></Delete></Button>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                : null
+                        }
+                    </div>
+                    <div className="singlePostCommentBox">
+                        {
+                            (isCreateCommentOn) ?
+                                <>
+                                    <input className="singlePostCommentInput" type="text" onChange={newCommentHandle} value={newComment}></input>
+                                    <Button onClick={(e) => {
+                                        addNewComment(e, props.val._id);
+                                    }} ><Send></Send></Button>
+                                </>
+                                : null
+                        }
+                    </div>
+                </div>
             </div>
-            <br></br>
-            <br></br>
-            <br></br>
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />

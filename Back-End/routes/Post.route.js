@@ -154,7 +154,7 @@ router.post("/myposts", verify, async (req, res) => {
     try {
         let posts = await Post.find(fileter).populate({
             path: "postedBy",
-            select: "username"
+            select: "-password"
         });
         res.status(200).json(posts);
     }
@@ -169,7 +169,7 @@ router.post("/public-user-posts", async (req, res) => {
     try {
         let data = await Post.find({
             postedBy: id
-        }).populate("postedBy", "username _id").exec();
+        }).populate("postedBy", "-password").exec();
         res.json(data);
     }
     catch (err) {

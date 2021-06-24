@@ -175,3 +175,18 @@ $sucessButtonColorBg:rgb(52, 255, 52);
     width: 4rem;
     border-radius: 50%;
 }
+
+.deletePostMyPosts {
+    width: 100%;
+    height: 2rem;
+    outline: none;
+    color: red;
+    border-radius: 0.2rem;
+    background-color: white;
+    border: none;
+
+    &:hover {
+        background-color: red;
+        color: white;
+    }
+}
