@@ -29,8 +29,8 @@ const Home = () => {
 
     return (
         <>
-            <Post></Post>
             <AllUsers></AllUsers>
+            <Post></Post>
         </>
     )
 }
