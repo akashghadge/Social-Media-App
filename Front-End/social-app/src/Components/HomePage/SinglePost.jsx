@@ -1,12 +1,28 @@
+// basic react imports
 import React, { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
-import axios from "axios"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
+import { NavLink } from "react-router-dom"
+import axios from "axios"
 import moment from "moment"
+// mui
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const SinglePost = (props) => {
-    console.log(props);
-    let history = useHistory();
+    // snack bar code
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
+    const ErrorObject =
+    {
+        backgroundColor: "red",
+        text: "Your Not Loggedin"
+    }
+
     // getting current user
     const LoggedUser = useSelector((state) => {
         return state.User;
@@ -21,7 +37,8 @@ const SinglePost = (props) => {
     // we route it to profile
     const addLike = (event, idPost) => {
         if (!LoggedUser._id) {
-            history.push("/profile");
+            setSnackbarObj(ErrorObject);
+            return setOpen(true);
         }
         const urlAddLike = "http://localhost:5000/api/post/like/add";
         let token = localStorage.getItem("token");
@@ -33,15 +50,24 @@ const SinglePost = (props) => {
         axios.post(urlAddLike, body)
             .then((data) => {
                 setFlag(++flagForReq);
+                // showing the snackbar
+                setSnackbarObj(
+                    {
+                        backgroundColor: "green",
+                        text: "You Liked Post"
+                    }
+                );
+                return setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
-                alert(err);
             })
     }
+    // remove if user commented or not
     const removeLike = (event, idPost) => {
         if (!LoggedUser._id) {
-            history.push("/profile");
+            setSnackbarObj(ErrorObject);
+            return setOpen(true);
         }
         const urlRemoveLike = "http://localhost:5000/api/post/like/remove";
         let token = localStorage.getItem("token");
@@ -52,12 +78,21 @@ const SinglePost = (props) => {
         axios.post(urlRemoveLike, body)
             .then((data) => {
                 setFlag(++flagForReq);
+                setSnackbarObj(
+                    {
+                        backgroundColor: "gold",
+                        text: "you dislike post"
+                    }
+                );
+                return setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
                 alert(err);
             })
     }
+
+    // load comments on post
     let [commentButton, setCommentButton] = useState(false);
     let [commentInfo, setCommentInfo] = useState("");
     let [commentLoading, setCommentLoading] = useState(false);
@@ -103,21 +138,37 @@ const SinglePost = (props) => {
                 setNewComment("");
                 setCreateCommentOn(!isCreateCommentOn);
                 setFlag(++flagForReq);
+                setSnackbarObj(
+                    {
+                        backgroundColor: "green",
+                        text: "You commented on Post"
+                    }
+                );
+                return setOpen(true);
             })
             .catch((err) => {
                 setFlag(++flagForReq);
                 console.log(err);
+                setSnackbarObj(ErrorObject);
+                return setOpen(true);
             })
     }
+    // deletion of comment
     function deleteComment(e, idOfComment, idOfCommentorReal) {
         // check user logged or not
         if (!LoggedUser._id) {
-            history.push("/profile");
+            setSnackbarObj(ErrorObject);
+            return setOpen(true);
         }
         // commentor id and Logged user is same or not
         if (LoggedUser._id !== idOfCommentorReal) {
-            alert("your not owner of this comment")
-            return "";
+            setSnackbarObj(
+                {
+                    backgroundColor: "red",
+                    text: "your not owner of comment so you will not able to delete it"
+                }
+            );
+            return setOpen(true);
         }
         // delete comment
         const payload = {
@@ -129,13 +180,20 @@ const SinglePost = (props) => {
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
-                
+                setSnackbarObj(
+                    {
+                        backgroundColor: "red",
+                        text: "Comment Removed"
+                    }
+                );
+                return setOpen(true);
                 console.log(data);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
+
     return (
         <>
             <div>
@@ -201,6 +259,9 @@ const SinglePost = (props) => {
             <br></br>
             <br></br>
             <br></br>
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }
