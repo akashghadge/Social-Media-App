@@ -10,6 +10,7 @@ const AllUsers = () => {
         axios.get(urlForAllUsers)
             .then((data) => {
                 setAllUsers(data.data);
+                console.log(data.data);
                 setLoading(false);
             })
             .catch((err) => {
@@ -19,22 +20,25 @@ const AllUsers = () => {
     }, [])
     return (
         <>
-            <div style={{ textAlign: "center" }}>
-
-                <h1>All User</h1>
-                <br></br>
-                <br></br>
-                {
-                    loading ? <p>loading.....</p>
-                        :
-                        allUsers.map((val, i) => {
-                            return <NavLink key={i} to={`/profile/${val._id}`}>
-                                <p>{val.username}</p>
-                            </NavLink>
-                        })
-                }
-                <br></br>
-                <br></br>
+            <div className="allUserParent">
+                <div className="allUserContainer">
+                    {
+                        loading ? <p>loading.....</p>
+                            :
+                            allUsers.map((val, i) => {
+                                return (
+                                    <>
+                                        <div className="allUserProfile">
+                                            <img src={val.PicUrl} className="allUserProfileImage"></img>
+                                            <NavLink className="allUserProfileUsername" key={i} to={`/profile/${val._id}`}>
+                                                <p>{val.username}</p>
+                                            </NavLink>
+                                        </div>
+                                    </>
+                                )
+                            })
+                    }
+                </div>
             </div>
         </>
     )

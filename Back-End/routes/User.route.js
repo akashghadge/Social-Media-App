@@ -145,7 +145,7 @@ router.get("/allUsers", async (req, res) => {
 
 router.get("/all-users-homepage", async (req, res) => {
     try {
-        let data = await User.find({}).select("username _id");
+        let data = await User.find({}).select("username _id PicUrl");
         res.status(200).json(data)
     } catch (err) {
         res.status(500).json(err);
