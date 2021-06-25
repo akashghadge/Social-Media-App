@@ -71,6 +71,23 @@ $sucessButtonColorBg:rgb(52, 255, 52);
     margin: 1rem;
 }
 
+.singlePostHeading {
+    display: flex;
+    width: 100%;
+}
+
+.singlePostHeadingColunm1 {}
+
+.singlePostHeadingColunm2 {
+    margin-left: 1rem;
+}
+
+.singlePostUserPic {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
 .singlePostUsername {
     text-decoration: none;
     font-family: 'Times New Roman', Times, serif;
@@ -115,9 +132,6 @@ $sucessButtonColorBg:rgb(52, 255, 52);
 }
 
 .singlePostCommentsCollection {
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
     margin-left: 1rem;
 }
 
@@ -183,10 +197,209 @@ $sucessButtonColorBg:rgb(52, 255, 52);
     color: red;
     border-radius: 0.2rem;
     background-color: white;
-    border: none;
+    border: solid 1px red;
 
     &:hover {
         background-color: red;
         color: white;
+        border: none;
+        box-shadow: 0px 0px 10px 0px red;
     }
+}
+
+// public profile
+.profilePic {
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+
+}
+
+.profileParentDiv {
+    display: flex;
+    height: auto;
+    width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px;
+    align-items: center;
+}
+
+.profileCenterColunm1 {
+    height: 200px;
+    width: 50%;
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.profileCenterColunm2 {
+    height: 200px;
+    width: 50%;
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.profileFirstLastName {
+    text-transform: capitalize;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: rgba(56, 56, 56, 0.774);
+}
+
+.profileUsername {
+    font-size: 2rem;
+}
+
+.profileNavlink {
+    text-decoration: none;
+    color: black;
+    font-size: 0.5rem;
+    margin: 0.8rem;
+}
+
+.profileNavlinkPost {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    margin: 0.8rem;
+    font-weight: bold;
+    transition: all 0.5 ease;
+}
+
+.profileNavlinkContainer {
+    justify-content: center;
+    display: flex;
+    padding: 0.8rem;
+}
+
+.profileFollowButtonContainer {
+    margin-top: 1rem;
+}
+
+.profileAbout {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.7rem;
+    color: black;
+    margin-top: 0.5rem;
+}
+
+.profileEmail {
+
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: rgba(56, 56, 56, 0.774);
+}
+
+// create post
+.createPostParentMain {
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+}
+
+.createPostParent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.createPostContainer {}
+
+.createPostInputFile {
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    border: solid 1px black;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.createPostTexts {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+}
+
+.createPostInputText {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 0.7rem;
+    font-family: cursive;
+    width: 50%;
+    margin: 1rem;
+}
+
+// notificaion
+.notificationContainer {
+    text-align: center;
+}
+
+
+// chat pages 
+.chatParentDiv {
+    display: flex;
+    height: auto;
+    width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px;
+    align-items: center;
+}
+
+.chatColumn2,
+.chatColumn1 {
+    height: 100vh;
+    // width: 50%;
+    text-align: center;
+    flex: 1 1 20px;
+    // margin: 10px;
+    position: relative;
+}
+
+.chatColumn1 {
+    width: 30%;
+}
+
+.chatColumn2 {
+    width: 70%;
+}
+
+.chatChatWindowShow {
+    height: 60vh;
+    // display: flex;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.chatChatWindowShow::-webkit-scrollbar {
+    overflow: hidden;
+}
+
+.chatInputBox {
+    bottom: 0;
+}
+
+.chatWindowInput {
+    width: 50%;
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+.chatWindowChatsText {
+    font-size: 0.6rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(56, 56, 56, 0.774);
+    margin-bottom: 0.5rem;
 }

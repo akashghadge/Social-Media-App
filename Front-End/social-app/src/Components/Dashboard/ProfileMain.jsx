@@ -6,8 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import saveUser from "../../actions/saveUser"
 import { NavLink } from "react-router-dom";
 import MyPost from "./MyPost"
+import { fade, makeStyles } from '@material-ui/core/styles';
+import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+const useStyles = makeStyles((theme) => ({
+    profileButtonFollow: {
+        color: "purple",
+        backgroundColor: "#ffaaff",
+        '&:hover': {
+            color: "white",
+            backgroundColor: "#ff88ff",
+        },
+    }
 
+}));
 const ProfileMain = () => {
+    const classes = useStyles();
     // console.log(LoggedUser);
     const dispatch = useDispatch();
     const LoggedUser = useSelector((state) => {
@@ -82,26 +95,36 @@ const ProfileMain = () => {
         <>
             {
                 isLoading ? <h1>Loading ..... </h1> :
-                    <div>
-                        <img src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
-                        <h1>First Name :{allCurrentData.fname}</h1>
-                        <h1>First Name :{allCurrentData.lname}</h1>
-                        <h1>First Name :{allCurrentData.email}</h1>
-                        <h1>First Name :{allCurrentData.username}</h1>
-                        <NavLink exact to={`/profile/${allCurrentData._id}/followers/`}>
-                            <h1>Followers :{followers.length}</h1>
-                        </NavLink>
-                        <NavLink exact to={`/profile/${allCurrentData._id}/following/`}>
-                            <h1>Following :{following.length}</h1>
-                        </NavLink>
+                    <div className="profileParentDiv">
+                        <div className="profileCenterColunm1">
+                            <img className="profilePic" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
+                        </div>
+                        <div className="profileCenterColunm2">
+                            <h1 className="profileUsername">{allCurrentData.username}</h1>
+                            <p className="profileFirstLastName">{allCurrentData.fname} {allCurrentData.lname}</p>
+                            <p className="profileEmail">{allCurrentData.email}</p>
+                            <p className="profileAbout">{allCurrentData.about}</p>
+                            <div className="profileNavlinkContainer">
+                                <a className="profileNavlinkPost" href="#profileMyPostContainer">{myPosts.length} Posts</a>
+                                <NavLink className="profileNavlink" exact to={`/profile/${allCurrentData._id}/followers/`}>
+                                    <h1>{followers.length} Followers</h1>
+                                </NavLink>
+                                <NavLink className="profileNavlink" exact to={`/profile/${allCurrentData._id}/following/`}>
+                                    <h1>{following.length} Following</h1>
+                                </NavLink>
+                            </div>
+                        </div>
                     </div>
             }
-            {/* post */}
-            {
-                myPosts.map((val, i) => {
-                    return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
-                })
-            }
+            <hr style={{ width: "90%", margin: "auto", marginBottom: "1rem", marginTop: "1rem" }}></hr>
+            <div id="profileMyPostContainer">
+                {/* post */}
+                {
+                    myPosts.map((val, i) => {
+                        return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
+                    })
+                }
+            </div>
         </>
     )
 }

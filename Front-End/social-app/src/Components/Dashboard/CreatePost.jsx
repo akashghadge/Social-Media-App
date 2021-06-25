@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from "react"
 import GetAuth from "../../helper/auth.helper";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import { Button } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles((theme) => ({
+    profileButtonFollow: {
+        color: "#00ff00",
+        backgroundColor: "white",
+        border: "solid 1px #00ff00",
+        '&:hover': {
+            color: "white",
+            backgroundColor: "#22ff22",
+        },
+    }
+
+}));
 const CreatePost = () => {
+    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -101,22 +116,27 @@ const CreatePost = () => {
     }
     return (
         <>
-            {
-                (isLoading) ? <h1>Loading ....</h1> :
-                    <div>
-                        <h1>Create Post</h1>
-                        <br></br>
-                        <div className="">
-                            <span >Description : </span>
-                            <input type="text" className="" id="desc" onChange={inputChange} value={allCurrentData.desc} required></input>
-                            <br></br>
-                            <lable>Post Photo : </lable>
-                            <input type="file" id="postPic" onChange={fileInputChange} accept="image/*"></input>
-                            <br></br>
-                            <button type="submit" onClick={SendPost}>SendPost</button>
+            <div className="createPostParentMain">
+                {
+                    (isLoading) ? <h1>Loading ....</h1> :
+                        <div className="createPostParent">
+                            <div className="createPostContainer">
+                                <h1 style={{ marginBottom: "2rem" }}>Create Post</h1>
+                                <span className="createPostTexts">Upload Image</span>
+                                <label for="postPic" class="createPostInputFile">
+                                    Upload Image
+                                </label>
+                                <input type="file" id="postPic" className="createPostInputFile" onChange={fileInputChange} accept="image/*">
+                                </input>
+                                <br></br>
+                                <span className="createPostTexts" >Description</span>
+                                <input type="text" className="createPostInputText" id="desc" onChange={inputChange} value={allCurrentData.desc} required></input>
+                                <br></br>
+                                <Button className={classes.profileButtonFollow} type="submit" onClick={SendPost}>SendPost</Button>
+                            </div>
                         </div>
-                    </div>
-            }
+                }
+            </div>
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
