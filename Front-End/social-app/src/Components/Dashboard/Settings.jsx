@@ -3,6 +3,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Save } from "@material-ui/icons";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import { NavLink } from "react-router-dom";
+import { Button } from "@material-ui/core";
 const Settings = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -84,20 +86,28 @@ const Settings = () => {
     }
     return (
         <>
-            <h1>Settings</h1>
+            <h1 className="settingMainHeading">Settings</h1>
             {
                 isLoading ? <h1>Loading ..... </h1> :
-                    <div>
-                        <input type="text" id="fname" value={allCurrentData.fname} onChange={inputChange}></input>
-                        <br></br>
-
-                        <input type="text" id="lname" value={allCurrentData.lname} onChange={inputChange}></input>
-                        <br></br>
-                        <br></br>
-                        {/* 
+                    <div className="settingContainer">
+                        <div className="settingContainerChild">
+                            <span className="settingText">First Name :</span>
+                            <input type="text" id="fname" className="settingInputFields" value={allCurrentData.fname} onChange={inputChange}></input>
+                            <br></br>
+                            <span className="settingText">Last Name :</span>
+                            <input type="text" id="lname" className="settingInputFields" value={allCurrentData.lname} onChange={inputChange}></input>
+                            <br></br>
+                            <span className="settingText" style={{ margin: "1rem" }}>About :</span>
+                            <input type="text" id="about" className="settingInputFields" value={allCurrentData.about} onChange={inputChange}></input>
+                            <br></br>
+                            <br></br>
+                            {/* 
                         <input type="password" id="password" value={allCurrentData.password} onChange={inputChange}></input>
                         <br></br> */}
-                        <button className="submitButton" onClick={updateUser}><Save></Save></button>
+                            <button className="submitButton" onClick={updateUser}><Save></Save></button>
+                            <br></br>
+                            <NavLink className="settingNavLink" to="/forget-password">For changing password please click here</NavLink >
+                        </div>
                     </div>
             }
             {/* snackbar */}

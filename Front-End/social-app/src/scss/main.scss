@@ -18,7 +18,6 @@ $sucessButtonColorBg:rgb(52, 255, 52);
     border-radius: 0.2rem;
     width: 5rem;
     height: 2.5rem;
-
     font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
     font-size: 1rem;
@@ -76,7 +75,6 @@ $sucessButtonColorBg:rgb(52, 255, 52);
     width: 100%;
 }
 
-.singlePostHeadingColunm1 {}
 
 .singlePostHeadingColunm2 {
     margin-left: 1rem;
@@ -306,7 +304,6 @@ $sucessButtonColorBg:rgb(52, 255, 52);
 }
 
 
-.createPostContainer {}
 
 .createPostInputFile {
     font-family: 'Times New Roman', Times, serif;
@@ -402,4 +399,98 @@ input[type="file"] {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(56, 56, 56, 0.774);
     margin-bottom: 0.5rem;
+}
+
+// setting page
+.settingMainHeading {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.settingInputFields {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+.settingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settingContainerChild {
+    padding: 1rem;
+}
+
+.settingText {
+    padding: 0.2rem;
+}
+
+.settingNavLink {
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+
+// forget password
+.forgetPasswordInputField {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    width: 40%;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+
+// match otp
+.matchOTPInputField {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    width: 40%;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+
+// sign in page
+.signINUPHead {
+    margin: 1rem;
+    font-size: xx-large;
+    color: rgb(34, 0, 128);
+}
+
+.signINUPInputFields {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    width: 40%;
+    max-width: 200px;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-left: 0.5rem;
+}
+
+.signINUPText {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.signINUPInputFileField {
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    border: solid 1px black;
+    font-weight: bold;
+    margin-left: 1rem;
 }
