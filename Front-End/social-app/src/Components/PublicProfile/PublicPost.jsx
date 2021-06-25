@@ -190,10 +190,17 @@ const PublicPost = (props) => {
         <>
             <div className="postContainer">
                 <div className="singlePost">
-                    <NavLink className="singlePostUsername" exact to={`profile/${props.val.postedBy._id}`}>
-                        <h3>{props.val.postedBy.username}</h3>
-                    </NavLink>
-                    <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
+                    <div className="singlePostHeading">
+                        <div className="singlePostHeadingColunm1">
+                            <img src={props.val.postedBy.PicUrl} className="singlePostUserPic"></img>
+                        </div>
+                        <div className="singlePostHeadingColunm2">
+                            <NavLink className="singlePostUsername" exact to={`/profile/${props.val.postedBy._id}`}>
+                                <h3 className="singlePostUsername">{props.val.postedBy.username}</h3>
+                            </NavLink>
+                            <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
+                        </div>
+                    </div>
                     <hr></hr>
                     <img src={props.val.photo} className="singlePostImage" alt="profile-pic"></img>
                     <h3 className="singlePostDesc">{props.val.desc}</h3>

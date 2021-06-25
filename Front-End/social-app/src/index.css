@@ -63,6 +63,18 @@
   box-shadow: 0px 7px 10px 0px gray;
   margin: 1rem; }
 
+.singlePostHeading {
+  display: flex;
+  width: 100%; }
+
+.singlePostHeadingColunm2 {
+  margin-left: 1rem; }
+
+.singlePostUserPic {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%; }
+
 .singlePostUsername {
   text-decoration: none;
   font-family: 'Times New Roman', Times, serif;

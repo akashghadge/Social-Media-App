@@ -71,6 +71,23 @@ $sucessButtonColorBg:rgb(52, 255, 52);
     margin: 1rem;
 }
 
+.singlePostHeading {
+    display: flex;
+    width: 100%;
+}
+
+.singlePostHeadingColunm1 {}
+
+.singlePostHeadingColunm2 {
+    margin-left: 1rem;
+}
+
+.singlePostUserPic {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
 .singlePostUsername {
     text-decoration: none;
     font-family: 'Times New Roman', Times, serif;
