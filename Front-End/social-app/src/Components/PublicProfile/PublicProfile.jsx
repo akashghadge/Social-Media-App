@@ -7,8 +7,21 @@ import { useHistory } from "react-router";
 import PublicPost from "./PublicPost";
 import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
+import { fade, makeStyles } from '@material-ui/core/styles';
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+const useStyles = makeStyles((theme) => ({
+    profileButtonFollow: {
+        color: "purple",
+        backgroundColor: "#ffaaff",
+        '&:hover': {
+            color: "white",
+            backgroundColor: "#ff88ff",
+        },
+    }
+
+}));
 const PublicProfile = () => {
+    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -138,7 +151,8 @@ const PublicProfile = () => {
             setIsFollow(true);
         }
         else {
-            history.push("/profile");
+            setSnackbarObj({ text: "Your not LoggedIn", backgroundColor: "red" });
+            setOpen(true);
             return 0;
         }
 
@@ -189,33 +203,47 @@ const PublicProfile = () => {
         <>
             {
                 isLoading ? <h1>Loading ..... </h1> :
-                    <div>
-                        <img src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
-                        <h1>Username :{allCurrentData.username}</h1>
-                        {
-                            loadingFollow ?
-                                <p>....</p> :
-                                isFollow ?
-                                    <button onClick={(e) => {
-                                        UnFollowUser(e, allCurrentData._id)
-                                    }}>Unfollow</button>
-                                    : <button onClick={(e) => { FollowUser(e, allCurrentData._id) }}>Follow</button>
+                    <div className="profileParentDiv">
+                        <div className="profileCenterColunm1">
+                            <img className="profilePic" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
+                        </div>
+                        <div className="profileCenterColunm2">
+                            <h1 className="profileUsername">{allCurrentData.username}</h1>
+                            <p className="profileFirstLastName">{allCurrentData.fname} {allCurrentData.lname}</p>
+                            <p className="profileAbout">{allCurrentData.about}</p>
+                            <div className="profileFollowButtonContainer">
+                                {
+                                    loadingFollow ?
+                                        <p>....</p> :
+                                        isFollow ?
+                                            <Button className={classes.profileButtonFollow} onClick={(e) => {
+                                                UnFollowUser(e, allCurrentData._id)
+                                            }}>Unfollow</Button>
+                                            : <Button className={classes.profileButtonFollow} onClick={(e) => { FollowUser(e, allCurrentData._id) }}>Follow</Button>
 
-                        }
-                        <NavLink exact to={`/profile/${params.id}/followers/`}>
-                            <h1>Followers :{followers.length}</h1>
-                        </NavLink>
-                        <NavLink exact to={`/profile/${params.id}/following/`}>
-                            <h1>Following :{following.length}</h1>
-                        </NavLink>
+                                }
+                            </div>
+                            <div className="profileNavlinkContainer">
+                                <a className="profileNavlinkPost" href="#profileMyPostContainer">{myPosts.length} Posts</a>
+                                <NavLink className="profileNavlink" exact to={`/profile/${params.id}/followers/`}>
+                                    <h1>{followers.length} Followers</h1>
+                                </NavLink>
+                                <NavLink className="profileNavlink" exact to={`/profile/${params.id}/following/`}>
+                                    <h1>{following.length} Following</h1>
+                                </NavLink>
+                            </div>
+                        </div>
                     </div>
             }
+            <hr style={{ width: "90%", margin: "auto", marginBottom: "1rem", marginTop: "1rem" }}></hr>
             {/* post */}
-            {
-                myPosts.map((val, i) => {
-                    return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
-                })
-            }
+            <div id="profileMyPostContainer">
+                {
+                    myPosts.map((val, i) => {
+                        return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
+                    })
+                }
+            </div>
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />

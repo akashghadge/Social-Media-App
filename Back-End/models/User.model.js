@@ -44,6 +44,9 @@ const UserSchema = new Schema
         expireToken: {
             type: Date
         },
+        about: {
+            type: String
+        },
         following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
         chatId: {

@@ -155,7 +155,79 @@
   color: red;
   border-radius: 0.2rem;
   background-color: white;
-  border: none; }
+  border: solid 1px red; }
   .deletePostMyPosts:hover {
     background-color: red;
-    color: white; }
+    color: white;
+    border: none;
+    box-shadow: 0px 0px 10px 0px red; }
+
+.profilePic {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%; }
+
+.profileParentDiv {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px;
+  align-items: center; }
+
+.profileCenterColunm1 {
+  height: 200px;
+  width: 50%;
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px; }
+
+.profileCenterColunm2 {
+  height: 200px;
+  width: 50%;
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px; }
+
+.profileFirstLastName {
+  text-transform: capitalize;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgba(56, 56, 56, 0.774); }
+
+.profileUsername {
+  font-size: 2rem; }
+
+.profileNavlink {
+  text-decoration: none;
+  color: black;
+  font-size: 0.5rem;
+  margin: 0.8rem; }
+
+.profileNavlinkPost {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  margin: 0.8rem;
+  font-weight: bold;
+  transition: all 0.5 ease; }
+
+.profileNavlinkContainer {
+  justify-content: center;
+  display: flex;
+  padding: 0.8rem; }
+
+.profileFollowButtonContainer {
+  margin-top: 1rem; }
+
+.profileAbout {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  color: black;
+  margin-top: 0.5rem; }
+
+.profileEmail {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgba(56, 56, 56, 0.774); }
