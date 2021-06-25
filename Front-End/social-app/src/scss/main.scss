@@ -132,9 +132,6 @@ $sucessButtonColorBg:rgb(52, 255, 52);
 }
 
 .singlePostCommentsCollection {
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
     margin-left: 1rem;
 }
 
@@ -337,4 +334,72 @@ input[type="file"] {
     font-family: cursive;
     width: 50%;
     margin: 1rem;
+}
+
+// notificaion
+.notificationContainer {
+    text-align: center;
+}
+
+
+// chat pages 
+.chatParentDiv {
+    display: flex;
+    height: auto;
+    width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px;
+    align-items: center;
+}
+
+.chatColumn2,
+.chatColumn1 {
+    height: 100vh;
+    // width: 50%;
+    text-align: center;
+    flex: 1 1 20px;
+    // margin: 10px;
+    position: relative;
+}
+
+.chatColumn1 {
+    width: 30%;
+}
+
+.chatColumn2 {
+    width: 70%;
+}
+
+.chatChatWindowShow {
+    height: 60vh;
+    // display: flex;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.chatChatWindowShow::-webkit-scrollbar {
+    overflow: hidden;
+}
+
+.chatInputBox {
+    bottom: 0;
+}
+
+.chatWindowInput {
+    width: 50%;
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+.chatWindowChatsText {
+    font-size: 0.6rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(56, 56, 56, 0.774);
+    margin-bottom: 0.5rem;
 }

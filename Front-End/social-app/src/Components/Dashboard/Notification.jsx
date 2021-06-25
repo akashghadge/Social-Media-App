@@ -29,14 +29,14 @@ const Notification = () => {
 
 
     return (<>
-        <h1>hello</h1>
-        <div>
+        <div className="notificationContainer">
+            <h2 style={{ margin: "2rem" }}>Notifications</h2>
             {
                 notificationAll.map((val, i) => {
                     return (
                         <>
                             <h4>{val.notification}</h4>
-                            <p>{moment(val.createdAt).format("H:mm a, MMMM Do YYYY")}</p>
+                            <p className="singlePostDate">{moment(val.createdAt).format("H:mm a, MMMM Do YYYY")}</p>
                         </>
                     )
                 })
