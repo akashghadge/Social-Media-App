@@ -243,3 +243,37 @@
   font-size: 0.8rem;
   font-weight: bold;
   color: rgba(56, 56, 56, 0.774); }
+
+.createPostParentMain {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem; }
+
+.createPostParent {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.createPostInputFile {
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-left: 1rem; }
+
+input[type="file"] {
+  display: none; }
+
+.createPostTexts {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem; }
+
+.createPostInputText {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 0.7rem;
+  font-family: cursive;
+  width: 50%;
+  margin: 1rem; }
