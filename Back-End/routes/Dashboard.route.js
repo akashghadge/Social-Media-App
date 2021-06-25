@@ -21,7 +21,7 @@ router.post("/profile", async (req, res) => {
 })
 // for editing profile
 router.post("/profile-edit", async (req, res) => {
-    const user = await User.findById({ _id: res.locals.id }).select("_id username fname lname");
+    const user = await User.findById({ _id: res.locals.id }).select("_id username fname lname about");
     if (user) {
         res.status(200).json(user);
     }

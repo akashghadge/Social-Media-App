@@ -329,3 +329,32 @@ input[type="file"] {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgba(56, 56, 56, 0.774);
   margin-bottom: 0.5rem; }
+
+.settingMainHeading {
+  text-align: center;
+  font-size: 2rem; }
+
+.settingInputFields {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 1rem;
+  font-family: cursive;
+  margin-right: 0.5rem; }
+
+.settingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.settingContainerChild {
+  padding: 1rem; }
+
+.settingText {
+  padding: 0.2rem; }
+
+.settingNavLink {
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic; }
