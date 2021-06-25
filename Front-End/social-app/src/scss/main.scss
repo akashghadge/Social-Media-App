@@ -438,3 +438,59 @@ input[type="file"] {
 }
 
 
+// forget password
+.forgetPasswordInputField {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    width: 40%;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+
+// match otp
+.matchOTPInputField {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    width: 40%;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-right: 0.5rem;
+}
+
+
+// sign in page
+.signINUPHead {
+    margin: 1rem;
+    font-size: xx-large;
+    color: rgb(34, 0, 128);
+}
+
+.signINUPInputFields {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    width: 40%;
+    max-width: 200px;
+    font-size: 1rem;
+    font-family: cursive;
+    margin-left: 0.5rem;
+}
+
+.signINUPText {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.signINUPInputFileField {
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    border: solid 1px black;
+    font-weight: bold;
+    margin-left: 1rem;
+}

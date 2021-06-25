@@ -27,17 +27,31 @@ const Followers = () => {
     }, []);
     return (
         <>
-            <h1>Followers</h1>
+            <h1 className="signINUPHead" style={{ textAlign: "center" }}>Followers</h1>
             {
                 isLoading ? <p>loading...</p> :
-                    (followers.length === 0) ? <h1>No Followers are here</h1>
+                    (followers.length === 0) ? <h1 className="signINUPHead" style={{ textAlign: "center" }}>No Followers are here</h1>
                         :
                         <>
                             {
                                 followers.map((val, i) => {
-                                    return <NavLink exact to={`/profile/${val._id}/`}>
-                                        <h1>{val.username}</h1>
-                                    </NavLink>
+                                    return (
+                                        <div className="postContainer">
+                                            <div className="singlePost">
+                                                <div className="singlePostHeading">
+                                                    <div className="singlePostHeadingColunm1">
+                                                        <img src={val.PicUrl} className="singlePostUserPic"></img>
+                                                    </div>
+                                                    <div className="singlePostHeadingColunm2">
+                                                        <NavLink className="singlePostUsername" exact to={`/profile/${val._id}/`}>
+                                                            <h3 className="singlePostUsername">{val.username}</h3>
+                                                        </NavLink>
+                                                        <p className="singlePostName">{`${val.fname} ${val.lname}`}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
                                 })
                             }
                         </>

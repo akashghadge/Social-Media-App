@@ -7,7 +7,23 @@ import { useHistory } from "react-router-dom"
 // mui
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import { Button } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles((theme) => ({
+    profileButtonFollow: {
+        color: "#0000ff",
+        backgroundColor: "white",
+        border: "solid 1px #0000ff",
+        margin: "2rem",
+        '&:hover': {
+            color: "white",
+            backgroundColor: "#2222ff",
+        },
+    }
+
+}));
 const SignUp = () => {
+    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -86,17 +102,21 @@ const SignUp = () => {
                 fetch(urlServerUploadUser, requestOptions)
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
+                        // console.log(data);
                         setLoading(false);
                         history.push("/match-otp");
                     })
                     .catch((err) => {
-                        console.log(err)
+                        // console.log(err)
+                        setSnackbarObj({ text: "Error Occured", backgroundColor: "red" });
+                        setOpen(true);
                         setLoading(false);
                     })
             })
             .catch((err) => {
-                console.log(err)
+                // console.log(err)
+                setSnackbarObj({ text: "Error Occured", backgroundColor: "red" });
+                setOpen(true);
                 setLoading(false);
             })
     }
@@ -108,26 +128,32 @@ const SignUp = () => {
                 (isLoading) ? <h1>Loading ....</h1> :
 
                     <div className="">
-                        <h1 className="SignHeading">Sign Up</h1>
-                        <lable>Profile Photo</lable>
-                        <input type="file" id="profilePic" onChange={fileInputChange} accept="image/*"></input>
+                        <h1 className="signINUPHead">Sign Up</h1>
+                        {/* <span>Profile Photo :</span> */}
+                        <span className="createPostTexts">Upload Image</span>
+                        <label for="ProfilePic" class="signINUPInputFileField">
+                            Upload
+                        </label>
+                        <input type="file" id="ProfilePic" className="signINUPInputFileField" onChange={fileInputChange} accept="image/*">
+                        </input>
                         <br></br>
-                        <label >First name</label>
-                        <input type="text" className="form-control" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
                         <br></br>
-                        <label >Last name</label>
-                        <input type="text" className="form-control" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
+                        <span className="signINUPText" >First name</span>
+                        <input type="text" className="signINUPInputFields" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
                         <br></br>
-                        <label >Email</label>
-                        <input type="email" className="form-control" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
+                        <span className="signINUPText" >Last name</span>
+                        <input type="text" className="signINUPInputFields" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
                         <br></br>
-                        <label >UserName</label>
-                        <input type="text" className="form-control inputFieldSignInUp" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
+                        <span className="signINUPText" style={{ marginRight: "1.4rem" }}>Email</span>
+                        <input type="email" className="signINUPInputFields" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
                         <br></br>
-                        <label >Password</label>
-                        <input type="password" className="form-control inputFieldSignInUp" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
+                        <span className="signINUPText">Username</span>
+                        <input type="text" className="signINUPInputFields" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
                         <br></br>
-                        <button className="submitButton" onClick={SendUser}><Save></Save></button>
+                        <span className="signINUPText">Password</span>
+                        <input type="password" className="signINUPInputFields" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
+                        <br></br>
+                        <Button className={classes.profileButtonFollow} onClick={SendUser}><Save></Save></Button>
                     </div>
             }
             {/* snackbar */}

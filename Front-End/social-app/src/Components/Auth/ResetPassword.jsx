@@ -4,7 +4,22 @@ import { useParams } from "react-router-dom"
 // mui
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import { Button } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles((theme) => ({
+    forgetPasswordButton: {
+        color: "#00ff00",
+        backgroundColor: "white",
+        border: "solid 1px #00ff00",
+        '&:hover': {
+            color: "white",
+            backgroundColor: "#22ff22",
+        },
+    }
+
+}));
 const ResetPassword = () => {
+    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -41,10 +56,17 @@ const ResetPassword = () => {
     }
     return (
         <>
-            <h1>Enter New Password</h1>
-            <input type="password" value={password} onChange={inputChange}></input>
-            <button onClick={changePassword}>Chnage Password</button>
-
+            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Enter New Password</h1>
+            <div className="settingContainer">
+                <div className="settingContainerChild">
+                    <span className="settingText">Enter New Password</span>
+                    <input type="password" className="forgetPasswordInputField" value={password} onChange={inputChange}></input>
+                    <br></br>
+                    <div style={{ textAlign: "center",marginTop:"3rem" }}>
+                        <Button className={classes.forgetPasswordButton} onClick={changePassword}>Chnage Password</Button>
+                    </div>
+                </div>
+            </div>
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
