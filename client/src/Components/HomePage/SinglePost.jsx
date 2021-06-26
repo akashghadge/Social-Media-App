@@ -9,6 +9,7 @@ import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteFo
 import { Button } from "@material-ui/core"
 // mui
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import ReactLoading from "react-loading"
 const SinglePost = (props) => {
     // snack bar code
     let [snackbarObj, setSnackbarObj] = useState({
@@ -239,7 +240,13 @@ const SinglePost = (props) => {
                     <div className="singlePostCommentsCollection">
                         {
                             (commentButton) ?
-                                commentLoading ? null :
+                                commentLoading ?
+                                    <>
+                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                        </div>
+                                    </>
+                                    :
                                     commentInfo.map((comment, i) => {
                                         return (
                                             <>

@@ -6,6 +6,7 @@ import { useHistory } from "react-router"
 import moment from "moment"
 import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
+import ReactLoading from "react-loading"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 const SinglePost = (props) => {
     let [snackbarObj, setSnackbarObj] = useState({
@@ -255,7 +256,11 @@ const SinglePost = (props) => {
                         {
 
                             (commentButton) ?
-                                commentLoading ? null :
+                                commentLoading ? <>
+                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                    </div>
+                                </> :
                                     commentInfo.map((comment, i) => {
                                         return (
                                             <>

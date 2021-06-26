@@ -7,6 +7,8 @@ import moment from "moment"
 import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import ReactLoading from "react-loading"
+
 const PublicPost = (props) => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -229,7 +231,13 @@ const PublicPost = (props) => {
                     <div className="singlePostCommentsCollection">
                         {
                             (commentButton) ?
-                                commentLoading ? null :
+                                commentLoading ?
+                                    <>
+                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                        </div>
+                                    </>
+                                    :
                                     commentInfo.map((comment, i) => {
                                         return (
                                             <>
