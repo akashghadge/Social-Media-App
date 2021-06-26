@@ -97,7 +97,7 @@ const PublicPost = (props) => {
     function onCommentButton(e, postId) {
         setCommentLoading(true);
         setCommentButton(!commentButton);
-        const urlComment = "/api
+        const urlComment = "/api/post/comment";
         const body = {
             idOfPost: postId
         };
@@ -123,7 +123,7 @@ const PublicPost = (props) => {
 
     // send comment
     function addNewComment(e, idOfPost) {
-        const urlForAddNewComment = "/api/post/comment/add";
+        const urlForAddNewComment = "http://localhost:5000/api/post/comment/add";
         let token = localStorage.getItem("token");
         const body =
         {
@@ -171,7 +171,7 @@ const PublicPost = (props) => {
             idOfComment: idOfComment,
             idOfCommentor: LoggedUser._id
         }
-        const urlForRemoveComment = "/api/post/comment/remove";
+        const urlForRemoveComment = "http://localhost:5000/api/post/comment/remove";
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
