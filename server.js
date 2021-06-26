@@ -57,10 +57,10 @@ main(io);
 
 
 // for production use
-app.use(express.static("../Front-End/social-app/build"));
+app.use(express.static("client/build"));
 const path = require("path");
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Front-End", "social-app", "build", "index.html"))
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 })
 
 
