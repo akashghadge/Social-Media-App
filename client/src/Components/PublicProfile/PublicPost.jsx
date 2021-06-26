@@ -7,7 +7,9 @@ import moment from "moment"
 import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-const SinglePost = (props) => {
+import ReactLoading from "react-loading"
+
+const PublicPost = (props) => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -49,23 +51,17 @@ const SinglePost = (props) => {
         axios.post(urlAddLike, body)
             .then((data) => {
                 setFlag(++flagForReq);
-                // showing the snackbar
                 setSnackbarObj(
                     {
                         backgroundColor: "green",
                         text: "You Liked Post"
                     }
                 );
-                return setOpen(true);
+                setOpen(true);
             })
             .catch((err) => {
-                setSnackbarObj(
-                    {
-                        backgroundColor: "red",
-                        text: "Please Logged in Again"
-                    }
-                );
-                return setOpen(true);
+                console.log(err);
+                alert(err);
             })
     }
     const removeLike = (event, idPost) => {
@@ -88,7 +84,7 @@ const SinglePost = (props) => {
                         text: "you dislike post"
                     }
                 );
-                return setOpen(true);
+                setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -153,25 +149,6 @@ const SinglePost = (props) => {
                 console.log(err);
             })
     }
-    // deletee the post
-    function deletePost(e) {
-        const urlForDeletePost = `http://localhost:5000/api/post/delete/${props.val._id}`
-        axios.post(urlForDeletePost, {})
-            .then((data) => {
-                console.log(data);
-                setFlag(++flagForReq);
-                setSnackbarObj(
-                    {
-                        backgroundColor: "red",
-                        text: "Post Deleted"
-                    }
-                );
-                setOpen(true);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
     function deleteComment(e, idOfComment, idOfCommentorReal) {
         // check user logged or not
         if (!LoggedUser._id) {
@@ -204,7 +181,7 @@ const SinglePost = (props) => {
                         text: "Comment Removed"
                     }
                 );
-                setCommentButton(false)
+                setCommentButton(false);
                 return setOpen(true);
             })
             .catch((err) => {
@@ -220,14 +197,14 @@ const SinglePost = (props) => {
                             <img src={props.val.postedBy.PicUrl} className="singlePostUserPic"></img>
                         </div>
                         <div className="singlePostHeadingColunm2">
-                            <NavLink className="singlePostUsername" exact to={`profile/${props.val.postedBy._id}`}>
+                            <NavLink className="singlePostUsername" exact to={`/profile/${props.val.postedBy._id}`}>
                                 <h3 className="singlePostUsername">{props.val.postedBy.username}</h3>
                             </NavLink>
                             <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
                         </div>
                     </div>
                     <hr></hr>
-                    <img src={props.val.photo} className="singlePostImage" width="100px" height="100px" alt="profile-pic"></img>
+                    <img src={props.val.photo} className="singlePostImage" alt="profile-pic"></img>
                     <h3 className="singlePostDesc">{props.val.desc}</h3>
                     {/* do in production */}
                     {/* created time */}
@@ -253,9 +230,14 @@ const SinglePost = (props) => {
                     }
                     <div className="singlePostCommentsCollection">
                         {
-
                             (commentButton) ?
-                                commentLoading ? null :
+                                commentLoading ?
+                                    <>
+                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                        </div>
+                                    </>
+                                    :
                                     commentInfo.map((comment, i) => {
                                         return (
                                             <>
@@ -287,8 +269,6 @@ const SinglePost = (props) => {
                                 : null
                         }
                     </div>
-                    {/* delete post */}
-                    <button className="deletePostMyPosts" onClick={deletePost}>Delete</button>
                 </div>
             </div>
             {/* snackbar */}
@@ -297,4 +277,4 @@ const SinglePost = (props) => {
         </>
     )
 }
-export default SinglePost;
+export default PublicPost;

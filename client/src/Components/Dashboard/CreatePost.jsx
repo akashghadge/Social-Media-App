@@ -3,6 +3,7 @@ import GetAuth from "../../helper/auth.helper";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import { Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import ReactLoading from "react-loading"
 const useStyles = makeStyles((theme) => ({
     profileButtonFollow: {
         color: "#00ff00",
@@ -118,7 +119,13 @@ const CreatePost = () => {
         <>
             <div className="createPostParentMain">
                 {
-                    (isLoading) ? <h1>Loading ....</h1> :
+                    (isLoading) ?
+                        <>
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                            </div>
+                        </>
+                        :
                         <div className="createPostParent">
                             <div className="createPostContainer">
                                 <h1 style={{ marginBottom: "2rem" }}>Create Post</h1>

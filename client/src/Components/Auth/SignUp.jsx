@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 // social-media
 // mui
 // snack bar code
+import ReactLoading from "react-loading"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import { Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
@@ -125,8 +126,10 @@ const SignUp = () => {
     return (
         <>
             {
-                (isLoading) ? <h1>Loading ....</h1> :
-
+                (isLoading) ?
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                    </div> :
                     <div className="">
                         <h1 className="signINUPHead">Sign Up</h1>
                         {/* <span>Profile Photo :</span> */}

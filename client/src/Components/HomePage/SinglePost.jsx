@@ -1,13 +1,17 @@
+// basic react imports
 import React, { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
-import axios from "axios"
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
+import { NavLink } from "react-router-dom"
+import axios from "axios"
 import moment from "moment"
 import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
+// mui
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-const PublicPost = (props) => {
+import ReactLoading from "react-loading"
+const SinglePost = (props) => {
+    // snack bar code
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -21,7 +25,7 @@ const PublicPost = (props) => {
         backgroundColor: "red",
         text: "Your Not Loggedin"
     }
-    let history = useHistory();
+
     // getting current user
     const LoggedUser = useSelector((state) => {
         return state.User;
@@ -49,19 +53,20 @@ const PublicPost = (props) => {
         axios.post(urlAddLike, body)
             .then((data) => {
                 setFlag(++flagForReq);
+                // showing the snackbar
                 setSnackbarObj(
                     {
                         backgroundColor: "green",
                         text: "You Liked Post"
                     }
                 );
-                setOpen(true);
+                return setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
-                alert(err);
             })
     }
+    // remove if user commented or not
     const removeLike = (event, idPost) => {
         if (!LoggedUser._id) {
             setSnackbarObj(ErrorObject);
@@ -82,13 +87,15 @@ const PublicPost = (props) => {
                         text: "you dislike post"
                     }
                 );
-                setOpen(true);
+                return setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
                 alert(err);
             })
     }
+
+    // load comments on post
     let [commentButton, setCommentButton] = useState(false);
     let [commentInfo, setCommentInfo] = useState("");
     let [commentLoading, setCommentLoading] = useState(false);
@@ -145,8 +152,11 @@ const PublicPost = (props) => {
             .catch((err) => {
                 setFlag(++flagForReq);
                 console.log(err);
+                setSnackbarObj(ErrorObject);
+                return setOpen(true);
             })
     }
+    // deletion of comment
     function deleteComment(e, idOfComment, idOfCommentorReal) {
         // check user logged or not
         if (!LoggedUser._id) {
@@ -173,19 +183,20 @@ const PublicPost = (props) => {
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
+                setCommentButton(false);
                 setSnackbarObj(
                     {
                         backgroundColor: "red",
                         text: "Comment Removed"
                     }
                 );
-                setCommentButton(false);
                 return setOpen(true);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
+
     return (
         <>
             <div className="postContainer">
@@ -195,7 +206,7 @@ const PublicPost = (props) => {
                             <img src={props.val.postedBy.PicUrl} className="singlePostUserPic"></img>
                         </div>
                         <div className="singlePostHeadingColunm2">
-                            <NavLink className="singlePostUsername" exact to={`/profile/${props.val.postedBy._id}`}>
+                            <NavLink className="singlePostUsername" exact to={`profile/${props.val.postedBy._id}`}>
                                 <h3 className="singlePostUsername">{props.val.postedBy.username}</h3>
                             </NavLink>
                             <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
@@ -229,7 +240,13 @@ const PublicPost = (props) => {
                     <div className="singlePostCommentsCollection">
                         {
                             (commentButton) ?
-                                commentLoading ? null :
+                                commentLoading ?
+                                    <>
+                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                        </div>
+                                    </>
+                                    :
                                     commentInfo.map((comment, i) => {
                                         return (
                                             <>
@@ -269,4 +286,4 @@ const PublicPost = (props) => {
         </>
     )
 }
-export default PublicPost;
+export default SinglePost;

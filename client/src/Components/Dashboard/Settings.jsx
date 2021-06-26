@@ -3,6 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Save } from "@material-ui/icons";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import ReactLoading from "react-loading"
 import { NavLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
 const Settings = () => {
@@ -88,7 +89,13 @@ const Settings = () => {
         <>
             <h1 className="settingMainHeading">Settings</h1>
             {
-                isLoading ? <h1>Loading ..... </h1> :
+                isLoading ?
+                    <>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                        </div>
+                    </>
+                    :
                     <div className="settingContainer">
                         <div className="settingContainerChild">
                             <span className="settingText">First Name :</span>

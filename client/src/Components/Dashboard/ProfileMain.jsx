@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import MyPost from "./MyPost"
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import ReactLoading from "react-loading"
 const useStyles = makeStyles((theme) => ({
     profileButtonFollow: {
         color: "purple",
@@ -94,7 +95,12 @@ const ProfileMain = () => {
     return (
         <>
             {
-                isLoading ? <h1>Loading ..... </h1> :
+                isLoading ?
+                    <>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                        </div>
+                    </> :
                     <div className="profileParentDiv">
                         <div className="profileCenterColunm1">
                             <img className="profilePic" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
@@ -120,9 +126,16 @@ const ProfileMain = () => {
             <div id="profileMyPostContainer">
                 {/* post */}
                 {
-                    myPosts.map((val, i) => {
-                        return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
-                    })
+                    loadingPost ?
+                        <>
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                            </div>
+                        </>
+                        :
+                        myPosts.map((val, i) => {
+                            return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
+                        })
                 }
             </div>
         </>

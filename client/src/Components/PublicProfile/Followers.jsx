@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router";
 import axios from "axios"
 import { NavLink } from "react-router-dom";
-
+import ReactLoading from "react-loading"
 const Followers = () => {
     let [isLoading, setLoading] = useState(false);
     let [followers, setFollowers] = useState([]);
@@ -29,7 +29,13 @@ const Followers = () => {
         <>
             <h1 className="signINUPHead" style={{ textAlign: "center" }}>Followers</h1>
             {
-                isLoading ? <p>loading...</p> :
+                isLoading ?
+                    <>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                        </div>
+                    </>
+                    :
                     (followers.length === 0) ? <h1 className="signINUPHead" style={{ textAlign: "center" }}>No Followers are here</h1>
                         :
                         <>

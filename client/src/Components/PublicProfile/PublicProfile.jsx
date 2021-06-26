@@ -9,6 +9,8 @@ import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteFo
 import { Button } from "@material-ui/core"
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import ReactLoading from "react-loading"
+
 const useStyles = makeStyles((theme) => ({
     profileButtonFollow: {
         color: "purple",
@@ -202,7 +204,13 @@ const PublicProfile = () => {
     return (
         <>
             {
-                isLoading ? <h1>Loading ..... </h1> :
+                isLoading ?
+                    <>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                        </div>
+                    </>
+                    :
                     <div className="profileParentDiv">
                         <div className="profileCenterColunm1">
                             <img className="profilePic" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
@@ -214,7 +222,12 @@ const PublicProfile = () => {
                             <div className="profileFollowButtonContainer">
                                 {
                                     loadingFollow ?
-                                        <p>....</p> :
+                                        <>
+                                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                                <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                            </div>
+                                        </>
+                                        :
                                         isFollow ?
                                             <Button className={classes.profileButtonFollow} onClick={(e) => {
                                                 UnFollowUser(e, allCurrentData._id)
@@ -239,9 +252,16 @@ const PublicProfile = () => {
             {/* post */}
             <div id="profileMyPostContainer">
                 {
-                    myPosts.map((val, i) => {
-                        return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
-                    })
+                    loadingPost ?
+                        <>
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                            </div>
+                        </>
+                        :
+                        myPosts.map((val, i) => {
+                            return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
+                        })
                 }
             </div>
             {/* snackbar */}

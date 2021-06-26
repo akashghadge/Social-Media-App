@@ -56,6 +56,14 @@ const { main } = require("./routes/chatSocket");
 main(io);
 
 
+// for production use
+app.use(express.static("client/build"));
+const path = require("path");
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"))
+})
+
+
 
 
 server.listen(port, () => {

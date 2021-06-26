@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "client": "cd ../Front-End/social-app && npm start",
-    "dev": "concurrently -n'server,client' -c'green,blue' \"npm start\" \"npm run client\""
+    "start": "node server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently -n'server,client' -c'green,blue' \"nodemon server.js\" \"npm run client\""
   },
   "author": "akash & darshan",
   "license": "ISC",
