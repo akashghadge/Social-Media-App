@@ -143,7 +143,7 @@ const Settings = () => {
                     <>
                         <div style={{ textAlign: "center", margin: "1rem" }}>
                             <label for="postPic" class="createPostInputFile">
-                                Upload Image
+                                Upload Here
                             </label>
                             <input type="file" id="postPic" className="createPostInputFile" onChange={fileInputChange} accept="image/*">
                             </input>
@@ -154,7 +154,7 @@ const Settings = () => {
                                         <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                     </div>
                                     :
-                                    <button style={{ margin: "1rem" }} className="submitButton" onClick={uploadImage}>Change Image</button>
+                                    <button style={{ margin: "1rem" }} className="submitButton" onClick={uploadImage}>Send Image</button>
                             }
                         </div>
                         <div className="settingContainer">

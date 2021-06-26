@@ -78,6 +78,7 @@ const ChatWindow = (props) => {
         }
         socket.emit("send-message", payload);
         setReload(++reloadHelper);
+        setChatBoxInput("");
     }
     return (
         <>
