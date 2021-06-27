@@ -95,7 +95,7 @@ router.post("/mail/forget-password", async (req, res) => {
                         const dataForEmail = {
                             subject: "Password Reset Request",
                             text: `<p>Click link to reset your password</p>
-                            <a href="http://localhost:3000/reset-password/${token}">here</a>
+                            <a href="http://social-media-app-akash.herokuapp.com/reset-password/${token}">here</a>
                             `  }
 
                         SendMailGen(email, dataForEmail)

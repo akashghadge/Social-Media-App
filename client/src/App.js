@@ -14,6 +14,7 @@ import Followers from "./Components/PublicProfile/Followers"
 import Following from "./Components/PublicProfile/Following"
 import ChatMain from './Components/Chat/ChatMain';
 import Notification from './Components/Dashboard/Notification';
+import Error from "./Components/Error/Error"
 function App() {
   return (
     <>
@@ -33,6 +34,8 @@ function App() {
         <Route path="/reset-password/:token" component={ResetPassword}></Route>
         <Route path="/messages" component={ChatMain}></Route>
         <Route path="/notifications" component={Notification}></Route>
+        {/* error page */}
+        <Route component={Error}></Route>
       </Switch>
 
     </>
