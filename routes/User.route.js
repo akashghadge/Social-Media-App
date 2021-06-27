@@ -8,7 +8,7 @@ const User = require("../models/User.model");
 const TempUser = require("../models/TempUser.model");
 const { SendMail } = require("../middleware/SendMail");
 
-const { handleErrors } = require("../helpers/handleErrors");        
+const { handleErrors } = require("../helpers/handleErrors");
 
 // user addding route
 router.post("/add", (req, res) => {
@@ -19,7 +19,7 @@ router.post("/add", (req, res) => {
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
-    const PicUrl = req.body.PicUrl;
+    let PicUrl = req.body.PicUrl;
 
     // finding for exiting user if not add it
     try {
@@ -41,6 +41,9 @@ router.post("/add", (req, res) => {
                                 // if user not in main and temp database then only create temp user and send mail
                                 SendMail(email)
                                     .then((sendData) => {
+                                        if (PicUrl == "") {
+                                            PicUrl = "http://social-media-app-akash.herokuapp.com/public/images/blank.png";
+                                        }
                                         let newTempUser = new TempUser({
                                             fname: fname,
                                             lname: lname,
