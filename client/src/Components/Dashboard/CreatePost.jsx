@@ -63,6 +63,11 @@ const CreatePost = () => {
         setPhoto(e.target.files[0]);
     }
     function SendPost(e) {
+        if (user.id == undefined || user.id == null) {
+            setSnackbarObj({ text: "Please Sign To Create Post", backgroundColor: "red" });
+            setOpen(true);
+            return;
+        }
         if (allCurrentData.desc.length == 0) {
             // notification
             setSnackbarObj({ text: "Post Must Contain description", backgroundColor: "red" });
