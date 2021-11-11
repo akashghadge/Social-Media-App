@@ -3,51 +3,96 @@
   padding: 0;
   box-sizing: border-box; }
 
-@im @import "Auth/Auth";
-.signButton {
-  outline: none;
-  color: white;
-  background-color: #3d81ff;
-  border: 1px solid #3d81ff;
-  border-radius: 0.2rem;
-  width: 5rem;
-  height: 2.5rem;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: all 0.3s; }
-  .signButton:hover {
-    outline: none;
-    border: none;
-    background-color: #3d81ff;
-    box-shadow: 0px 0px 5px 2px #3d81ff;
-    transform: scale(1.05); }
+.heading-auth {
+  font-size: xx-large;
+  color: #220080; }
 
-.submitButton {
-  outline: none;
-  color: white;
-  background-color: #3d81ff;
-  border: 1px solid #3d81ff;
-  border-radius: 0.2rem;
-  width: 5rem;
-  height: 2.5rem;
+.text-auth {
   font-family: 'Times New Roman', Times, serif;
-  font-weight: 700;
   font-size: 1rem;
-  transition: all 0.3s; }
-  .submitButton:hover {
-    outline: none;
-    border: none;
-    background-color: #34ff34;
-    box-shadow: 0px 0px 5px 2px #34ff34;
-    transform: scale(1.05); }
+  text-align: center; }
 
-.SignHeading {
+.input-field-auth {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  width: 40%;
+  max-width: 200px;
+  font-size: 1rem;
+  font-family: cursive;
+  margin-left: 0.5rem; }
+
+.navlink-auth {
+  text-decoration: none;
+  text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0.5rem;
-  color: #3d81ff; }
+  font-style: italic; }
+
+.upload-image-text-auth {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem; }
+
+.upload-box-auth {
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-left: 1rem; }
+
+.heading-chat {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 1rem; }
+
+.container-chat {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px;
+  align-items: center; }
+
+.col-chat-1 {
+  width: 30%; }
+
+.col-chat-2 {
+  width: 70%; }
+
+.col-chat-1,
+.col-chat-2 {
+  height: 100vh;
+  text-align: center;
+  flex: 1 1 20px;
+  position: relative; }
+
+.chat-window {
+  height: 60vh;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden; }
+
+.chat-window::-webkit-scrollbar {
+  overflow: hidden; }
+
+.chat-message-text {
+  font-size: 0.6rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgba(56, 56, 56, 0.774);
+  margin-bottom: 0.5rem; }
+
+.chat-message-box {
+  bottom: 0; }
+
+.input-field-chat {
+  width: 50%;
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 1rem;
+  font-family: cursive;
+  margin-right: 0.5rem; }
 
 .postContainer {
   display: flex;
@@ -282,55 +327,6 @@ input[type="file"] {
 .notificationContainer {
   text-align: center; }
 
-.chatParentDiv {
-  display: flex;
-  height: auto;
-  width: 90%;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 10px;
-  align-items: center; }
-
-.chatColumn2,
-.chatColumn1 {
-  height: 100vh;
-  text-align: center;
-  flex: 1 1 20px;
-  position: relative; }
-
-.chatColumn1 {
-  width: 30%; }
-
-.chatColumn2 {
-  width: 70%; }
-
-.chatChatWindowShow {
-  height: 60vh;
-  width: 100%;
-  overflow: scroll;
-  overflow-x: hidden; }
-
-.chatChatWindowShow::-webkit-scrollbar {
-  overflow: hidden; }
-
-.chatInputBox {
-  bottom: 0; }
-
-.chatWindowInput {
-  width: 50%;
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.chatWindowChatsText {
-  font-size: 0.6rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
-
 .settingMainHeading {
   text-align: center;
   font-size: 2rem; }
@@ -360,48 +356,7 @@ input[type="file"] {
   font-family: 'Times New Roman', Times, serif;
   font-style: italic; }
 
-.forgetPasswordInputField {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.matchOTPInputField {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
 .signINUPHead {
   margin: 1rem;
   font-size: xx-large;
   color: #220080; }
-
-.signINUPInputFields {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  max-width: 200px;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-left: 0.5rem; }
-
-.signINUPText {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem;
-  text-align: center; }
-
-.signINUPInputFileField {
-  font-family: 'Times New Roman', Times, serif;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-  border: solid 1px black;
-  font-weight: bold;
-  margin-left: 1rem; }

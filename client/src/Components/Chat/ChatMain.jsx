@@ -40,7 +40,7 @@ const ChatMain = () => {
             <SocketContext.Provider value={getSocket({ id: LoggedUser._id, username: LoggedUser.username })}>
                 <h2 className="heading-chat">Chat App</h2>
                 <div className="container-chat">
-                    <div className="">
+                    <div className="col-chat-1">
                         <h4>Users</h4>
                         <ul style={{ listStyle: "none" }}>
                             {

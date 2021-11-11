@@ -1,51 +1,6 @@
 @import "Standard/reset";
 @import "Auth/Auth";
 @import "Chat/Chat";
-// button colors
-$normalButtonColor: rgb(255, 255, 255);
-$normalButtonColorBg:rgb(61, 129, 255);
-$sucessButtonColorBg:rgb(52, 255, 52);
-
-@mixin Button($color, $bgColor, $hcolor, $hbgColor) {
-    outline: none;
-    color: $color;
-    background-color: $bgColor;
-    border: 1px solid $bgColor;
-    border-radius: 0.2rem;
-    width: 5rem;
-    height: 2.5rem;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.3s;
-
-    &:hover {
-        outline: none;
-        border: none;
-        background-color: $hbgColor;
-        box-shadow: 0px 0px 5px 2px $hbgColor;
-        transform: scale(1.05);
-    }
-}
-
-.signButton {
-    @include Button($normalButtonColor, $normalButtonColorBg, $normalButtonColorBg, $normalButtonColorBg);
-}
-
-.submitButton {
-    @include Button($normalButtonColor, $normalButtonColorBg, $normalButtonColorBg, $sucessButtonColorBg);
-}
-
-
-
-.SignHeading {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0.5rem;
-    color: $normalButtonColorBg;
-}
-
 
 // home page
 // post
@@ -335,68 +290,6 @@ input[type="file"] {
 }
 
 
-// chat pages 
-.chatParentDiv {
-    display: flex;
-    height: auto;
-    width: 90%;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 10px;
-    align-items: center;
-}
-
-.chatColumn2,
-.chatColumn1 {
-    height: 100vh;
-    // width: 50%;
-    text-align: center;
-    flex: 1 1 20px;
-    // margin: 10px;
-    position: relative;
-}
-
-.chatColumn1 {
-    width: 30%;
-}
-
-.chatColumn2 {
-    width: 70%;
-}
-
-.chatChatWindowShow {
-    height: 60vh;
-    // display: flex;
-    width: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
-}
-
-.chatChatWindowShow::-webkit-scrollbar {
-    overflow: hidden;
-}
-
-.chatInputBox {
-    bottom: 0;
-}
-
-.chatWindowInput {
-    width: 50%;
-    border: none;
-    border-bottom: solid 3px black;
-    outline: none;
-    font-size: 1rem;
-    font-family: cursive;
-    margin-right: 0.5rem;
-}
-
-.chatWindowChatsText {
-    font-size: 0.6rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: rgba(56, 56, 56, 0.774);
-    margin-bottom: 0.5rem;
-}
-
 // setting page
 .settingMainHeading {
     text-align: center;
@@ -433,60 +326,9 @@ input[type="file"] {
     font-style: italic;
 }
 
-
-// forget password
-.forgetPasswordInputField {
-    border: none;
-    border-bottom: solid 3px black;
-    outline: none;
-    width: 40%;
-    font-size: 1rem;
-    font-family: cursive;
-    margin-right: 0.5rem;
-}
-
-
-// match otp
-.matchOTPInputField {
-    border: none;
-    border-bottom: solid 3px black;
-    outline: none;
-    width: 40%;
-    font-size: 1rem;
-    font-family: cursive;
-    margin-right: 0.5rem;
-}
-
-
 // sign in page
 .signINUPHead {
     margin: 1rem;
     font-size: xx-large;
     color: rgb(34, 0, 128);
-}
-
-.signINUPInputFields {
-    border: none;
-    border-bottom: solid 3px black;
-    outline: none;
-    width: 40%;
-    max-width: 200px;
-    font-size: 1rem;
-    font-family: cursive;
-    margin-left: 0.5rem;
-}
-
-.signINUPText {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.signINUPInputFileField {
-    font-family: 'Times New Roman', Times, serif;
-    border-radius: 0.2rem;
-    padding: 0.1rem;
-    border: solid 1px black;
-    font-weight: bold;
-    margin-left: 1rem;
 }

@@ -154,7 +154,7 @@ const Settings = () => {
                                         <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                     </div>
                                     :
-                                    <button style={{ margin: "1rem" }} className="submitButton" onClick={uploadImage}>Send Image</button>
+                                    <button style={{ margin: "1rem" }} className="btn btn-outline-success" onClick={uploadImage}>Send Image</button>
                             }
                         </div>
                         <div className="settingContainer">
@@ -172,7 +172,7 @@ const Settings = () => {
                                 {/* 
                         <input type="password" id="password" value={allCurrentData.password} onChange={inputChange}></input>
                         <br></br> */}
-                                <button className="submitButton" onClick={updateUser}><Save></Save></button>
+                                <button className="btn btn-outline-success" onClick={updateUser}><Save></Save></button>
                                 <br></br>
                                 <NavLink className="settingNavLink" to="/forget-password">For changing password please click here</NavLink >
                             </div>
