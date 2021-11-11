@@ -21,8 +21,8 @@ const AllUsers = () => {
     }, [])
     return (
         <>
-            <div className="allUserParent">
-                <div className="allUserContainer">
+            <div className="mt-3">
+                <div className="all-user-container">
                     {
                         loading ?
                             <>
@@ -34,9 +34,9 @@ const AllUsers = () => {
                             allUsers.map((val, i) => {
                                 return (
                                     <>
-                                        <div className="allUserProfile">
-                                            <img src={val.PicUrl} className="allUserProfileImage"></img>
-                                            <NavLink className="allUserProfileUsername" key={i} to={`/profile/${val._id}`}>
+                                        <div className="decoration-none mx-3 text-center">
+                                            <img src={val.PicUrl} className="all-user-image"></img>
+                                            <NavLink className="decoration-none  text-dark" key={i} to={`/profile/${val._id}`}>
                                                 <p>{val.username}</p>
                                             </NavLink>
                                         </div>

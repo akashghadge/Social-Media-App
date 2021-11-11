@@ -3,6 +3,43 @@
   padding: 0;
   box-sizing: border-box; }
 
+input[type="file"] {
+  display: none; }
+
+.user-post-small-pic {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%; }
+
+.heading-div-post {
+  display: flex;
+  width: 100%; }
+
+.navlink-post-profile {
+  text-decoration: none;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold; }
+
+.full-name-post-profile {
+  font-size: smaller;
+  text-transform: capitalize;
+  padding: 0.1rem;
+  color: rgba(56, 56, 56, 0.774);
+  margin-bottom: 0.5rem; }
+
+.decoration-none {
+  text-decoration: none !important; }
+
+.container-center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0rem 1rem;
+  padding: 0.2rem;
+  margin-bottom: 1rem; }
+
 .heading-auth {
   font-size: xx-large;
   color: #220080; }
@@ -111,6 +148,15 @@
   font-weight: bold;
   margin-left: 1rem; }
 
+.input-field-dash-lg {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 1rem;
+  font-family: cursive;
+  width: 50%;
+  margin: 1rem; }
+
 .input-field-dash {
   border: none;
   border-bottom: solid 3px black;
@@ -125,6 +171,52 @@
   height: 100vh; }
 
 .container-dash {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.profile-div-main {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px;
+  align-items: center; }
+
+.profile-div-col-1 {
+  height: 200px;
+  width: 50%;
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px; }
+
+.profile-div-col-2 {
+  height: 200px;
+  width: 50%;
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px; }
+
+.profile-pic-main {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%; }
+
+.profile-links-container {
+  justify-content: center;
+  display: flex;
+  padding: 0.8rem; }
+
+.profile-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  margin: 0.8rem;
+  font-weight: bold;
+  transition: all 0.5 ease; }
+
+.setting-container {
   display: flex;
   justify-content: center;
   align-items: center; }
@@ -176,212 +268,15 @@
   color: black;
   font-size: 0.8rem; }
 
-.user-post-small-pic {
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%; }
-
-.heading-div-post {
-  display: flex;
-  width: 100%; }
-
-.navlink-post-profile {
-  text-decoration: none;
-  font-family: 'Times New Roman', Times, serif;
-  color: black;
-  font-size: 1.2rem;
-  font-weight: bold; }
-
-.full-name-post-profile {
-  font-size: smaller;
-  text-transform: capitalize;
-  padding: 0.1rem;
-  color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
-
-.postContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0rem 1rem;
-  padding: 0.2rem;
-  margin-bottom: 1rem; }
-
-.allUserParent {
-  margin-top: 20px; }
-
-.allUserContainer {
+.all-user-container {
   display: flex;
   width: 100%;
   overflow: scroll;
   overflow-y: hidden; }
+  .all-user-container::-webkit-scrollbar {
+    overflow: hidden; }
 
-.allUserContainer::-webkit-scrollbar {
-  overflow: hidden; }
-
-.allUserProfile {
-  margin: 0 1rem;
-  text-align: center;
-  text-decoration: none; }
-
-.allUserProfileUsername {
-  text-decoration: none;
-  color: black;
-  font-size: 0.8rem; }
-
-.allUserProfileImage {
+.all-user-image {
   height: 4rem;
   width: 4rem;
   border-radius: 50%; }
-
-.deletePostMyPosts {
-  width: 100%;
-  height: 2rem;
-  outline: none;
-  color: red;
-  border-radius: 0.2rem;
-  background-color: white;
-  border: solid 1px red; }
-  .deletePostMyPosts:hover {
-    background-color: red;
-    color: white;
-    border: none;
-    box-shadow: 0px 0px 10px 0px red; }
-
-.profilePic {
-  width: 12rem;
-  height: 12rem;
-  border-radius: 50%; }
-
-.profileParentDiv {
-  display: flex;
-  height: auto;
-  width: 90%;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 10px;
-  align-items: center; }
-
-.profileCenterColunm1 {
-  height: 200px;
-  width: 50%;
-  text-align: center;
-  flex: 1 1 200px;
-  margin: 10px; }
-
-.profileCenterColunm2 {
-  height: 200px;
-  width: 50%;
-  text-align: center;
-  flex: 1 1 200px;
-  margin: 10px; }
-
-.profileFirstLastName {
-  text-transform: capitalize;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: rgba(56, 56, 56, 0.774); }
-
-.profileUsername {
-  font-size: 2rem; }
-
-.profileNavlink {
-  text-decoration: none;
-  color: black;
-  font-size: 0.5rem;
-  margin: 0.8rem; }
-
-.profileNavlinkPost {
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-  margin: 0.8rem;
-  font-weight: bold;
-  transition: all 0.5 ease; }
-
-.profileNavlinkContainer {
-  justify-content: center;
-  display: flex;
-  padding: 0.8rem; }
-
-.profileFollowButtonContainer {
-  margin-top: 1rem; }
-
-.profileAbout {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.7rem;
-  color: black;
-  margin-top: 0.5rem; }
-
-.profileEmail {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: rgba(56, 56, 56, 0.774); }
-
-.createPostParentMain {
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem; }
-
-.createPostParent {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.createPostInputFile {
-  font-family: 'Times New Roman', Times, serif;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-  border: solid 1px black;
-  font-weight: bold;
-  margin-left: 1rem; }
-
-input[type="file"] {
-  display: none; }
-
-.createPostTexts {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem; }
-
-.createPostInputText {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  font-size: 0.7rem;
-  font-family: cursive;
-  width: 50%;
-  margin: 1rem; }
-
-.settingMainHeading {
-  text-align: center;
-  font-size: 2rem; }
-
-.settingInputFields {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.settingContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.settingContainerChild {
-  padding: 1rem; }
-
-.settingText {
-  padding: 0.2rem; }
-
-.settingNavLink {
-  text-decoration: none;
-  text-align: center;
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic; }
-
-.signINUPHead {
-  margin: 1rem;
-  font-size: xx-large;
-  color: #220080; }

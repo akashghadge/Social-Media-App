@@ -27,7 +27,7 @@ const Followers = () => {
     }, []);
     return (
         <>
-            <h1 className="signINUPHead" style={{ textAlign: "center" }}>Followers</h1>
+            <h1 className="heading-dash" style={{ textAlign: "center" }}>Followers</h1>
             {
                 isLoading ?
                     <>
@@ -36,13 +36,13 @@ const Followers = () => {
                         </div>
                     </>
                     :
-                    (followers.length === 0) ? <h1 className="signINUPHead" style={{ textAlign: "center" }}>No Followers are here</h1>
+                    (followers.length === 0) ? <h1 className="heading-dash" style={{ textAlign: "center" }}>No Followers are here</h1>
                         :
                         <>
                             {
                                 followers.map((val, i) => {
                                     return (
-                                        <div className="postContainer">
+                                        <div className="container-center-all">
                                             <div className="">
                                                 <div className="heading-div-post">
                                                     <div className=" ">

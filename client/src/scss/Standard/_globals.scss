@@ -24,3 +24,16 @@
     color: rgba(56, 56, 56, 0.774);
     margin-bottom: 0.5rem;
 }
+
+.decoration-none {
+    text-decoration: none !important;
+}
+
+.container-center-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 1rem;
+    padding: 0.2rem;
+    margin-bottom: 1rem;
+}

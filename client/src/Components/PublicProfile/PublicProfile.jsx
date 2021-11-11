@@ -211,15 +211,15 @@ const PublicProfile = () => {
                         </div>
                     </>
                     :
-                    <div className="profileParentDiv">
-                        <div className="profileCenterColunm1">
-                            <img className="profilePic" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
+                    <div className="profile-div-main">
+                        <div className="profile-div-col-1">
+                            <img className="profile-pic-main" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
                         </div>
-                        <div className="profileCenterColunm2">
-                            <h1 className="profileUsername">{allCurrentData.username}</h1>
-                            <p className="profileFirstLastName">{allCurrentData.fname} {allCurrentData.lname}</p>
-                            <p className="profileAbout">{allCurrentData.about}</p>
-                            <div className="profileFollowButtonContainer">
+                        <div className="profile-div-col-2">
+                            <h1 className=" ">{allCurrentData.username}</h1>
+                            <p className="">{allCurrentData.fname} {allCurrentData.lname}</p>
+                            <p className="">{allCurrentData.about}</p>
+                            <div className="mt-3">
                                 {
                                     loadingFollow ?
                                         <>
@@ -236,8 +236,8 @@ const PublicProfile = () => {
 
                                 }
                             </div>
-                            <div className="profileNavlinkContainer">
-                                <a className="profileNavlinkPost" href="#profileMyPostContainer">{myPosts.length} Posts</a>
+                            <div className=" profile-links-container">
+                                <a className="profile-link" href="#profileMyPostContainer">{myPosts.length} Posts</a>
                                 <NavLink className="profileNavlink" exact to={`/profile/${params.id}/followers/`}>
                                     <h1>{followers.length} Followers</h1>
                                 </NavLink>

@@ -199,7 +199,7 @@ const SinglePost = (props) => {
 
     return (
         <>
-            <div className="postContainer">
+            <div className="container-center-all">
                 <div className="">
                     <div className="heading-div-post">
                         <div className=" ">

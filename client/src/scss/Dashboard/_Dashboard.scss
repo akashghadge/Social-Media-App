@@ -18,6 +18,16 @@
     margin-left: 1rem;
 }
 
+.input-field-dash-lg {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 1rem;
+    font-family: cursive;
+    width: 50%;
+    margin: 1rem;
+}
+
 .input-field-dash {
     border: none;
     border-bottom: solid 3px black;
@@ -34,6 +44,60 @@
 }
 
 .container-dash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-div-main {
+    display: flex;
+    height: auto;
+    width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px;
+    align-items: center;
+}
+
+.profile-div-col-1 {
+    height: 200px;
+    width: 50%;
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.profile-div-col-2 {
+    height: 200px;
+    width: 50%;
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+
+.profile-pic-main {
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+}
+
+.profile-links-container {
+    justify-content: center;
+    display: flex;
+    padding: 0.8rem;
+}
+
+.profile-link {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    margin: 0.8rem;
+    font-weight: bold;
+    transition: all 0.5 ease;
+}
+
+.setting-container{
     display: flex;
     justify-content: center;
     align-items: center;

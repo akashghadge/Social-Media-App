@@ -131,7 +131,7 @@ const Settings = () => {
     }
     return (
         <>
-            <h1 className="settingMainHeading">Settings</h1>
+            <h1 className="heading-dash text-center">Settings</h1>
             {
                 isLoading ?
                     <>
@@ -142,10 +142,10 @@ const Settings = () => {
                     :
                     <>
                         <div style={{ textAlign: "center", margin: "1rem" }}>
-                            <label for="postPic" class="createPostInputFile">
+                            <label for="postPic" class="input-file-dash">
                                 Upload Here
                             </label>
-                            <input type="file" id="postPic" className="createPostInputFile" onChange={fileInputChange} accept="image/*">
+                            <input type="file" id="postPic" className="input-file-dash" onChange={fileInputChange} accept="image/*">
                             </input>
                             <br></br>
                             {
@@ -154,19 +154,19 @@ const Settings = () => {
                                         <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                     </div>
                                     :
-                                    <button style={{ margin: "1rem" }} className="btn btn-outline-success" onClick={uploadImage}>Send Image</button>
+                                    <button style={{ margin: "1rem" }} className="btn btn-outline-success text-center" onClick={uploadImage}>Send Image</button>
                             }
                         </div>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">First Name :</span>
-                                <input type="text" id="fname" className="settingInputFields" value={allCurrentData.fname} onChange={inputChange}></input>
+                        <div className="setting-container">
+                            <div className="p-2">
+                                <span className="text-dash">First Name :</span>
+                                <input type="text" id="fname" className="input-field-dash-lg" value={allCurrentData.fname} onChange={inputChange}></input>
                                 <br></br>
-                                <span className="settingText">Last Name :</span>
-                                <input type="text" id="lname" className="settingInputFields" value={allCurrentData.lname} onChange={inputChange}></input>
+                                <span className="text-dash">Last Name :</span>
+                                <input type="text" id="lname" className="input-field-dash-lg" value={allCurrentData.lname} onChange={inputChange}></input>
                                 <br></br>
-                                <span className="settingText" style={{ margin: "1rem" }}>About :</span>
-                                <input type="text" id="about" className="settingInputFields" value={allCurrentData.about} onChange={inputChange}></input>
+                                <span className="text-dash" style={{ margin: "1rem" }}>About :</span>
+                                <input type="text" id="about" className="input-field-dash-lg" value={allCurrentData.about} onChange={inputChange}></input>
                                 <br></br>
                                 <br></br>
                                 {/* 
@@ -174,7 +174,7 @@ const Settings = () => {
                         <br></br> */}
                                 <button className="btn btn-outline-success" onClick={updateUser}><Save></Save></button>
                                 <br></br>
-                                <NavLink className="settingNavLink" to="/forget-password">For changing password please click here</NavLink >
+                                <NavLink className="navlink-auth" to="/forget-password">For changing password please click here</NavLink >
                             </div>
                         </div>
                     </>
