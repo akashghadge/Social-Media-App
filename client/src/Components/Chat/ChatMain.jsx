@@ -38,9 +38,9 @@ const ChatMain = () => {
     return (
         <>
             <SocketContext.Provider value={getSocket({ id: LoggedUser._id, username: LoggedUser.username })}>
-                <h2 style={{ textAlign: "center", marginTop: "1rem", fontFamily: "sans-serif" }}>Chat App</h2>
-                <div className="chatParentDiv">
-                    <div className="chatColumn1">
+                <h2 className="heading-chat">Chat App</h2>
+                <div className="container-chat">
+                    <div className="">
                         <h4>Users</h4>
                         <ul style={{ listStyle: "none" }}>
                             {
@@ -52,7 +52,7 @@ const ChatMain = () => {
                             }
                         </ul>
                     </div>
-                    <div className="chatColumn2">
+                    <div className="col-chat-2">
                         <ChatWindow totalUsers={totalUsers} recUser={chatUser.id} recUserName={chatUser.username} ></ChatWindow>
                     </div>
                 </div>

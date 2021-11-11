@@ -3,43 +3,7 @@
   padding: 0;
   box-sizing: border-box; }
 
-.heading-auth {
-  font-size: xx-large;
-  color: #220080; }
-
-.text-auth {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem;
-  text-align: center; }
-
-.input-field-auth {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  max-width: 200px;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-left: 0.5rem; }
-
-.navlink-auth {
-  text-decoration: none;
-  text-align: center;
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic; }
-
-.upload-image-text-auth {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem; }
-
-.upload-box-auth {
-  font-family: 'Times New Roman', Times, serif;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-  border: solid 1px black;
-  font-weight: bold;
-  margin-left: 1rem; }
-
+@im @import "Auth/Auth";
 .signButton {
   outline: none;
   color: white;

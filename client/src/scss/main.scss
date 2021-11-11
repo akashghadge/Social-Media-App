@@ -1,11 +1,6 @@
-// starter code
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+@import "Standard/reset";
 @import "Auth/Auth";
+@import "Chat/Chat";
 // button colors
 $normalButtonColor: rgb(255, 255, 255);
 $normalButtonColorBg:rgb(61, 129, 255);

@@ -91,28 +91,28 @@ const ChatWindow = (props) => {
                 }
             </div>
             <hr></hr>
-            <div className="chatChatWindowShow">
+            <div className="chat-window">
                 {
                     prevM.length === 0 ? <p>No prev chats</p> : prevM.map((val, i) => {
                         return (
                             (LoggedUser.username === val.sender.username) ?
                                 < div key={i} style={{ textAlign: "right" }}>
                                     <h4>{val.text}</h4>
-                                    <p className="chatWindowChatsText">{val.sender.username}</p>
-                                    <p className="chatWindowChatsText">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                    <p className="chat-message-text">{val.sender.username}</p>
+                                    <p className="chat-message-text">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
                                 </div> :
                                 <div key={i} style={{ textAlign: "left" }}>
                                     <h4>{val.text}</h4>
-                                    <p className="chatWindowChatsText">{val.sender.username}</p>
-                                    <p className="chatWindowChatsText">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                    <p className="chat-message-text">{val.sender.username}</p>
+                                    <p className="chat-message-text">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
                                 </div>
                         )
                     })
                 }
             </div>
             <hr style={{ margin: "1rem" }}></hr>
-            <div className="chatInputBox">
-                <input type="text" className="chatWindowInput" value={chatBoxInput} onChange={inputChange}></input>
+            <div className="chat-message-box">
+                <input type="text" className="input-field-chat" value={chatBoxInput} onChange={inputChange}></input>
                 <Send onClick={sendMessage} className={classes.profileButtonFollow}></Send>
             </div>
         </>
