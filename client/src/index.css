@@ -94,7 +94,42 @@
   font-family: cursive;
   margin-right: 0.5rem; }
 
-.postContainer {
+.heading-dash {
+  font-size: xx-large;
+  color: #220080; }
+
+.text-dash {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  text-align: center; }
+
+.input-file-dash {
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-left: 1rem; }
+
+.input-field-dash {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 0.7rem;
+  font-family: cursive;
+  width: 50%;
+  margin: 1rem; }
+
+.container-main-dash {
+  width: 100vw;
+  height: 100vh; }
+
+.container-dash {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.container-post {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,82 +137,75 @@
   padding: 0.2rem;
   margin-bottom: 1rem; }
 
-.singlePostImage {
+.image-post {
   height: 18rem;
   width: 20rem;
   border-radius: 1.5rem;
   box-shadow: 0px 7px 10px 0px gray;
   margin: 1rem; }
 
-.singlePostHeading {
-  display: flex;
-  width: 100%; }
-
-.singlePostHeadingColunm2 {
-  margin-left: 1rem; }
-
-.singlePostUserPic {
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%; }
-
-.singlePostUsername {
-  text-decoration: none;
-  font-family: 'Times New Roman', Times, serif;
-  color: black;
-  font-size: 1.2rem;
-  font-weight: bold; }
-
-.singlePostName {
-  font-size: smaller;
-  text-transform: capitalize;
-  padding: 0.1rem;
-  color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
-
-.singlePostDesc {
+.desc-post {
   font-size: 0.9rem;
   font-family: cursive;
   font-style: italic; }
 
-.singlePostDate {
+.date-post {
   font-size: 0.6rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgba(56, 56, 56, 0.774);
   margin-bottom: 0.5rem; }
 
-.singlePostCommentBox {
+.comment-box {
   display: flex;
   align-items: center;
   justify-content: center; }
 
-.singlePostCommentInput {
+.comment-input-field {
   border: none;
   border-bottom: solid 3px black;
   outline: none;
   font-size: 1rem;
   font-family: cursive; }
 
-.singlePostCommentsCollection {
-  margin-left: 1rem; }
+.comment-text {
+  font-size: 1rem;
+  font-family: cursive; }
 
-.singlePostSingleComment {
-  padding: 0.7rem; }
-
-.singlePostCommentUsername {
+.comment-username {
   text-decoration: none;
   color: black;
   font-size: 0.8rem; }
 
-.singlePostCommentText {
-  font-size: 1rem;
-  font-family: cursive; }
+.user-post-small-pic {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%; }
 
-.singlePostCommentDate {
-  font-size: 0.5rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.heading-div-post {
+  display: flex;
+  width: 100%; }
+
+.navlink-post-profile {
+  text-decoration: none;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold; }
+
+.full-name-post-profile {
+  font-size: smaller;
+  text-transform: capitalize;
+  padding: 0.1rem;
   color: rgba(56, 56, 56, 0.774);
   margin-bottom: 0.5rem; }
+
+.postContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0rem 1rem;
+  padding: 0.2rem;
+  margin-bottom: 1rem; }
 
 .allUserParent {
   margin-top: 20px; }
@@ -323,9 +351,6 @@ input[type="file"] {
   font-family: cursive;
   width: 50%;
   margin: 1rem; }
-
-.notificationContainer {
-  text-align: center; }
 
 .settingMainHeading {
   text-align: center;

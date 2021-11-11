@@ -1,0 +1,26 @@
+.user-post-small-pic {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.heading-div-post {
+    display: flex;
+    width: 100%;
+}
+
+.navlink-post-profile {
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.full-name-post-profile {
+    font-size: smaller;
+    text-transform: capitalize;
+    padding: 0.1rem;
+    color: rgba(56, 56, 56, 0.774);
+    margin-bottom: 0.5rem;
+}

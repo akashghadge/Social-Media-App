@@ -1,0 +1,40 @@
+.heading-dash {
+    font-size: xx-large;
+    color: rgb(34, 0, 128);
+}
+
+.text-dash {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.input-file-dash {
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    border: solid 1px black;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.input-field-dash {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 0.7rem;
+    font-family: cursive;
+    width: 50%;
+    margin: 1rem;
+}
+
+.container-main-dash {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-dash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

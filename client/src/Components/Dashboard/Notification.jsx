@@ -36,8 +36,8 @@ const Notification = () => {
 
 
     return (<>
-        <div className="notificationContainer">
-            <h2 style={{ margin: "2rem" }}>Notifications</h2>
+        <div className="text-center">
+            <h2 className="m-5">Notifications</h2>
             {
                 loading ?
                     <>
@@ -50,7 +50,7 @@ const Notification = () => {
                         return (
                             <>
                                 <h4>{val.notification}</h4>
-                                <p className="singlePostDate">{moment(val.createdAt).format("H:mm a, MMMM Do YYYY")}</p>
+                                <p className="date-post">{moment(val.createdAt).format("H:mm a, MMMM Do YYYY")}</p>
                             </>
                         )
                     })

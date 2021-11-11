@@ -41,16 +41,16 @@ const Following = () => {
                                     return (
                                         <>
                                             <div className="postContainer">
-                                                <div className="singlePost">
-                                                    <div className="singlePostHeading">
-                                                        <div className="singlePostHeadingColunm1">
-                                                            <img src={val.PicUrl} className="singlePostUserPic"></img>
+                                                <div className="">
+                                                    <div className="heading-div-post">
+                                                        <div className=" ">
+                                                            <img src={val.PicUrl} className="user-post-small-pic"></img>
                                                         </div>
-                                                        <div className="singlePostHeadingColunm2">
-                                                            <NavLink className="singlePostUsername" exact to={`/profile/${val._id}/`}>
-                                                                <h3 className="singlePostUsername">{val.username}</h3>
+                                                        <div className=" ">
+                                                            <NavLink className="navlink-post-profile" exact to={`/profile/${val._id}/`}>
+                                                                <h3 className="navlink-post-profile">{val.username}</h3>
                                                             </NavLink>
-                                                            <p className="singlePostName">{`${val.fname} ${val.lname}`}</p>
+                                                            <p className="full-name-post-profile">{`${val.fname} ${val.lname}`}</p>
                                                         </div>
                                                     </div>
                                                 </div>

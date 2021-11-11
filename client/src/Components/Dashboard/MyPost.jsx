@@ -214,25 +214,25 @@ const SinglePost = (props) => {
     }
     return (
         <>
-            <div className="postContainer">
-                <div className="singlePost">
-                    <div className="singlePostHeading">
-                        <div className="singlePostHeadingColunm1">
-                            <img src={props.val.postedBy.PicUrl} className="singlePostUserPic"></img>
+            <div className="container-post">
+                <div className="">
+                    <div className="heading-div-post">
+                        <div>
+                            <img src={props.val.postedBy.PicUrl} className="user-post-small-pic"></img>
                         </div>
-                        <div className="singlePostHeadingColunm2">
-                            <NavLink className="singlePostUsername" exact to={`profile/${props.val.postedBy._id}`}>
-                                <h3 className="singlePostUsername">{props.val.postedBy.username}</h3>
+                        <div>
+                            <NavLink className="navlink-post-profile" exact to={`profile/${props.val.postedBy._id}`}>
+                                <h3 className="navlink-post-profile">{props.val.postedBy.username}</h3>
                             </NavLink>
-                            <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
+                            <p className="full-name-post-profile">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
                         </div>
                     </div>
                     <hr></hr>
-                    <img src={props.val.photo} className="singlePostImage" width="100px" height="100px" alt="profile-pic"></img>
-                    <h3 className="singlePostDesc">{props.val.desc}</h3>
+                    <img src={props.val.photo} className="image-post" width="100px" height="100px" alt="profile-pic"></img>
+                    <h3 className="desc-post">{props.val.desc}</h3>
                     {/* do in production */}
                     {/* created time */}
-                    <p className="singlePostDate">{moment(props.val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                    <p className="date-post">{moment(props.val.created).format("H:mm a, MMMM Do YYYY")}</p>
                     {/* like section */}
                     {
                         (props.val.likes.includes(LoggedUser._id))
@@ -252,7 +252,7 @@ const SinglePost = (props) => {
                             createCommentButton(e, props.val._id);
                         }}><AddComment></AddComment></Button>
                     }
-                    <div className="singlePostCommentsCollection">
+                    <div className="ml-3">
                         {
 
                             (commentButton) ?
@@ -264,12 +264,12 @@ const SinglePost = (props) => {
                                     commentInfo.map((comment, i) => {
                                         return (
                                             <>
-                                                <div className="singlePostSingleComment">
-                                                    <h3 className="singlePostCommentText">{comment.text}</h3>
-                                                    <NavLink className="singlePostCommentUsername" exact to={`profile/${comment.postedBy._id}`}>
+                                                <div className="p-1">
+                                                    <h3 className="comment-text">{comment.text}</h3>
+                                                    <NavLink className="comment-username" exact to={`profile/${comment.postedBy._id}`}>
                                                         <p>{comment.postedBy.username}</p>
                                                     </NavLink>
-                                                    <p className="singlePostCommentDate">{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                                    <p className="date-post">{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
                                                     <Button onClick={(e) => {
                                                         deleteComment(e, comment._id, comment.postedBy._id)
                                                     }}><Delete style={{ color: "red", fontSize: "0.8rem" }}></Delete></Button>
@@ -280,11 +280,11 @@ const SinglePost = (props) => {
                                 : null
                         }
                     </div>
-                    <div className="singlePostCommentBox">
+                    <div className="comment-box">
                         {
                             (isCreateCommentOn) ?
                                 <>
-                                    <input className="singlePostCommentInput" type="text" onChange={newCommentHandle} value={newComment}></input>
+                                    <input className="comment-input-field" type="text" onChange={newCommentHandle} value={newComment}></input>
                                     <Button onClick={(e) => {
                                         addNewComment(e, props.val._id);
                                     }} ><Send></Send></Button>
@@ -293,7 +293,7 @@ const SinglePost = (props) => {
                         }
                     </div>
                     {/* delete post */}
-                    <button className="deletePostMyPosts" onClick={deletePost}>Delete</button>
+                    <button className="btn btn-outline-danger mt-3" style={{ width: "100%" }} onClick={deletePost}>Delete</button>
                 </div>
             </div>
             {/* snackbar */}
