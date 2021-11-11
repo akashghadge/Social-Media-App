@@ -59,7 +59,7 @@ const ForgetPassword = () => {
     }
     return (
         <>
-            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Enter Your Email</h1>
+            <h1 className="heading-auth text-center mt-3">Enter Your Email</h1>
             {
                 loading ?
                     <>
@@ -69,17 +69,16 @@ const ForgetPassword = () => {
                     </>
                     :
                     <>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">Please Enter Your Email : </span>
-                                <input type="email" className="forgetPasswordInputField" value={email} onChange={changeEmail}></input>
-                                <br></br>
-                                <br></br>
-                                <div style={{ textAlign: "center" }}>
-                                    <Button className={classes.forgetPasswordButton} onClick={sendResetLink}>Reset Password</Button>
+                        <div className="d-flex justify-content-center">
+                            <div className="p-4">
+                                <span className="text-auth">Please Enter Your Email : </span>
+                                <input type="email" className="input-field-auth" value={email} onChange={changeEmail}></input>
+                                <div className="text-center mt-3">
+                                    <button className="btn btn-outline-success" onClick={sendResetLink}>Reset Password</button>
                                 </div>
                             </div>
                         </div>
+
                         {/* snackbar */}
                         <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                             text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />

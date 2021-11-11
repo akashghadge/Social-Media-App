@@ -4,24 +4,8 @@ import { useHistory, NavLink } from "react-router-dom";
 // mui
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    profileButtonFollow: {
-        color: "#0000ff",
-        backgroundColor: "white",
-        border: "solid 1px #0000ff",
-        margin: "2rem",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#2222ff",
-        },
-    }
-
-}));
 const SignIn = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -86,26 +70,19 @@ const SignIn = () => {
                 </> :
                     <>
                         <div className="container my-5 px-5">
-                            <h1 className="signINUPHead">Sign In</h1>
-                            <div className="row widthSignIn my-4" style={{ wordSpacing: "10px" }}>
-                                <div className="">
-                                    <span className="signINUPText">Username</span>
-                                    <input type="text" className="signINUPInputFields" id="username" placeholder="akash@3" onChange={inputChange} value={allCurrentData.username} required style={{ boxShadow: "none" }}></input>
-                                </div>
-                                <div className="">
-                                    <span className="signINUPText">Password</span>
-                                    <input type="password" className="signINUPInputFields" id="password" onChange={inputChange} value={allCurrentData.password} required style={{ boxShadow: "none" }}></input>
-                                </div>
+                            <h1 className="heading-auth">Sign In</h1>
+                            <div className="row my-4" style={{ wordSpacing: "10px" }}>
+                                <span className="text-auth">Username</span>
+                                <input type="text" className="input-field-auth" id="username" placeholder="akash@3" onChange={inputChange} value={allCurrentData.username} required style={{ boxShadow: "none" }}></input>
+                                <span className="text-auth">Password</span>
+                                <input type="password" className="input-field-auth" id="password" onChange={inputChange} value={allCurrentData.password} required style={{ boxShadow: "none" }}></input>
                             </div>
-                            <div className="my-3 mx-2">
-                                <Button id="addContactUs" className={classes.profileButtonFollow} onClick={SendUser}>Save</Button>
-                            </div>
-                        </div>
-                        <div>
-                            <NavLink className="settingNavLink" to="/forget-password">
+                            <button className="btn btn-primary" onClick={SendUser}>Save</button>
+                            <NavLink className="navlink-auth d-block" to="/forget-password">
                                 Forget Password
                             </NavLink>
                         </div>
+
 
                         {/* snackbar */}
                         <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}

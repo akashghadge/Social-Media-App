@@ -1,23 +1,9 @@
 import React, { useState } from "react"
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    MatchOTPButton: {
-        color: "#00ff00",
-        backgroundColor: "white",
-        border: "solid 1px #00ff00",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#22ff22",
-        },
-    }
 
-}));
 const MatchOTP = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -69,7 +55,7 @@ const MatchOTP = () => {
     }
     return (
         <>
-            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Please check your email for otp</h1>
+            <h1 className="heading-auth mt-3 text-center">Please check your email for otp</h1>
             {
                 loading ?
                     <>
@@ -79,16 +65,15 @@ const MatchOTP = () => {
                     </>
                     :
                     <>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">Email :</span>
-                                <input type="email" className="matchOTPInputField" id="emailMatchOTP" name="email" placeholder="" value={allCurrentData.email} onChange={inputChange} required></input>
+                        <div className="d-flex justify-content-center">
+                            <div className="p-4">
+                                <span className="text-auth">Email :</span>
+                                <input type="email" className="input-field-auth" id="emailMatchOTP" name="email" placeholder="" value={allCurrentData.email} onChange={inputChange} required></input>
                                 <br></br>
-                                <span className="settingText" >OTP :</span>
-                                <input style={{ marginLeft: "0.5rem" }} type="number" name="otp" className="matchOTPInputField" id="otpMatchOTP" placeholder="" value={allCurrentData.otp} onChange={inputChange} required></input>
-                                <br></br>
-                                <div style={{ textAlign: "center", margin: "2rem" }}>
-                                    <Button className={classes.MatchOTPButton} type="submit" onClick={sendOtp}>Match OTP</Button>
+                                <span className="text-auth" >OTP :</span>
+                                <input type="number" name="otp" className="input-field-auth" id="otpMatchOTP" placeholder="" value={allCurrentData.otp} onChange={inputChange} required></input>
+                                <div className="text-center mt-3">
+                                    <button className="btn btn-outline-success" type="submit" onClick={sendOtp}>Match OTP</button>
                                 </div>
                             </div>
                         </div>

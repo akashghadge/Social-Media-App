@@ -8,23 +8,7 @@ import { useHistory } from "react-router-dom"
 // snack bar code
 import ReactLoading from "react-loading"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
-const useStyles = makeStyles((theme) => ({
-    profileButtonFollow: {
-        color: "#0000ff",
-        backgroundColor: "white",
-        border: "solid 1px #0000ff",
-        margin: "2rem",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#2222ff",
-        },
-    }
-
-}));
 const SignUp = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -122,39 +106,45 @@ const SignUp = () => {
 
     return (
         <>
+            <div className="container">
 
-            <div className="">
-                <h1 className="signINUPHead">Sign Up</h1>
-                {/* <span>Profile Photo :</span> */}
-                <span className="createPostTexts">Upload Image</span>
-                <label htmlFor="ProfilePic" class="signINUPInputFileField">
+                <h1 className="heading-auth">Sign Up</h1>
+
+                <span className="upload-image-text-auth">Upload Image</span>
+                <label htmlFor="ProfilePic" class="upload-box-auth">
                     Upload
                 </label>
-                <input type="file" id="ProfilePic" className="signINUPInputFileField" onChange={fileInputChange} accept="image/*">
+                <input type="file" id="ProfilePic" className="upload-box-auth" onChange={fileInputChange} accept="image/*">
                 </input>
                 <br></br>
                 <br></br>
-                <span className="signINUPText" >First name</span>
-                <input type="text" className="signINUPInputFields" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
+
+
+                <span className="text-auth" >First name</span>
+                <input type="text" className="input-field-auth" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
                 <br></br>
-                <span className="signINUPText" >Last name</span>
-                <input type="text" className="signINUPInputFields" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
+
+                <span className="text-auth" >Last name</span>
+                <input type="text" className="input-field-auth" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
                 <br></br>
-                <span className="signINUPText" style={{ marginRight: "1.4rem" }}>Email</span>
-                <input type="email" className="signINUPInputFields" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
+
+                <span className="text-auth" style={{ marginRight: "1.4rem" }}>Email</span>
+                <input type="email" className="input-field-auth" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
                 <br></br>
-                <span className="signINUPText">Username</span>
-                <input type="text" className="signINUPInputFields" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
+
+                <span className="text-auth">Username</span>
+                <input type="text" className="input-field-auth" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
                 <br></br>
-                <span className="signINUPText">Password</span>
-                <input type="password" className="signINUPInputFields" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
+
+                <span className="text-auth">Password</span>
+                <input type="password" className="input-field-auth" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
                 <br></br>
                 {
                     (isLoading) ?
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div> :
-                        <Button className={classes.profileButtonFollow} onClick={SendUser}><Save></Save></Button>
+                        <button className="btn btn-outline-primary" onClick={SendUser}><Save></Save></button>
                 }
             </div>
             {/* snackbar */}

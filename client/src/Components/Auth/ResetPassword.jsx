@@ -61,7 +61,7 @@ const ResetPassword = () => {
     }
     return (
         <>
-            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Enter New Password</h1>
+            <h1 className="text-center heading-auth">Enter New Password</h1>
             {
                 loading ?
                     <>
@@ -70,13 +70,13 @@ const ResetPassword = () => {
                         </div>
                     </> :
                     <>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">Enter New Password</span>
-                                <input type="password" className="forgetPasswordInputField" value={password} onChange={inputChange}></input>
+                        <div className="d-flex justify-content-center">
+                            <div className="p-4">
+                                <span className="text-auth">Enter New Password</span>
+                                <input type="password" className="input-field-auth" value={password} onChange={inputChange}></input>
                                 <br></br>
-                                <div style={{ textAlign: "center", marginTop: "3rem" }}>
-                                    <Button className={classes.forgetPasswordButton} onClick={changePassword}>Chnage Password</Button>
+                                <div className="text-center mt-3">
+                                    <button className="btn btn-outline-success" onClick={changePassword}>Chnage Password</button>
                                 </div>
                             </div>
                         </div>
