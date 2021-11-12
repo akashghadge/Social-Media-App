@@ -6,6 +6,9 @@
 input[type="file"] {
   display: none; }
 
+.row {
+  --bs-gutter-x: 0rem !important; }
+
 .user-post-small-pic {
   height: 2.5rem;
   width: 2.5rem;
@@ -17,7 +20,6 @@ input[type="file"] {
 
 .navlink-post-profile {
   text-decoration: none;
-  font-family: 'Times New Roman', Times, serif;
   color: black;
   font-size: 1.2rem;
   font-weight: bold; }
@@ -35,17 +37,36 @@ input[type="file"] {
 .container-center-all {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 0rem 1rem;
-  padding: 0.2rem;
-  margin-bottom: 1rem; }
+  align-items: center; }
+
+.btn-outline-default {
+  color: #220080 !important;
+  border-color: #220080 !important;
+  background-color: white !important;
+  box-shadow: none !important;
+  border-radius: 0 !important; }
+  .btn-outline-default:hover, .btn-outline-default:checked {
+    color: white !important;
+    background-color: #220080 !important; }
+
+.btn-default {
+  color: white !important;
+  background-color: #220080 !important;
+  box-shadow: none !important; }
+
+.same-height {
+  display: flex;
+  flex-direction: column;
+  flex: 1; }
+
+.bg-blank {
+  background-color: #fafafa; }
 
 .heading-auth {
   font-size: xx-large;
   color: #220080; }
 
 .text-auth {
-  font-family: 'Times New Roman', Times, serif;
   font-size: 1rem;
   text-align: center; }
 
@@ -62,20 +83,15 @@ input[type="file"] {
 .navlink-auth {
   text-decoration: none;
   text-align: center;
-  font-family: 'Times New Roman', Times, serif;
   font-style: italic; }
 
-.upload-image-text-auth {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem; }
-
 .upload-box-auth {
-  font-family: 'Times New Roman', Times, serif;
   border-radius: 0.2rem;
-  padding: 0.1rem;
+  padding: 0.5rem;
   border: solid 1px black;
   font-weight: bold;
-  margin-left: 1rem; }
+  margin-right: 1rem;
+  cursor: pointer; }
 
 .heading-chat {
   text-align: center;

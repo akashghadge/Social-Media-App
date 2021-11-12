@@ -1,20 +1,32 @@
 import React, { useState } from "react"
 import SignUp from "./SignUp";
 import SignIn from "./SignIn"
+import loginSrc from "../../assets/images/login.jpg"
 const Sign = () => {
-    let [signButtonState, signButtonSetState] = useState("");
+    let [signButtonState, signButtonSetState] = useState(1);
     function changeButtonSign(e) {
         signButtonSetState(e);
     }
     return (
         <>
-            <div className="text-center">
-                <button className="btn btn-outline-primary" name="signup" value="0" onClick={(e) => changeButtonSign(0)}>Sign Up</button>
-                <button className="btn btn-outline-primary" name="signin" value="1" onClick={(e) => changeButtonSign(1)}>Sign In</button>
+            <div className="row bg-blank">
+                <div className="col-12 col-md-6 same-height" >
+                    <img src={loginSrc} className="img-fluid d-none d-md-block px-2 rounded-2"></img>
+                </div>
+                <div className="col-12 col-md-6 same-height">
+                    <div className="text-center">
+                        <button className="btn btn-outline-default active" name="signup" aria-pressed="true" value="0" onClick={(e) => changeButtonSign(0)}>Sign Up</button>
+                        <button className="btn btn-outline-default active" aria-pressed="true" name="signin" value="1" onClick={(e) => changeButtonSign(1)}>Sign In</button>
+                    </div>
+                    <div className="card m-3">
+                        <div className="card-body">
+                            {
+                                signButtonState === 1 ? <SignIn /> : <SignUp />
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-            {
-                signButtonState === 1 ? <SignIn /> : <SignUp />
-            }
         </>
     )
 }

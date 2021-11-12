@@ -69,19 +69,22 @@ const SignIn = () => {
                     </div>
                 </> :
                     <>
-                        <div className="container my-5 px-5">
-                            <h1 className="heading-auth">Sign In</h1>
-                            <div className="row my-4" style={{ wordSpacing: "10px" }}>
-                                <span className="text-auth">Username</span>
-                                <input type="text" className="input-field-auth" id="username" placeholder="akash@3" onChange={inputChange} value={allCurrentData.username} required style={{ boxShadow: "none" }}></input>
-                                <span className="text-auth">Password</span>
-                                <input type="password" className="input-field-auth" id="password" onChange={inputChange} value={allCurrentData.password} required style={{ boxShadow: "none" }}></input>
-                            </div>
-                            <button className="btn btn-primary" onClick={SendUser}>Save</button>
-                            <NavLink className="navlink-auth d-block" to="/forget-password">
-                                Forget Password
-                            </NavLink>
+                        <h1 className="heading-auth mt-2 mb-4">Sign In</h1>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="username" placeholder="akash@3" onChange={inputChange} value={allCurrentData.username} required></input>
+                            <label htmlFor="username">Enter Username</label>
                         </div>
+                        <div className="form-floating mb-3">
+                            <input type="password" className="form-control" id="password" onChange={inputChange} placeholder="*" value={allCurrentData.password} required></input>
+                            <label htmlFor="password">Enter Password</label>
+                        </div>
+                        <div className="d-flex justify-content-center mb-3">
+                            <button className="btn btn-default d-block w-50" onClick={SendUser}>Login</button>
+                        </div>
+                        <NavLink className="navlink-auth d-block" to="/forget-password">
+                            Forget Password
+                        </NavLink>
+
 
 
                         {/* snackbar */}

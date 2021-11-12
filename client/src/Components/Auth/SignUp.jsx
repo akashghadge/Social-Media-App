@@ -107,44 +107,49 @@ const SignUp = () => {
     return (
         <>
             <div className="container">
-
-                <h1 className="heading-auth">Sign Up</h1>
-
-                <span className="upload-image-text-auth">Upload Image</span>
-                <label htmlFor="ProfilePic" class="upload-box-auth">
-                    Upload
-                </label>
-                <input type="file" id="ProfilePic" className="upload-box-auth" onChange={fileInputChange} accept="image/*">
-                </input>
-                <br></br>
-                <br></br>
-
-
-                <span className="text-auth" >First name</span>
-                <input type="text" className="input-field-auth" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
-                <br></br>
-
-                <span className="text-auth" >Last name</span>
-                <input type="text" className="input-field-auth" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
-                <br></br>
-
-                <span className="text-auth" style={{ marginRight: "1.4rem" }}>Email</span>
-                <input type="email" className="input-field-auth" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
-                <br></br>
-
-                <span className="text-auth">Username</span>
-                <input type="text" className="input-field-auth" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
-                <br></br>
-
-                <span className="text-auth">Password</span>
-                <input type="password" className="input-field-auth" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
-                <br></br>
+                <h1 className="heading-auth mt-2 mb-4">Sign Up</h1>
+                <div className="row">
+                    <div className="col-12 col-md-6 px-1">
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="fname" placeholder="john" value={allCurrentData.fname} onChange={inputChange} required></input>
+                            <label htmlFor="fname" >First name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="email" className="form-control" id="email" placeholder="john@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
+                            <label htmlFor="email" style={{ marginRight: "1.4rem" }}>Email</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="password" className="form-control" placeholder="*" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
+                            <label htmlFor="password">Password</label>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6 px-1">
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="lname" placeholder="doe" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
+                            <label htmlFor="lname" >Last name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
+                            <label htmlFor="username">Username</label>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="ProfilePic" class="upload-box-auth mt-2">
+                                Upload
+                            </label>
+                            <input type="file" id="ProfilePic" className="upload-box-auth" onChange={fileInputChange} accept="image/*">
+                            </input>
+                            <span className="text-sm text-muted">Profile Picture</span>
+                        </div>
+                    </div>
+                </div>
                 {
                     (isLoading) ?
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div> :
-                        <button className="btn btn-outline-primary" onClick={SendUser}><Save></Save></button>
+                        <div className="d-flex justify-content-center mb-3">
+                            <button className="btn btn-default d-block w-50" onClick={SendUser}>Create Account</button>
+                        </div>
                 }
             </div>
             {/* snackbar */}

@@ -11,7 +11,6 @@
 
 .navlink-post-profile {
     text-decoration: none;
-    font-family: 'Times New Roman', Times, serif;
     color: black;
     font-size: 1.2rem;
     font-weight: bold;
@@ -33,7 +32,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0rem 1rem;
-    padding: 0.2rem;
-    margin-bottom: 1rem;
+}
+
+.btn-outline-default {
+    color: $color-main !important;
+    border-color: $color-main !important;
+    background-color: white !important;
+    box-shadow: none !important;
+
+    &:hover,
+    &:checked {
+        color: white !important;
+        background-color: $color-main !important;
+    }
+
+    border-radius: 0 !important;
+}
+
+.btn-default {
+    color: white !important;
+    background-color: $color-main !important;
+    box-shadow: none !important;
+}
+
+.same-height {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.bg-blank {
+    background-color: #fafafa;
 }
