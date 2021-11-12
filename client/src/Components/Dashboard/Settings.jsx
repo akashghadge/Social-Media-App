@@ -131,54 +131,83 @@ const Settings = () => {
     }
     return (
         <>
-            <h1 className="heading-dash text-center">Settings</h1>
+            <div className="p-4 bg-transparent">
+                <div className="page-header">
+                    <h2 className="heading-auth">Profile Settings</h2>
+                </div>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item">
+                            <NavLink to="/profile" className="navlink-auth">Dashboard</NavLink>
+                        </li>
+                        <li className="breadcrumb-item active" aria-current="page">Settings</li>
+                    </ol>
+                </nav>
+            </div>
             {
                 isLoading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
                     <>
-                        <div style={{ textAlign: "center", margin: "1rem" }}>
-                            <label for="postPic" class="input-file-dash">
-                                Upload Here
-                            </label>
-                            <input type="file" id="postPic" className="input-file-dash" onChange={fileInputChange} accept="image/*">
-                            </input>
-                            <br></br>
-                            {
-                                loadingImg ?
-                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                        <div className="container-fluid px-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h1 className="heading-auth mt-2 mb-4">Update</h1>
+                                    <div>
+                                        <div className="row px-2">
+                                            <div className="col-12 col-md-6 pr-2">
+                                                <div className="form-floating mb-3">
+                                                    <input type="text" className="form-control" id="fname" placeholder="john" value={allCurrentData.fname} onChange={inputChange} required></input>
+                                                    <label htmlFor="fname" >First name</label>
+                                                </div>
+                                                <div className="form-floating mb-3">
+                                                    <textarea type="text" id="about" className="form-control" value={allCurrentData.about} onChange={inputChange} placeholder="about ..."></textarea>
+                                                    <label htmlFor="about" >About</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-12 col-md-6 px-2">
+                                                <div className="form-floating mb-3">
+                                                    <input type="text" className="form-control" id="lname" placeholder="doe" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
+                                                    <label htmlFor="lname" >Last name</label>
+                                                </div>
+                                                <div className="row text-center text-md-start">
+                                                    <div className="col-12  col-md-6 mb-3 mb-md-0">
+                                                        <label htmlFor="postPic" className="input-file-dash p-2">
+                                                            Upload Here
+                                                        </label>
+                                                        <input type="file" id="postPic" className="input-file-dash" onChange={fileInputChange} accept="image/*">
+                                                        </input>
+                                                    </div>
+                                                    <div className="col-12 col-md-6">
+                                                        {
+                                                            loadingImg ?
+                                                                <div className="container-center-all">
+                                                                    <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                                                </div>
+                                                                :
+                                                                <button className="btn btn-outline-success" onClick={uploadImage}>Change Image</button>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    :
-                                    <button style={{ margin: "1rem" }} className="btn btn-outline-success text-center" onClick={uploadImage}>Send Image</button>
-                            }
-                        </div>
-                        <div className="setting-container">
-                            <div className="p-2">
-                                <span className="text-dash">First Name :</span>
-                                <input type="text" id="fname" className="input-field-dash-lg" value={allCurrentData.fname} onChange={inputChange}></input>
-                                <br></br>
-                                <span className="text-dash">Last Name :</span>
-                                <input type="text" id="lname" className="input-field-dash-lg" value={allCurrentData.lname} onChange={inputChange}></input>
-                                <br></br>
-                                <span className="text-dash" style={{ margin: "1rem" }}>About :</span>
-                                <input type="text" id="about" className="input-field-dash-lg" value={allCurrentData.about} onChange={inputChange}></input>
-                                <br></br>
-                                <br></br>
-                                {/* 
-                        <input type="password" id="password" value={allCurrentData.password} onChange={inputChange}></input>
-                        <br></br> */}
-                                <button className="btn btn-outline-success" onClick={updateUser}><Save></Save></button>
-                                <br></br>
-                                <NavLink className="navlink-auth" to="/forget-password">For changing password please click here</NavLink >
+                                    <NavLink className="navlink-auth text-center d-block mt-2 mb-3" to="/forget-password">Change Password</NavLink >
+                                    <div className="d-flex justify-content-center">
+                                        <button className="d-block w-50 btn btn-outline-success" onClick={updateUser}>Update Changes</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </>
             }
+
+
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />

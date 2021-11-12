@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color: #fafafa;
+}
+
+body {
+    background-color: transparent !important;
+}
+
 // create post
 input[type="file"] {
     display: none;

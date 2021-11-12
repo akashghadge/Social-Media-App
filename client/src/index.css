@@ -3,6 +3,12 @@
   padding: 0;
   box-sizing: border-box; }
 
+html {
+  background-color: #fafafa; }
+
+body {
+  background-color: transparent !important; }
+
 input[type="file"] {
   display: none; }
 
@@ -59,8 +65,8 @@ input[type="file"] {
   flex-direction: column;
   flex: 1; }
 
-.bg-blank {
-  background-color: #fafafa; }
+.bg-transparent {
+  background-color: transparent !important; }
 
 .heading-auth {
   font-size: xx-large;
@@ -83,7 +89,10 @@ input[type="file"] {
 .navlink-auth {
   text-decoration: none;
   text-align: center;
-  font-style: italic; }
+  font-style: italic;
+  color: #220080; }
+  .navlink-auth:hover {
+    color: #220080; }
 
 .upload-box-auth {
   border-radius: 0.2rem;

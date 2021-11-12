@@ -9,11 +9,11 @@ const Sign = () => {
     }
     return (
         <>
-            <div className="row bg-blank">
-                <div className="col-12 col-md-6 same-height" >
+            <div className="row">
+                <div className="col-12 col-md-6" >
                     <img src={loginSrc} className="img-fluid d-none d-md-block px-2 rounded-2"></img>
                 </div>
-                <div className="col-12 col-md-6 same-height">
+                <div className="col-12 col-md-6 bg-transparent">
                     <div className="text-center">
                         <button className="btn btn-outline-default active" name="signup" aria-pressed="true" value="0" onClick={(e) => changeButtonSign(0)}>Sign Up</button>
                         <button className="btn btn-outline-default active" aria-pressed="true" name="signin" value="1" onClick={(e) => changeButtonSign(1)}>Sign In</button>

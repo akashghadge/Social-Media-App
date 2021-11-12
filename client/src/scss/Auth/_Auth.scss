@@ -23,6 +23,11 @@
     text-decoration: none;
     text-align: center;
     font-style: italic;
+    color: rgb(34, 0, 128);
+
+    &:hover {
+        color: rgb(34, 0, 128);
+    }
 }
 
 .upload-box-auth {
