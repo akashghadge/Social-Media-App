@@ -4,23 +4,9 @@ import { useParams } from "react-router-dom"
 // mui
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    forgetPasswordButton: {
-        color: "#00ff00",
-        backgroundColor: "white",
-        border: "solid 1px #00ff00",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#22ff22",
-        },
-    }
-
-}));
+import { NavLink } from "react-router-dom"
 const ResetPassword = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -61,30 +47,48 @@ const ResetPassword = () => {
     }
     return (
         <>
-            <h1 className="text-center heading-auth">Enter New Password</h1>
+            <div className="p-4 bg-transparent">
+                <div className="page-header">
+                    <h2 className="heading-auth">Reset Password</h2>
+                </div>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item">
+                            <NavLink to="/" className="navlink-auth">Home</NavLink>
+                        </li>
+                        <li className="breadcrumb-item active" aria-current="page">Reset Password</li>
+                    </ol>
+                </nav>
+            </div>
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="cotainer-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </> :
                     <>
-                        <div className="d-flex justify-content-center">
-                            <div className="p-4">
-                                <span className="text-auth">Enter New Password</span>
-                                <input type="password" className="input-field-auth" value={password} onChange={inputChange}></input>
-                                <br></br>
-                                <div className="text-center mt-3">
-                                    <button className="btn btn-outline-success" onClick={changePassword}>Chnage Password</button>
+                        <div className="container-fluid px-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h1 className="heading-auth mt-2 mb-4">Set New Password</h1>
+                                    <div className="p-4">
+                                        <div className="form-floating mb-3">
+                                            <input type="password" id="reset-password" placeholder="temp" className="form-control" value={password} onChange={inputChange}></input>
+                                            <label htmlFor="reset-password">Enter New Password</label>
+                                        </div>
+                                        <div className="text-center mt-3">
+                                            <button className="btn btn-outline-success" onClick={changePassword}>Set Password</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {/* snackbar */}
-                        <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
-                            text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
                     </>
             }
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }

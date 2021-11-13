@@ -2,7 +2,7 @@ import React, { useState } from "react"
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
-
+import { NavLink } from "react-router-dom"
 const MatchOTP = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -55,25 +55,45 @@ const MatchOTP = () => {
     }
     return (
         <>
-            <h1 className="heading-auth mt-3 text-center">Please check your email for otp</h1>
+            <div className="p-4 bg-transparent">
+                <div className="page-header">
+                    <h2 className="heading-auth">Mail Verification</h2>
+                </div>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item">
+                            <NavLink to="/" className="navlink-auth">Home</NavLink>
+                        </li>
+                        <li className="breadcrumb-item active" aria-current="page">Mail Verification</li>
+                    </ol>
+                </nav>
+            </div>
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="cotainer-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
                     <>
-                        <div className="d-flex justify-content-center">
-                            <div className="p-4">
-                                <span className="text-auth">Email :</span>
-                                <input type="email" className="input-field-auth" id="emailMatchOTP" name="email" placeholder="" value={allCurrentData.email} onChange={inputChange} required></input>
-                                <br></br>
-                                <span className="text-auth" >OTP :</span>
-                                <input type="number" name="otp" className="input-field-auth" id="otpMatchOTP" placeholder="" value={allCurrentData.otp} onChange={inputChange} required></input>
-                                <div className="text-center mt-3">
-                                    <button className="btn btn-outline-success" type="submit" onClick={sendOtp}>Match OTP</button>
+                        <div className="container-fluid px-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h1 className="heading-auth mt-2 mb-4">Mail Verification</h1>
+                                    <div className="row">
+                                        <div className="form-floating mb-3 col-12 col-md-6 px-1">
+                                            <input type="email" className="form-control" id="emailMatchOTP" name="email" placeholder="" value={allCurrentData.email} onChange={inputChange} placeholder="." required></input>
+                                            <label htmlFor="emailMatchOTP">Enter Email</label>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6 px-1">
+                                            <input type="number" name="otp" className="form-control" id="otpMatchOTP" placeholder="123456" value={allCurrentData.otp} onChange={inputChange} required></input>
+                                            <label htmlFor="otpMatchOTP" >Enter OTP</label>
+                                        </div>
+                                    </div>
+                                    <div className="text-center mt-3 d-flex justify-content-center">
+                                        <button className="btn btn-outline-success d-block w-50 w-md-25" type="submit" onClick={sendOtp}>Match OTP</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

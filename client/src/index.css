@@ -74,6 +74,9 @@ input[type="file"] {
   font-size: 1rem;
   cursor: pointer; }
 
+.w-fit {
+  width: fit-content !important; }
+
 .heading-auth {
   font-size: xx-large;
   color: #220080; }
