@@ -82,15 +82,14 @@ const ChatWindow = (props) => {
     }
     return (
         <>
-            <div>
-                <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+            <div className="text-center bg-default text-white">
+                <h2 className="mb-0">
                     {props.recUserName}
-                </h1>
+                </h2>
                 {
-                    isTyping ? <p>{typerPerson} Typing...</p> : null
+                    isTyping ? <p className="mb-">{typerPerson} Typing...</p> : <p>Not Active</p>
                 }
             </div>
-            <hr></hr>
             <div className="chat-window">
                 {
                     prevM.length === 0 ? <p>No prev chats</p> : prevM.map((val, i) => {

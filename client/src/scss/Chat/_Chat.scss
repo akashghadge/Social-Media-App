@@ -1,6 +1,5 @@
 .heading-chat {
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
     margin-top: 1rem;
 }
 
@@ -63,4 +62,10 @@
     font-size: 1rem;
     font-family: cursive;
     margin-right: 0.5rem;
+}
+
+.active-chat-member {
+    background-color: $color-main;
+    color: white;
+    cursor: pointer;
 }

@@ -77,6 +77,18 @@ input[type="file"] {
 .w-fit {
   width: fit-content !important; }
 
+.list-style-none {
+  list-style: none !important; }
+
+.cursor-pointer {
+  cursor: pointer !important; }
+
+.bg-default {
+  background-color: #220080 !important; }
+
+.text-default {
+  color: #220080 !important; }
+
 .heading-auth {
   font-size: xx-large;
   color: #220080; }
@@ -99,7 +111,6 @@ input[type="file"] {
 
 .heading-chat {
   text-align: center;
-  font-family: 'Times New Roman', Times, serif;
   margin-top: 1rem; }
 
 .container-chat {
@@ -150,6 +161,11 @@ input[type="file"] {
   font-size: 1rem;
   font-family: cursive;
   margin-right: 0.5rem; }
+
+.active-chat-member {
+  background-color: #220080;
+  color: white;
+  cursor: pointer; }
 
 .heading-dash {
   font-size: xx-large;

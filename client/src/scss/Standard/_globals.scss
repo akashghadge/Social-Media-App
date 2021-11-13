@@ -75,3 +75,19 @@
 .w-fit {
     width: fit-content !important;
 }
+
+.list-style-none {
+    list-style: none !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.bg-default {
+    background-color: $color-main !important;
+}
+
+.text-default {
+    color: $color-main !important;
+}
