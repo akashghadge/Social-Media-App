@@ -137,7 +137,7 @@ const CreatePost = () => {
                                         <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                     </div>
                                 </> :
-                                <div className="text-center">
+                                <div className="text-center my-3">
                                     <button className="btn-success btn" type="submit" onClick={SendPost}>Share Post</button>
                                 </div>
                         }

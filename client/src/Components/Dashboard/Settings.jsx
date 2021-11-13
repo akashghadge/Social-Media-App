@@ -208,7 +208,7 @@ const Settings = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center mb-5">
                                         <button className="d-block w-50 btn btn-outline-success" onClick={updateUser}>Update Changes</button>
                                     </div>
                                 </div>
