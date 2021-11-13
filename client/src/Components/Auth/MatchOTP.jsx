@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb"
+// loading and navigation
 import ReactLoading from "react-loading"
 import { NavLink } from "react-router-dom"
 const MatchOTP = () => {
@@ -19,7 +21,6 @@ const MatchOTP = () => {
     });
     function inputChange(event) {
         const { name, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -28,7 +29,6 @@ const MatchOTP = () => {
         })
     }
     function sendOtp(event) {
-        // console.log("sending otp");
         setLoading(true);
         const urlOtpMatch = "/api/mail/verification";
         const requestOptions = {
@@ -55,19 +55,7 @@ const MatchOTP = () => {
     }
     return (
         <>
-            <div className="p-4 bg-transparent">
-                <div className="page-header">
-                    <h2 className="heading-auth">Mail Verification</h2>
-                </div>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <NavLink to="/" className="navlink-auth">Home</NavLink>
-                        </li>
-                        <li className="breadcrumb-item active" aria-current="page">Mail Verification</li>
-                    </ol>
-                </nav>
-            </div>
+            <Pagebreadcrumb heading="Mail Verification" base="Home" url="" />
             {
                 loading ?
                     <>

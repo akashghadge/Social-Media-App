@@ -5,6 +5,7 @@ import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ForgetPassword from "../Auth/ForgetPassword";
 import ReactLoading from "react-loading"
 import { NavLink } from "react-router-dom";
+import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb";
 const Settings = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -137,19 +138,7 @@ const Settings = () => {
     }
     return (
         <>
-            <div className="p-4 bg-transparent">
-                <div className="page-header">
-                    <h2 className="heading-auth">Profile Settings</h2>
-                </div>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <NavLink to="/profile" className="navlink-auth">Dashboard</NavLink>
-                        </li>
-                        <li className="breadcrumb-item active" aria-current="page">Settings</li>
-                    </ol>
-                </nav>
-            </div>
+            <Pagebreadcrumb heading="Profile Settings" base="Dashboard" url="profile" />
             {
                 isLoading ?
                     <>

@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom"
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
-import { NavLink } from "react-router-dom"
+import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb";
+
 const ResetPassword = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -16,6 +17,8 @@ const ResetPassword = () => {
     function handleClickCloseSnackBar() {
         setOpen(false);
     }
+
+
     let { token } = useParams();
     let [password, setPassword] = useState("");
     function inputChange(e) {
@@ -34,7 +37,6 @@ const ResetPassword = () => {
         };
         axios.post(urlForReset, sendData)
             .then((data) => {
-                // console.log(data);
                 setSnackbarObj({ text: "Email is Sent", backgroundColor: "green" });
                 setOpen(true);
                 setLoading(false);
@@ -45,21 +47,10 @@ const ResetPassword = () => {
                 setLoading(false);
             });
     }
+    
     return (
         <>
-            <div className="p-4 bg-transparent">
-                <div className="page-header">
-                    <h2 className="heading-auth">Reset Password</h2>
-                </div>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <NavLink to="/" className="navlink-auth">Home</NavLink>
-                        </li>
-                        <li className="breadcrumb-item active" aria-current="page">Reset Password</li>
-                    </ol>
-                </nav>
-            </div>
+            <Pagebreadcrumb heading="Reset Password" base="Home" url=""></Pagebreadcrumb>
             {
                 loading ?
                     <>

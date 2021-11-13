@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import axios from 'axios';
-// mui
 // loading effect 
 import ReactLoading from "react-loading"
+
 const ForgetPassword = (props) => {
+    // loading state
     let [loading, setLoading] = useState(false);
     let [email, setEmail] = useState("");
     function changeEmail(e) {
@@ -18,12 +19,10 @@ const ForgetPassword = (props) => {
             })
             .then((data) => {
                 props.openSnackBarForgetPassword(1);
-                // loading effect
                 setLoading(false);
             })
             .catch((err) => {
                 props.openSnackBarForgetPassword(0);
-                // loading effect
                 setLoading(false);
             })
     }
