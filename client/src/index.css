@@ -68,6 +68,12 @@ input[type="file"] {
 .bg-transparent {
   background-color: transparent !important; }
 
+.modal-button {
+  font-style: italic;
+  color: #220080;
+  font-size: 1rem;
+  cursor: pointer; }
+
 .heading-auth {
   font-size: xx-large;
   color: #220080; }

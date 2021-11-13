@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { Save } from "@material-ui/icons";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import ForgetPassword from "../Auth/ForgetPassword";
 import ReactLoading from "react-loading"
 import { NavLink } from "react-router-dom";
-import { Button } from "@material-ui/core";
 const Settings = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -56,16 +55,13 @@ const Settings = () => {
                 [id]: value
             }
         })
-        console.log(allCurrentData);
     }
-    console.log(allCurrentData);
     function updateUser(e) {
         if (allCurrentData.fname.length < 3 || allCurrentData.lname.length < 3) {
             setSnackbarObj({ text: "First and Last name must have atleast 3 letters", backgroundColor: "red" });
             setOpen(true);
         }
         else {
-
             setLoading(true);
             const urlUpdateUser = "/api/dashboard/edit";
             const updateData = {
@@ -128,6 +124,16 @@ const Settings = () => {
                 setLoadingImg(false);
                 console.log(err);
             })
+    }
+    function openSnackBarForgetPassword(flag) {
+        if (flag) {
+            setSnackbarObj({ text: `Link Send Successfully please check email`, backgroundColor: "green" })
+            setOpen(true);
+        }
+        else {
+            setSnackbarObj({ text: `Fail send link please enter valid email`, backgroundColor: "red" })
+            setOpen(true);
+        }
     }
     return (
         <>
@@ -197,7 +203,22 @@ const Settings = () => {
 
                                         </div>
                                     </div>
-                                    <NavLink className="navlink-auth text-center d-block mt-2 mb-3" to="/forget-password">Change Password</NavLink >
+                                    <p className="modal-button text-center d-block" data-bs-toggle="modal" data-bs-target="#forget-modal">
+                                        Change Password
+                                    </p>
+                                    <div class="modal fade" id="forget-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                                                    <button type="button" class="btn-close btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ForgetPassword openSnackBarForgetPassword={openSnackBarForgetPassword}></ForgetPassword>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="d-flex justify-content-center">
                                         <button className="d-block w-50 btn btn-outline-success" onClick={updateUser}>Update Changes</button>
                                     </div>

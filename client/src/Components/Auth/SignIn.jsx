@@ -5,6 +5,7 @@ import { useHistory, NavLink } from "react-router-dom";
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
+import ForgetPassword from "./ForgetPassword";
 const SignIn = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -57,7 +58,16 @@ const SignIn = () => {
                 setOpen(true);
                 setLoading(false);
             })
-
+    }
+    function openSnackBarForgetPassword(flag) {
+        if (flag) {
+            setSnackbarObj({ text: `Link Send Successfully please check email`, backgroundColor: "green" })
+            setOpen(true);
+        }
+        else {
+            setSnackbarObj({ text: `Fail send link please enter valid email`, backgroundColor: "red" })
+            setOpen(true);
+        }
     }
 
     return (
@@ -81,11 +91,23 @@ const SignIn = () => {
                         <div className="d-flex justify-content-center mb-3">
                             <button className="btn btn-default d-block w-50" onClick={SendUser}>Login</button>
                         </div>
-                        <NavLink className="navlink-auth d-block" to="/forget-password">
+                        <p className="modal-button text-center d-block" data-bs-toggle="modal" data-bs-target="#forget-modal">
                             Forget Password
-                        </NavLink>
+                        </p>
 
-
+                        <div class="modal fade" id="forget-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Forget Password</h5>
+                                        <button type="button" class="btn-close btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ForgetPassword openSnackBarForgetPassword={openSnackBarForgetPassword}></ForgetPassword>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         {/* snackbar */}
                         <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
