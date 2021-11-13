@@ -156,14 +156,19 @@ input[type="file"] {
   color: #220080; }
 
 .text-dash {
-  font-family: 'Times New Roman', Times, serif;
   font-size: 1rem;
   text-align: center; }
 
 .input-file-dash {
-  font-family: 'Times New Roman', Times, serif;
   border-radius: 0.2rem;
   padding: 0.1rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-left: 1rem; }
+
+.input-file-dash-create-post {
+  border-radius: 0.2rem;
+  padding: 0.5rem;
   border: solid 1px black;
   font-weight: bold;
   margin-left: 1rem; }

@@ -1,36 +1,45 @@
 import React, { useState, useEffect } from "react"
 import GetAuth from "../../helper/auth.helper";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
+import PageBreadcrumb from "../SmallComponents/PageBreadcrumb"
 import ReactLoading from "react-loading"
+import { useHistory } from "react-router-dom"
 const CreatePost = () => {
+    // declarations
+    let history = useHistory();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
     });
     let [open, setOpen] = useState(false);
-    function handleClickCloseSnackBar() {
-        setOpen(false);
-    }
-
-    // setting loading true when we request add new  in database
-    let [isLoading, setLoading] = useState(false);
-    let [user, setUser] = useState({});
-    useEffect(() => {
-        GetAuth()
-            .then((data) => {
-                setUser(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
-
-
     let [allCurrentData, setAllCurrentData] = useState({
         photo: "",
         desc: "",
         postedById: ""
     });
+    let [photo, setPhoto] = useState(null);
+    // setting loading true when we request add new  in database
+    let [isLoading, setLoading] = useState(false);
+    let [user, setUser] = useState({});
+
+    // lifecycle
+    useEffect(() => {
+        setLoading(true);
+        GetAuth()
+            .then((data) => {
+                setUser(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                history.push("/sign");
+                setLoading(false);
+            })
+    }, []);
+
+    // methods
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     function inputChange(event) {
         const { id, value } = event.target
         // console.log(id, value);
@@ -41,9 +50,6 @@ const CreatePost = () => {
             }
         })
     }
-
-
-    let [photo, setPhoto] = useState(null);
     function fileInputChange(e) {
         setPhoto(e.target.files[0]);
     }
@@ -107,29 +113,33 @@ const CreatePost = () => {
     }
     return (
         <>
-            <div className="container-main-dash p-3">
-                <div className="container-dash">
-                    <div>
-                        <h1 className="heading-dash">Create Post</h1>
-                        <span className="text-dash">Upload Image</span>
-                        <label for="postPic" class="input-file-dash">
-                            Upload Image
-                        </label>
-                        <input type="file" id="postPic" className="input-file-dash" onChange={fileInputChange} accept="image/*">
-                        </input>
-                        <br></br>
-                        <span className="text-dash" >Description</span>
-                        <input type="text" className="input-field-dash" id="desc" onChange={inputChange} value={allCurrentData.desc} required></input>
-                        <br></br>
+            <PageBreadcrumb heading="Upload Post" base="Dashboard" url="profile" />
+            <div className="container-fluid px-5">
+                <div className="card">
+                    <div className="card-body row">
+                        <h1 className="heading-auth mt-2 mb-4">Create Post</h1>
+                        <div className="col-12 col-md-6 mb-3 container-center-all">
+                            <span className="text-dash">Share Image</span>
+                            <label for="postPic" class="input-file-dash-create-post">
+                                Upload Image
+                            </label>
+                            <input type="file" id="postPic" className="input-file-dash-create-post" onChange={fileInputChange} accept="image/*">
+                            </input>
+                        </div>
+                        <div className="form-floating mb-3 col-12 col-md-6">
+                            <textarea type="text" className="form-control" id="desc" placeholder="add description" onChange={inputChange} value={allCurrentData.desc} required></textarea>
+                            <label htmlFor="desc" >Description</label>
+                        </div>
                         {
-
                             (isLoading) ?
                                 <>
-                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                    <div className="container-center-all">
                                         <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                     </div>
                                 </> :
-                                <button className="btn-success btn" type="submit" onClick={SendPost}>SendPost</button>
+                                <div className="text-center">
+                                    <button className="btn-success btn" type="submit" onClick={SendPost}>Share Post</button>
+                                </div>
                         }
                     </div>
                 </div>
