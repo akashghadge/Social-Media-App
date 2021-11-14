@@ -280,7 +280,11 @@ const PublicProfile = () => {
                         </>
                         :
                         myPosts.map((val, i) => {
-                            return <PublicPost val={val} key={val.id} handleChangeInPost={handleChangeInPost}></PublicPost>
+                            return (
+                                <>
+                                    <PublicPost val={val} key={val.id} handleChangeInPost={handleChangeInPost}></PublicPost>
+                                </>
+                            )
                         })
                 }
             </div>

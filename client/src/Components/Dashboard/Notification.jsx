@@ -63,7 +63,7 @@ const Notification = () => {
                         notificationAll.map((val, i) => {
                             return (
                                 <>
-                                    <div className="container-fluid">
+                                    <div className="container-fluid mb-3">
                                         <div className="card shadow-sm flex-row">
                                             <div className="card-image-top container-center-all p-3">
                                                 <Notifications></Notifications>
