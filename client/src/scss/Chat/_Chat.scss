@@ -31,12 +31,17 @@
     position: relative;
 }
 
+.chat-window-main {
+    background-color: #f1f1f1;
+}
+
 .chat-window {
     height: 60vh;
     // display: flex;
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
+    margin-bottom: 1rem;
 }
 
 .chat-window::-webkit-scrollbar {
@@ -44,10 +49,10 @@
 }
 
 .chat-message-text {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgba(56, 56, 56, 0.774);
-    margin-bottom: 0.5rem;
+    margin: 0;
 }
 
 .chat-message-box {
@@ -65,7 +70,31 @@
 }
 
 .active-chat-member {
-    background-color: $color-main;
-    color: white;
+    background: linear-gradient(to right, $color-main 1%, $color-main-light 1%, #fafafa 90%);
+    font-weight: bold;
     cursor: pointer;
+}
+
+.chat-message-section-user,
+.chat-message-section-user-2 {
+    background-color: white;
+    padding: 0.9rem;
+    margin-bottom: 0;
+}
+
+.chat-message-section-user {
+    border-radius: 15px 15px 0px 15px;
+}
+
+.chat-message-section-user-2 {
+    border-radius: 15px 15px 15px 0px;
+
+}
+
+.chat-prev-no-chats {
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+    width: 80%;
+    padding: 0.7rem;
 }

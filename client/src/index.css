@@ -89,6 +89,12 @@ input[type="file"] {
 .text-default {
   color: #220080 !important; }
 
+.b-radius-input {
+  border-radius: 1.3rem !important; }
+
+.font-weight-bold {
+  font-weight: bold !important; }
+
 .heading-auth {
   font-size: xx-large;
   color: #220080; }
@@ -135,20 +141,24 @@ input[type="file"] {
   flex: 1 1 20px;
   position: relative; }
 
+.chat-window-main {
+  background-color: #f1f1f1; }
+
 .chat-window {
   height: 60vh;
   width: 100%;
   overflow: scroll;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  margin-bottom: 1rem; }
 
 .chat-window::-webkit-scrollbar {
   overflow: hidden; }
 
 .chat-message-text {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
+  margin: 0; }
 
 .chat-message-box {
   bottom: 0; }
@@ -163,9 +173,28 @@ input[type="file"] {
   margin-right: 0.5rem; }
 
 .active-chat-member {
-  background-color: #220080;
-  color: white;
+  background: linear-gradient(to right, #220080 1%, rgba(34, 0, 128, 0.5) 1%, #fafafa 90%);
+  font-weight: bold;
   cursor: pointer; }
+
+.chat-message-section-user,
+.chat-message-section-user-2 {
+  background-color: white;
+  padding: 0.9rem;
+  margin-bottom: 0; }
+
+.chat-message-section-user {
+  border-radius: 15px 15px 0px 15px; }
+
+.chat-message-section-user-2 {
+  border-radius: 15px 15px 15px 0px; }
+
+.chat-prev-no-chats {
+  background-color: white;
+  border-radius: 15px;
+  text-align: center;
+  width: 80%;
+  padding: 0.7rem; }
 
 .heading-dash {
   font-size: xx-large;

@@ -3,16 +3,16 @@ import { useSelector } from "react-redux"
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import { SocketContext } from '../../contexts/SocketContext';
-import { Button } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import { Send } from "@material-ui/icons"
 const useStyles = makeStyles((theme) => ({
     profileButtonFollow: {
-        color: "#00ff00",
-        backgroundColor: "white",
+        color: "#220080",
+        fontSize: "40px",
+        borderRadius: "1rem",
         '&:hover': {
             color: "white",
-            backgroundColor: "#22ff22",
+            backgroundColor: "#220080",
         },
     }
 
@@ -82,37 +82,56 @@ const ChatWindow = (props) => {
     }
     return (
         <>
-            <div className="text-center bg-default text-white">
-                <h2 className="mb-0">
-                    {props.recUserName}
-                </h2>
-                {
-                    isTyping ? <p className="mb-">{typerPerson} Typing...</p> : <p>Not Active</p>
-                }
-            </div>
-            <div className="chat-window">
-                {
-                    prevM.length === 0 ? <p>No prev chats</p> : prevM.map((val, i) => {
-                        return (
-                            (LoggedUser.username === val.sender.username) ?
-                                < div key={i} style={{ textAlign: "right" }}>
-                                    <h4>{val.text}</h4>
-                                    <p className="chat-message-text">{val.sender.username}</p>
-                                    <p className="chat-message-text">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
-                                </div> :
-                                <div key={i} style={{ textAlign: "left" }}>
-                                    <h4>{val.text}</h4>
-                                    <p className="chat-message-text">{val.sender.username}</p>
-                                    <p className="chat-message-text">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
-                                </div>
-                        )
-                    })
-                }
-            </div>
-            <hr style={{ margin: "1rem" }}></hr>
-            <div className="chat-message-box">
-                <input type="text" className="input-field-chat" value={chatBoxInput} onChange={inputChange}></input>
-                <Send onClick={sendMessage} className={classes.profileButtonFollow}></Send>
+            <div className="chat-window-main">
+                <div className="bg-white mx-3 mt-3 shadow-sm rounded-3">
+                    <h3 className="px-3 pt-3 mb-0 font-weight-bold">
+                        {props.recUserName === undefined ? "Select User " : props.recUserName}
+                    </h3>
+                    <p className="px-3 pb-2 text-muted font-10">
+                        {
+                            isTyping ?
+                                `${typerPerson} is typing...`
+                                : "Not Active"
+                        }
+                    </p>
+                </div>
+                <div className="chat-window">
+                    {
+                        prevM.length === 0 ?
+                            <div className="d-flex justify-content-center">
+                                <p className="chat-prev-no-chats text-muted">No previous messages</p>
+                            </div>
+                            :
+                            prevM.map((val, i) => {
+                                return (
+                                    (LoggedUser.username === val.sender.username) ?
+                                        <div key={val.created} className="d-flex justify-content-end">
+                                            <div key={val.username} className="mb-3">
+                                                <p className="chat-message-section-user">{val.text}</p>
+                                                <p className="chat-message-text text-end">{val.sender.username}</p>
+                                                <p className="chat-message-text text-end">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div key={val.created} className="d-flex justify-content-start px-3">
+                                            <div key={val.username} className="mb-3">
+                                                <p className="chat-message-section-user-2">{val.text}</p>
+                                                <p className="chat-message-text">{val.sender.username}</p>
+                                                <p className="chat-message-text">{moment(val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                            </div>
+                                        </div>
+                                )
+                            })
+                    }
+                </div>
+                <div className="row">
+                    <div className="col-10">
+                        <input type="text" className="form-control b-radius-input font-30" value={chatBoxInput} onChange={inputChange}></input>
+                    </div>
+                    <div className="col-2 text-center">
+                        <Send onClick={sendMessage} className={classes.profileButtonFollow}></Send>
+                    </div>
+                </div>
             </div>
         </>
     );
