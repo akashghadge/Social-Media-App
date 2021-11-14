@@ -15,6 +15,10 @@
 
 }
 
+.post-box-content-limiter {
+    width: 20rem;
+}
+
 .desc-post {
     margin-left: 1.2rem;
     font-size: 1rem;
@@ -38,12 +42,10 @@
     border-bottom: solid 3px black;
     outline: none;
     font-size: 1rem;
-    font-family: cursive;
 }
 
 .comment-text {
     font-size: 1rem;
-    font-family: cursive;
 }
 
 .comment-username {
@@ -56,10 +58,18 @@
     .image-post {
         max-width: 18rem;
     }
+
+    .post-box-content-limiter {
+        max-width: 17rem;
+    }
 }
 
 @media (max-width:450px) {
     .image-post {
         max-width: 15rem;
+    }
+
+    .post-box-content-limiter {
+        max-width: 14rem;
     }
 }
