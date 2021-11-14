@@ -206,61 +206,81 @@ const PublicProfile = () => {
             {
                 isLoading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
-                    <div className="profile-div-main">
-                        <div className="profile-div-col-1">
-                            <img className="profile-pic-main" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
+                    <div className="row">
+                        <div className="col-12 col-md-6 container-center-all">
+                            <img className="profile-pic-main mt-3 mt-md-0 shadow-sm" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
                         </div>
-                        <div className="profile-div-col-2">
-                            <h1 className=" ">{allCurrentData.username}</h1>
-                            <p className="">{allCurrentData.fname} {allCurrentData.lname}</p>
-                            <p className="">{allCurrentData.about}</p>
-                            <div className="mt-3">
-                                {
-                                    loadingFollow ?
-                                        <>
-                                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                                <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
-                                            </div>
-                                        </>
-                                        :
-                                        isFollow ?
-                                            <Button className={classes.profileButtonFollow} onClick={(e) => {
-                                                UnFollowUser(e, allCurrentData._id)
-                                            }}>Unfollow</Button>
-                                            : <Button className={classes.profileButtonFollow} onClick={(e) => { FollowUser(e, allCurrentData._id) }}>Follow</Button>
+                        <div className="col-12 col-md-6 p-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="text-center">
+                                        <h3 className="mb-0">{allCurrentData.username}</h3>
+                                        <p className="text-muted">{allCurrentData.fname} {allCurrentData.lname}</p>
+                                        <p className="px-4">{allCurrentData.about}</p>
+                                    </div>
 
-                                }
-                            </div>
-                            <div className=" profile-links-container">
-                                <a className="profile-link" href="#profileMyPostContainer">{myPosts.length} Posts</a>
-                                <NavLink className="profileNavlink" exact to={`/profile/${params.id}/followers/`}>
-                                    <h1>{followers.length} Followers</h1>
-                                </NavLink>
-                                <NavLink className="profileNavlink" exact to={`/profile/${params.id}/following/`}>
-                                    <h1>{following.length} Following</h1>
-                                </NavLink>
+                                    <div className="my-3 text-center">
+                                        {
+                                            loadingFollow ?
+                                                <>
+                                                    <div className="container-center-all">
+                                                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                                    </div>
+                                                </>
+                                                :
+                                                isFollow ?
+                                                    <button className="btn btn-default" onClick={(e) => {
+                                                        UnFollowUser(e, allCurrentData._id)
+                                                    }}>Unfollow</button>
+                                                    : <button className="btn btn-outline-default" onClick={(e) => { FollowUser(e, allCurrentData._id) }}>Follow</button>
+
+                                        }
+                                        <NavLink to="/messages" className="decoration-none">
+                                            <button className="btn btn-outline-primary mx-3">
+                                                Message
+                                            </button>
+                                        </NavLink>
+                                    </div>
+                                    <div className="row">
+                                        <a className="col-4 profile-info-stat" href="#profileMyPostContainer"><span> {myPosts.length}</span> Posts</a>
+                                        <NavLink className="col-4 profile-info-stat" exact to={`/profile/${params.id}/followers/`}>
+                                            <p>
+                                                <span>
+                                                    {followers.length}
+                                                </span>
+                                                Followers
+                                            </p>
+                                        </NavLink>
+                                        <NavLink className="col-4 profile-info-stat" exact to={`/profile/${params.id}/following/`}>
+                                            <p>
+                                                <span> {following.length}</span>
+                                                Following
+                                            </p>
+                                        </NavLink>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
             }
-            <hr style={{ width: "90%", margin: "auto", marginBottom: "1rem", marginTop: "1rem" }}></hr>
+
             {/* post */}
             <div id="profileMyPostContainer">
                 {
                     loadingPost ?
                         <>
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <div className="container-center-all">
                                 <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                             </div>
                         </>
                         :
                         myPosts.map((val, i) => {
-                            return <PublicPost val={val} key={i} handleChangeInPost={handleChangeInPost}></PublicPost>
+                            return <PublicPost val={val} key={val.id} handleChangeInPost={handleChangeInPost}></PublicPost>
                         })
                 }
             </div>

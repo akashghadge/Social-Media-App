@@ -273,23 +273,21 @@ input[type="file"] {
   height: 12rem;
   border-radius: 50%; }
 
-.profile-links-container {
-  justify-content: center;
-  display: flex;
-  padding: 0.8rem; }
-
-.profile-link {
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-  margin: 0.8rem;
-  font-weight: bold;
-  transition: all 0.5 ease; }
-
 .setting-container {
   display: flex;
   justify-content: center;
   align-items: center; }
+
+.profile-info-stat {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 0; }
+
+.profile-info-stat span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block; }
 
 .container-post {
   display: flex;
