@@ -97,45 +97,58 @@ const ProfileMain = () => {
             {
                 isLoading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </> :
 
-                    <div className="profile-div-main">
-                        <div className="profile-div-col-1">
+                    <div className="row">
+                        <div className="col-12 col-md-6 container-center-all">
                             <img className="profile-pic-main" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
                         </div>
-                        <div className="profile-div-col-2">
-                            <h1 className=" ">{allCurrentData.username}</h1>
-                            <p className="">{allCurrentData.fname} {allCurrentData.lname}</p>
-                            <p className="">{allCurrentData.email}</p>
-                            <p className="">{allCurrentData.about}</p>
-                            <div className="profile-links-container">
-                                <a className="profile-link" href="#profileMyPostContainer">{myPosts.length} Posts</a>
-                                <NavLink className="profile-link" exact to={`/profile/${allCurrentData._id}/followers/`}>
-                                    <p>{followers.length} Followers</p>
-                                </NavLink>
-                                <NavLink className="profile-link" exact to={`/profile/${allCurrentData._id}/following/`}>
-                                    <p>{following.length} Following</p>
-                                </NavLink>
+                        <div className="col-12 col-md-6 p-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="text-center">
+                                        <h3 className="mb-0">{allCurrentData.username}</h3>
+                                        <p className="text-muted mb-0">{allCurrentData.fname} {allCurrentData.lname}</p>
+                                        <p className="">{allCurrentData.email}</p>
+                                        <p className="px-4">{allCurrentData.about}</p>
+                                        <div className="row">
+                                            <a className="col-4 profile-info-stat" href="#profileMyPostContainer"><span> {myPosts.length}</span> Posts</a>
+                                            <NavLink className="col-4 profile-info-stat" exact to={`/profile/${allCurrentData._id}/followers/`}>
+                                                <p>
+                                                    <span>
+                                                        {followers.length}
+                                                    </span>
+                                                    Followers
+                                                </p>
+                                            </NavLink>
+                                            <NavLink className="col-4 profile-info-stat" exact to={`/profile/${allCurrentData._id}/following/`}>
+                                                <p>
+                                                    <span> {following.length}</span>
+                                                    Following
+                                                </p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
             }
-            <hr style={{ width: "90%", margin: "auto", marginBottom: "1rem", marginTop: "1rem" }}></hr>
+            {/* post */}
             <div id="profileMyPostContainer">
-                {/* post */}
                 {
                     loadingPost ?
                         <>
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <div className="container-center-all">
                                 <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                             </div>
                         </>
                         :
                         myPosts.map((val, i) => {
-                            return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
+                            return <MyPost val={val} key={val._id} handleChangeInPost={handleChangeInPost}></MyPost>
                         })
                 }
             </div>

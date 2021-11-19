@@ -254,7 +254,7 @@ const PublicPost = (props) => {
                                 (commentButton) ?
                                     commentLoading ?
                                         <>
-                                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <div className="container-center-all">
                                                 <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                             </div>
                                         </>
