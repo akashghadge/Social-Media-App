@@ -35,13 +35,26 @@ const Home = () => {
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
                     <>
                         <AllUsers></AllUsers>
+                        <div className="container-center-all m-0">
+                            <hr width="95%"></hr>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                            <h3 className="mx-4 my-2 font-weight-bold">
+                                Feeds
+                            </h3>
+                            <div className="d-flex mx-4 my-2 font-20 cursor-pointer">
+                                <p className="mx-1 active-feed-type">All</p>
+                                <p className="mx-1 text-muted">Followers</p>
+                                <p className="mx-1 text-muted">Recent</p>
+                            </div>
+                        </div>
                         <Post></Post>
                     </>
             }

@@ -6,6 +6,8 @@
 
     &::-webkit-scrollbar {
         overflow: hidden;
+        padding: 0;
+        margin: 0;
     }
 }
 
@@ -13,4 +15,9 @@
     height: 4rem;
     width: 4rem;
     border-radius: 50%;
+}
+
+.active-feed-type {
+    color: $color-main-dark;
+    font-weight: 500;
 }

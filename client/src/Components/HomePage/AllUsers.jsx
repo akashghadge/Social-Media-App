@@ -26,7 +26,7 @@ const AllUsers = () => {
                     {
                         loading ?
                             <>
-                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <div className="container-center-all">
                                     <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                                 </div>
                             </>
@@ -36,8 +36,8 @@ const AllUsers = () => {
                                     <>
                                         <div className="decoration-none mx-3 text-center">
                                             <img src={val.PicUrl} className="all-user-image"></img>
-                                            <NavLink className="decoration-none  text-dark" key={i} to={`/profile/${val._id}`}>
-                                                <p>{val.username}</p>
+                                            <NavLink className="decoration-none  text-dark font-weight-bold" key={i} to={`/profile/${val._id}`}>
+                                                <p className="mb-0">{val.username}</p>
                                             </NavLink>
                                         </div>
                                     </>

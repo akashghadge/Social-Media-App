@@ -356,9 +356,15 @@ input[type="file"] {
   overflow: scroll;
   overflow-y: hidden; }
   .all-user-container::-webkit-scrollbar {
-    overflow: hidden; }
+    overflow: hidden;
+    padding: 0;
+    margin: 0; }
 
 .all-user-image {
   height: 4rem;
   width: 4rem;
   border-radius: 50%; }
+
+.active-feed-type {
+  color: #130047;
+  font-weight: 500; }

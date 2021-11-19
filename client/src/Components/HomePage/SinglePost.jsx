@@ -200,7 +200,7 @@ const SinglePost = (props) => {
     return (
         <>
             <div className="container-center-all mx-3 my-4">
-                <div className="card b-radius">
+                <div className="card b-radius-card">
                     <div className="card-body">
                         <div className="row">
                             <div className="col-3 container-center-all">
