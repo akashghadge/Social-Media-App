@@ -310,7 +310,8 @@ input[type="file"] {
 
 .image-post {
   height: 100%;
-  width: 25rem;
+  width: 30rem;
+  max-height: 30rem;
   margin: 1rem;
   border-radius: 1rem; }
 
@@ -348,13 +349,15 @@ input[type="file"] {
 
 @media (max-width: 768px) {
   .image-post {
-    max-width: 18rem; }
+    max-width: 20rem;
+    max-height: 20rem; }
   .post-box-content-limiter {
     max-width: 17rem; } }
 
 @media (max-width: 450px) {
   .image-post {
-    max-width: 15rem; }
+    max-width: 15rem;
+    max-height: 20rem; }
   .post-box-content-limiter {
     max-width: 14rem; } }
 

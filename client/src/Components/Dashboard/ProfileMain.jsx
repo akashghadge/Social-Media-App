@@ -104,7 +104,7 @@ const ProfileMain = () => {
 
                     <div className="row">
                         <div className="col-12 col-md-6 container-center-all">
-                            <img className="profile-pic-main" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
+                            <img className="profile-pic-main mt-3 mt-md-0" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
                         </div>
                         <div className="col-12 col-md-6 p-3">
                             <div className="card">
