@@ -10,8 +10,8 @@ const Sign = () => {
     return (
         <>
             <div className="row">
-                <div className="col-12 col-md-6" >
-                    <img src={loginSrc} className="img-fluid d-none d-md-block px-2 rounded-2"></img>
+                <div className="col-12 col-md-6 px-0" >
+                    <img src={loginSrc} className="img-fluid d-none d-md-block h-100"></img>
                 </div>
                 <div className="col-12 col-md-6 bg-transparent">
                     <div className="text-center">
