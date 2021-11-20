@@ -164,20 +164,20 @@ const Settings = () => {
                                                     <label htmlFor="about" >About</label>
                                                 </div>
                                             </div>
-                                            <div className="col-12 col-md-6 px-2">
+                                            <div className="col-12 col-md-6 px-0">
                                                 <div className="form-floating mb-3">
                                                     <input type="text" className="form-control" id="lname" placeholder="doe" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
                                                     <label htmlFor="lname" >Last name</label>
                                                 </div>
                                                 <div className="row text-center text-md-start">
                                                     <div className="col-12  col-md-6 mb-3 mb-md-0">
-                                                        <label htmlFor="postPic" className="input-file-dash p-2">
+                                                        <label htmlFor="postPic" className="input-file-dash p-2 m-0 mx-md-4">
                                                             Upload Here
                                                         </label>
                                                         <input type="file" id="postPic" className="input-file-dash" onChange={fileInputChange} accept="image/*">
                                                         </input>
                                                     </div>
-                                                    <div className="col-12 col-md-6">
+                                                    <div className="col-12 col-md-6 mb-3 mb-md-0">
                                                         {
                                                             loadingImg ?
                                                                 <div className="container-center-all">
