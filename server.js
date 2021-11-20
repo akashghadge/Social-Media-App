@@ -12,7 +12,7 @@ const io = socketio(server, {
     cors: {
         origins: ["http://localhost:3000/"]
     }
-})
+}) 
 
 // must needed packages
 const cros = require("cors");
