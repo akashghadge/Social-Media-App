@@ -42,7 +42,6 @@ const CreatePost = () => {
     }
     function inputChange(event) {
         const { id, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,

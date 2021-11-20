@@ -32,7 +32,6 @@ const SignUp = () => {
     });
     function inputChange(event) {
         const { id, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -70,7 +69,6 @@ const SignUp = () => {
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 const id = "PicUrl";
                 const value = data.url;
                 setAllCurrentData((prev) => {
@@ -87,7 +85,6 @@ const SignUp = () => {
                 fetch(urlServerUploadUser, requestOptions)
                     .then((res) => res.json())
                     .then((data) => {
-                        // console.log("match otp");
                         history.push("/match-otp");
                     })
                     .catch((err) => {

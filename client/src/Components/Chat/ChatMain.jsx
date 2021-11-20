@@ -20,7 +20,6 @@ const ChatMain = () => {
         axios.post("/api/chat/user-list", { id: LoggedUser._id })
             .then((data) => {
                 setTotalUsers(data.data);
-                console.log(data);
             })
             .catch((err) => {
                 console.log(err);

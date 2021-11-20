@@ -50,7 +50,6 @@ const ChatWindow = (props) => {
             SenderId: LoggedUser._id,
             RecId: props.recUser
         }).then((data) => {
-            console.log(data);
             // here if there is no chat then there is no user present there data.data is emtpy it tends to null.chats 
             // so we check first
             if (data.data === null) {

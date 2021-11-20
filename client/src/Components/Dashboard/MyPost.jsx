@@ -159,7 +159,6 @@ const SinglePost = (props) => {
         const urlForDeletePost = `/api/post/delete/${props.val._id}`
         axios.post(urlForDeletePost, {})
             .then((data) => {
-                console.log(data);
                 setFlag(++flagForReq);
                 setSnackbarObj(
                     {

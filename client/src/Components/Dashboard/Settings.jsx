@@ -32,7 +32,6 @@ const Settings = () => {
         const urlProfileDetails = "/api/dashboard/profile-edit";
         axios.post(urlProfileDetails, { token: token })
             .then((data) => {
-                console.log(data.data);
                 setAllCurrentData(data.data);
                 setLoading(false);
             })
@@ -49,7 +48,6 @@ const Settings = () => {
     // radio varibles
     function inputChange(event) {
         const { id, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -72,7 +70,6 @@ const Settings = () => {
             };
             axios.post(urlUpdateUser, updateData)
                 .then((data) => {
-                    console.log(data);
                     setSnackbarObj({ text: "Profile Updated", backgroundColor: "green" });
                     setOpen(true);
                     setLoading(false);
@@ -108,7 +105,6 @@ const Settings = () => {
                 };
                 axios.post(urlUpdateUser, updateData)
                     .then((data) => {
-                        console.log(data);
                         setSnackbarObj({ text: "Profile Updated", backgroundColor: "green" });
                         setLoadingImg(false);
                         setOpen(true);

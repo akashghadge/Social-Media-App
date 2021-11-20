@@ -9,7 +9,6 @@ const Following = () => {
     let [isLoading, setLoading] = useState(false);
     const params = useParams();
     let [following, setFollowing] = useState([]);
-    console.log(following);
     useEffect(() => {
         const urlForFollowing = "/api/follow/following/all"; const followBody = {
             userId: params.id

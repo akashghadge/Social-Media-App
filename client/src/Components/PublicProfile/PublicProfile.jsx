@@ -78,7 +78,6 @@ const PublicProfile = () => {
         axios.post(urlForFollower, followBody)
             .then((data) => {
                 // for getting follwers we also do check for is user alreasdy followed or not
-                console.log(data.data);
                 setFollowers(data.data.followers);
                 if (!isEmpty(LoggedUser) && data.data.followers.some(e => e._id === LoggedUser._id)) {
                     setIsFollow(true);
@@ -111,7 +110,6 @@ const PublicProfile = () => {
         };
         axios.post(urlForPosts, payload)
             .then((data) => {
-                console.log(data);
                 setMyPosts(data.data);
                 setLoadingPost(false);
             })

@@ -25,7 +25,6 @@ const Notification = () => {
                         setNotificationCount(0);
                     }
                     else {
-                        console.log(data);
                         setNotificationAll(data.data);
                         setNotificationCount(0);
                     }

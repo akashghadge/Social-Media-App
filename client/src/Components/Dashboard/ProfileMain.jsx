@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ProfileMain = () => {
     const classes = useStyles();
-    // console.log(LoggedUser);
     const dispatch = useDispatch();
     const LoggedUser = useSelector((state) => {
         return state.User;
@@ -57,7 +56,6 @@ const ProfileMain = () => {
         const urlProfileDetails = "/api/dashboard/profile";
         axios.post(urlProfileDetails, { token: token })
             .then((data) => {
-                console.log(data);
                 setAllCurrentData(data.data);
                 setFollowers(data.data.followers);
                 setFollowing(data.data.following);
@@ -82,7 +80,6 @@ const ProfileMain = () => {
         };
         axios.post(urlForPosts, payload)
             .then((data) => {
-                console.log(data);
                 setMyPosts(data.data);
                 setLoadingPost(false);
             })
