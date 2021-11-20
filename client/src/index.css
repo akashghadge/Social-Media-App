@@ -347,6 +347,11 @@ input[type="file"] {
   color: black;
   font-size: 0.8rem; }
 
+@media (max-width: 1050px) {
+  .image-post {
+    max-width: 25rem;
+    max-height: 25rem; } }
+
 @media (max-width: 768px) {
   .image-post {
     max-width: 20rem;
@@ -379,3 +384,12 @@ input[type="file"] {
 .active-feed-type {
   border-bottom: solid 2px #130047;
   font-weight: 500; }
+
+.heading-home {
+  color: #220080; }
+
+.btn-activity {
+  width: 6rem;
+  height: 6rem;
+  margin: 0.5rem !important;
+  border-radius: 0.5rem !important; }

@@ -55,6 +55,13 @@
     font-size: 0.8rem;
 }
 
+@media (max-width:1050px) {
+    .image-post {
+        max-width: 25rem;
+        max-height: 25rem;
+    }
+}
+
 @media (max-width:768px) {
     .image-post {
         max-width: 20rem;

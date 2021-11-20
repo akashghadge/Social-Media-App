@@ -8,6 +8,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import saveUser from "../../actions/saveUser"
 import ReactLoading from "react-loading"
+import Followersuggestions from "./FollowerSuggestions";
+import Activities from "./Activities";
 
 
 const Home = () => {
@@ -46,21 +48,36 @@ const Home = () => {
                     </>
                     :
                     <>
-                        <AllUsers></AllUsers>
-                        <div className="container-center-all m-0">
-                            <hr width="95%"></hr>
-                        </div>
-                        <div className="d-flex justify-content-between">
-                            <h3 className="mx-4 my-2 font-weight-bold">
-                                Feeds
-                            </h3>
-                            <div className="d-flex mx-4 my-2 font-20 cursor-pointer">
-                                <p onClick={sortChange} id="all-sort" className={`${sortByValue === "all-sort" ? 'active-feed-type' : ''} mx-1`}>All</p>
-                                <p onClick={sortChange} id="top-sort" className={`${sortByValue === "top-sort" ? 'active-feed-type' : ''} mx-1`}>Top</p>
-                                <p onClick={sortChange} id="date-sort" className={`${sortByValue === "date-sort" ? 'active-feed-type' : ''} mx-1`}>Recent</p>
+                        <div className="row container-center-all">
+                            <div className="col-md-10 col-12">
+                                <AllUsers></AllUsers>
                             </div>
                         </div>
-                        <Post sortBy={sortByValue}></Post>
+
+                        <div className="row">
+                            <div className="col-md-3 col-12 d-none d-md-block">
+                                <Activities></Activities>
+                            </div>
+                            <div className="col-md-6 col-12">
+                                <div className="container-center-all m-0">
+                                    <hr width="95%"></hr>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <h3 className="mx-4 my-2 font-weight-bold">
+                                        Feeds
+                                    </h3>
+                                    <div className="d-flex mx-4 my-2 font-20 cursor-pointer">
+                                        <p onClick={sortChange} id="all-sort" className={`${sortByValue === "all-sort" ? 'active-feed-type' : ''} mx-1`}>All</p>
+                                        <p onClick={sortChange} id="top-sort" className={`${sortByValue === "top-sort" ? 'active-feed-type' : ''} mx-1`}>Top</p>
+                                        <p onClick={sortChange} id="date-sort" className={`${sortByValue === "date-sort" ? 'active-feed-type' : ''} mx-1`}>Recent</p>
+                                    </div>
+                                </div>
+                                <Post sortBy={sortByValue}></Post>
+                            </div>
+                            <div className="col-md-3 col-12 d-none d-md-block">
+                                <Followersuggestions></Followersuggestions>
+                            </div>
+                        </div>
                     </>
             }
         </>
