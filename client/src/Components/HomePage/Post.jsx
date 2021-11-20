@@ -21,14 +21,14 @@ const Post = (props) => {
 
     useEffect(() => {
         const temp = [...totalPosts];
-        if (props.sortBy == 'date-sort') {
+        if (props.sortBy === 'date-sort') {
             temp.sort(function (a, b) {
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
                 return new Date(b.created) - new Date(a.created);
             });
         }
-        else if (props.sortBy == 'top-sort') {
+        else if (props.sortBy === 'top-sort') {
             temp.sort(function (a, b) {
                 return b.likes.length - a.likes.length
             })
@@ -36,7 +36,7 @@ const Post = (props) => {
         setTotalPosts(temp);
     }, [props.sortBy])
 
-    
+
     // this function will detect the change of flagForReqstate in child class
     function handleChangeInPost(flagForReqFromState) {
         setFlag(flagForReqFromState);

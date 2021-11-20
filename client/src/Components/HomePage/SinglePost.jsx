@@ -1,11 +1,10 @@
 // basic react imports
 import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { useHistory } from "react-router"
 import { NavLink } from "react-router-dom"
 import axios from "axios"
 import moment from "moment"
-import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
+import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
 // mui
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
@@ -204,7 +203,7 @@ const SinglePost = (props) => {
                     <div className="card-body">
                         <div className="row">
                             <div className="col-3 container-center-all">
-                                <img src={props.val.postedBy.PicUrl} className="user-post-small-pic"></img>
+                                <img src={props.val.postedBy.PicUrl} className="user-post-small-pic" alt="profile-pic"></img>
                             </div>
                             <div className="col-6 d-flex align-item-center">
                                 <div className="text-truncate">

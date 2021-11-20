@@ -18,9 +18,7 @@ const Followers = () => {
         };
         axios.post(urlForFollower, followBody)
             .then((data) => {
-                console.log(data);
                 setFollowers(data.data.followers);
-                console.log(data.data.followers);
                 setLoading(false);
             })
             .catch((err) => {
@@ -34,7 +32,7 @@ const Followers = () => {
             {
                 isLoading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
@@ -59,7 +57,7 @@ const Followers = () => {
                                             <div className="container-fluid mb-3">
                                                 <div className="card shadow-sm flex-row">
                                                     <div className="card-image-top container-center-all p-3">
-                                                        <img src={val.PicUrl} className="user-post-small-pic"></img>
+                                                        <img src={val.PicUrl} className="user-post-small-pic" alt="User Profile"></img>
                                                     </div>
                                                     <div className="card-body d-flex">
                                                         <NavLink className="card-title font-20 w-50 my-auto text-capitalize navlink-post-profile" exact to={`/profile/${val._id}/`}>

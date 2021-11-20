@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -75,7 +75,7 @@ export default function PrimarySearchAppBar() {
                 token: token
             })
                 .then((data) => {
-                    if (data.data == null || data.data.length == 0) {
+                    if (data.data === null || data.data.length === 0) {
                         setNotificationCount(0);
                     }
                     else {

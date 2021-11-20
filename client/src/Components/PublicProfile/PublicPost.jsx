@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import axios from "axios"
 import { useSelector } from "react-redux"
-import { useHistory } from "react-router"
 import moment from "moment"
-import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
+import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, Delete } from "@material-ui/icons"
 import { Button } from "@material-ui/core"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
@@ -23,7 +22,6 @@ const PublicPost = (props) => {
         backgroundColor: "red",
         text: "Your Not Loggedin"
     }
-    let history = useHistory();
     // getting current user
     const LoggedUser = useSelector((state) => {
         return state.User;
@@ -195,7 +193,7 @@ const PublicPost = (props) => {
                     <div className="card-body">
                         <div className="row">
                             <div className="col-3 container-center-all">
-                                <img src={props.val.postedBy.PicUrl} className="user-post-small-pic"></img>
+                                <img src={props.val.postedBy.PicUrl} className="user-post-small-pic" alt="User Profile Pictrue"></img>
                             </div>
                             <div className="col-6 d-flex align-item-center">
                                 <div className="text-truncate">

@@ -55,7 +55,7 @@ const Following = () => {
                                             <div className="container-fluid mb-3">
                                                 <div className="card shadow-sm flex-row">
                                                     <div className="card-image-top container-center-all p-3">
-                                                        <img src={val.PicUrl} className="user-post-small-pic"></img>
+                                                        <img src={val.PicUrl} className="user-post-small-pic" alt="user profile"></img>
                                                     </div>
                                                     <div className="card-body d-flex">
                                                         <NavLink className="card-title font-20 w-50 my-auto text-capitalize navlink-post-profile" exact to={`/profile/${val._id}/`}>

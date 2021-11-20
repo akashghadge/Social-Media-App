@@ -34,7 +34,7 @@ const AllUsers = () => {
                                 return (
                                     <>
                                         <div key={val._id} className="decoration-none mx-3 text-center">
-                                            <img src={val.PicUrl} className="all-user-image"></img>
+                                            <img src={val.PicUrl} className="all-user-image" alt="user pic"></img>
                                             <NavLink className="decoration-none  text-dark font-weight-bold" key={i} to={`/profile/${val._id}`}>
                                                 <p className="mb-0">{val.username}</p>
                                             </NavLink>

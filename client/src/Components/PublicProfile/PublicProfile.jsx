@@ -5,38 +5,11 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router";
 import PublicPost from "./PublicPost";
-import { Favorite, FavoriteBorder, ChatBubbleOutline, AddComment, Send, DeleteForeverOutlined, Delete } from "@material-ui/icons"
-import { Button } from "@material-ui/core"
-import { fade, makeStyles } from '@material-ui/core/styles';
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
 
-const useStyles = makeStyles((theme) => ({
-    profileButtonFollow: {
-        color: "purple",
-        backgroundColor: "#ffaaff",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#ff88ff",
-        },
-    }
-
-}));
 const PublicProfile = () => {
-    const classes = useStyles();
-    let [snackbarObj, setSnackbarObj] = useState({
-        text: "hello world",
-        backgroundColor: "black"
-    });
-    let [open, setOpen] = useState(false);
-    function handleClickCloseSnackBar() {
-        setOpen(false);
-    }
-    const ErrorObject =
-    {
-        backgroundColor: "red",
-        text: "Your Not Loggedin"
-    }
+    // instances
     let history = useHistory();
     let params = useParams();
     // getting current user
@@ -46,11 +19,8 @@ const PublicProfile = () => {
     if (LoggedUser._id === params.id) {
         history.push("/profile");
     }
-    // this function will helps us to check is user object is empty due to refreshing of the user
-    function isEmpty(obj) {
-        return (Object.entries(obj).length === 0 && obj.constructor === Object)
-    }
 
+    // data
     // main loading for whole page
     let [isLoading, setLoading] = useState(false);
     // public user data
@@ -62,7 +32,11 @@ const PublicProfile = () => {
         password: "",
         PicUrl: ""
     });
-
+    let [snackbarObj, setSnackbarObj] = useState({
+        text: "hello world",
+        backgroundColor: "black"
+    });
+    let [open, setOpen] = useState(false);
     // followers and following list of an user
     let [followers, setFollowers] = useState([]);
     let [following, setFollowing] = useState([]);
@@ -71,6 +45,12 @@ const PublicProfile = () => {
     let [loadingFollow, setLoadingFollow] = useState(true);//loading to check user already followed or not
     let [isFollow, setIsFollow] = useState(false);//flag for follow unfollow
     let [flagForReq, setFlag] = useState(0);
+    let [reloadForUseEffect, setReload] = useState(1);
+    // posts my
+    let [loadingPost, setLoadingPost] = useState(false);
+    let [myPosts, setMyPosts] = useState([]);
+
+    // lifecycles
     // useEffect for getting basic user info
     useEffect(() => {
         setLoading(true);
@@ -87,9 +67,7 @@ const PublicProfile = () => {
                 alert(err);
             })
     }, []);
-
     // here we useEffect on reloadFor every time we do follow or unfollw the user so it is real time
-    let [reloadForUseEffect, setReload] = useState(1);
     useEffect(() => {
         // fetching follwers and following
         const urlForFollower = "/api/follow/followers/all";
@@ -125,7 +103,36 @@ const PublicProfile = () => {
                 console.log(err);
             })
     }, [reloadForUseEffect])
+    useEffect(() => {
+        setLoadingPost(true);
+        const urlForPosts = "/api/post/public-user-posts";
+        const payload = {
+            id: params.id
+        };
+        axios.post(urlForPosts, payload)
+            .then((data) => {
+                console.log(data);
+                setMyPosts(data.data);
+                setLoadingPost(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoadingPost(false);
+            })
 
+    }, [flagForReq])
+
+
+    /**
+     * Methods
+     */
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
+    // this function will helps us to check is user object is empty due to refreshing of the user
+    function isEmpty(obj) {
+        return (Object.entries(obj).length === 0 && obj.constructor === Object)
+    }
     // for unfollow we does not need do any check cause unfollow button only see if user exists in follwers list
     function UnFollowUser(e, PublicUserId) {
         let token = localStorage.getItem("token");
@@ -144,7 +151,6 @@ const PublicProfile = () => {
                 console.log(err);
             });
     }
-
     // for follow we always recheck is user already follow this public profile or not
     function FollowUser(e, PublicUserId) {
         let token = localStorage.getItem("token");
@@ -175,27 +181,6 @@ const PublicProfile = () => {
             });
 
     }
-    // posts my
-    let [myPosts, setMyPosts] = useState([]);
-    let [loadingPost, setLoadingPost] = useState(false);
-    useEffect(() => {
-        setLoadingPost(true);
-        const urlForPosts = "/api/post/public-user-posts";
-        const payload = {
-            id: params.id
-        };
-        axios.post(urlForPosts, payload)
-            .then((data) => {
-                console.log(data);
-                setMyPosts(data.data);
-                setLoadingPost(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoadingPost(false);
-            })
-
-    }, [flagForReq])
     // this function will detect the change of flagForReqstate in child class
     function handleChangeInPost(flagForReqFromState) {
         setFlag(flagForReqFromState);
