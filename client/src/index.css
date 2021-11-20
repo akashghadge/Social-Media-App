@@ -184,12 +184,15 @@ input[type="file"] {
 .chat-message-section-user-2 {
   background-color: white;
   padding: 0.9rem;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  max-width: 400px; }
 
 .chat-message-section-user {
-  border-radius: 15px 15px 0px 15px; }
+  border-radius: 15px 15px 0px 15px;
+  margin-left: 1rem; }
 
 .chat-message-section-user-2 {
+  margin-right: 1rem;
   border-radius: 15px 15px 15px 0px; }
 
 .chat-prev-no-chats {
@@ -198,6 +201,11 @@ input[type="file"] {
   text-align: center;
   width: 80%;
   padding: 0.7rem; }
+
+@media (max-width: 350px) {
+  .chat-message-section-user,
+  .chat-message-section-user-2 {
+    max-width: 200px; } }
 
 .heading-dash {
   font-size: xx-large;
