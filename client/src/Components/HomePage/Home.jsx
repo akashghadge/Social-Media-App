@@ -14,6 +14,7 @@ const Home = () => {
     // redux stuff
     const dispatch = useDispatch();
     let [loading, setLoading] = useState(false);
+    let [sortByValue, setSortByValue] = useState("all-sort");
     useEffect(() => {
         let token = localStorage.getItem("token");
         setLoading(true);
@@ -29,6 +30,10 @@ const Home = () => {
                 console.log(err);
             })
     }, []);
+
+    function sortChange(e) {
+        setSortByValue(e.target.id);
+    }
 
     return (
         <>
@@ -50,12 +55,12 @@ const Home = () => {
                                 Feeds
                             </h3>
                             <div className="d-flex mx-4 my-2 font-20 cursor-pointer">
-                                <p className="mx-1 active-feed-type">All</p>
-                                <p className="mx-1 text-muted">Followers</p>
-                                <p className="mx-1 text-muted">Recent</p>
+                                <p onClick={sortChange} id="all-sort" className={`${sortByValue === "all-sort" ? 'active-feed-type' : ''} mx-1`}>All</p>
+                                <p onClick={sortChange} id="top-sort" className={`${sortByValue === "top-sort" ? 'active-feed-type' : ''} mx-1`}>Top</p>
+                                <p onClick={sortChange} id="date-sort" className={`${sortByValue === "date-sort" ? 'active-feed-type' : ''} mx-1`}>Recent</p>
                             </div>
                         </div>
-                        <Post></Post>
+                        <Post sortBy={sortByValue}></Post>
                     </>
             }
         </>

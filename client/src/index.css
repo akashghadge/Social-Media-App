@@ -377,5 +377,5 @@ input[type="file"] {
   border-radius: 50%; }
 
 .active-feed-type {
-  color: #130047;
+  border-bottom: solid 2px #130047;
   font-weight: 500; }

@@ -11,7 +11,6 @@ const AllUsers = () => {
         axios.get(urlForAllUsers)
             .then((data) => {
                 setAllUsers(data.data);
-                console.log(data.data);
                 setLoading(false);
             })
             .catch((err) => {
@@ -34,7 +33,7 @@ const AllUsers = () => {
                             allUsers.map((val, i) => {
                                 return (
                                     <>
-                                        <div className="decoration-none mx-3 text-center">
+                                        <div key={val._id} className="decoration-none mx-3 text-center">
                                             <img src={val.PicUrl} className="all-user-image"></img>
                                             <NavLink className="decoration-none  text-dark font-weight-bold" key={i} to={`/profile/${val._id}`}>
                                                 <p className="mb-0">{val.username}</p>
