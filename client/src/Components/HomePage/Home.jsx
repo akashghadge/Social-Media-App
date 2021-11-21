@@ -49,7 +49,7 @@ const Home = () => {
                     :
                     <>
                         <div className="row container-center-all">
-                            <div className="col-md-10 col-12">
+                            <div className="col-md-6 col-12">
                                 <AllUsers></AllUsers>
                             </div>
                         </div>

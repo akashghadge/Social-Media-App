@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ReactLoading from "react-loading"
-import axios from 'axios';
 import { NavLink } from "react-router-dom"
+import http from '../../helper/http';
+
 const Followersuggestions = () => {
     let [loading, setLoading] = useState(false);
     let [allUsers, setAllUsers] = useState([]);
-    useEffect(() => {
+    useEffect(async () => {
         setLoading(true);
-        const urlForAllUsers = "/api/user/all-users-homepage";
-        axios.get(urlForAllUsers)
-            .then((data) => {
-                setAllUsers(data.data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-            })
+        let allusers = await http.getAllUsers();
+        setAllUsers(allusers);
+        setLoading(false);
     }, [])
+
     return (
         <>
             <div className="card b-radius-card mx-2 mt-3">
@@ -34,22 +29,20 @@ const Followersuggestions = () => {
                             :
                             allUsers.map((val, i) => {
                                 return (
-                                    <>
-                                        <div key={val._id} className="row decoration-none text-center">
-                                            <div className="col-5 container-center-all">
-                                                <img src={val.PicUrl} className="all-user-image" alt="user pic"></img>
-                                            </div>
-                                            <div className="col-7">
-                                                <NavLink className="decoration-none  text-dark font-weight-bold" key={i} to={`/profile/${val._id}`}>
-                                                    <p className="mb-1 text-truncate">{val.username}</p>
-                                                </NavLink>
-                                                <NavLink to={`/profile/${val._id}`}>
-                                                    <button className="btn btn-default">Follow</button>
-                                                </NavLink>
-                                            </div>
-                                            <hr className="my-3"></hr>
+                                    <div key={val._id} className="row decoration-none text-center">
+                                        <div className="col-5 container-center-all">
+                                            <img src={val.PicUrl} className="all-user-image" alt="user pic"></img>
                                         </div>
-                                    </>
+                                        <div className="col-7">
+                                            <NavLink className="decoration-none  text-dark font-weight-bold" key={i} to={`/profile/${val._id}`}>
+                                                <p className="mb-1 text-truncate">{val.username}</p>
+                                            </NavLink>
+                                            <NavLink to={`/profile/${val._id}`}>
+                                                <button className="btn btn-default">Follow</button>
+                                            </NavLink>
+                                        </div>
+                                        <hr className="my-3"></hr>
+                                    </div>
                                 )
                             })
                     }

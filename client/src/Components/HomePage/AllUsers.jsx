@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react"
-import axios from 'axios';
 import { NavLink } from "react-router-dom"
 import ReactLoading from "react-loading"
+import http from "../../helper/http";
+
 const AllUsers = () => {
     let [loading, setLoading] = useState(false);
     let [allUsers, setAllUsers] = useState([]);
-    useEffect(() => {
+    useEffect(async function () {
         setLoading(true);
-        const urlForAllUsers = "/api/user/all-users-homepage";
-        axios.get(urlForAllUsers)
-            .then((data) => {
-                setAllUsers(data.data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-            })
+        let allusers = await http.getAllUsers();
+        setAllUsers(allusers);
+        setLoading(false);
+
     }, [])
     return (
         <>

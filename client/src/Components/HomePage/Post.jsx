@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import SinglePost from "./SinglePost"
+import http from "../../helper/http";
+
 const Post = (props) => {
-    //for storing all fetch post data
     let [totalPosts, setTotalPosts] = useState([]);
     // for storing state if state change we need to fetch info again so we show user latest info only
     let [flagForReq, setFlag] = useState(0);
 
-    // this will fetch all data when flagForReq is change
-    useEffect(() => {
-        const urlForAllPost = "/api/post/all";
-        axios.post(urlForAllPost, {})
-            .then((data) => {
-                setTotalPosts(data.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+    useEffect(async () => {
+        let allpost = await http.getAllPosts();
+        setTotalPosts(allpost)
     }, [flagForReq]);
-
+    // sort feature when props changes
     useEffect(() => {
         const temp = [...totalPosts];
         if (props.sortBy === 'date-sort') {
             temp.sort(function (a, b) {
-                // Turn your strings into dates, and then subtract them
-                // to get a value that is either negative, positive, or zero.
                 return new Date(b.created) - new Date(a.created);
             });
         }
@@ -35,7 +26,6 @@ const Post = (props) => {
         }
         setTotalPosts(temp);
     }, [props.sortBy])
-
 
     // this function will detect the change of flagForReqstate in child class
     function handleChangeInPost(flagForReqFromState) {

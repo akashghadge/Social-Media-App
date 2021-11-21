@@ -191,7 +191,7 @@ const Settings = () => {
                                     <p className="modal-button text-center d-block" data-bs-toggle="modal" data-bs-target="#forget-modal">
                                         Change Password
                                     </p>
-                                    <div class="modal fade" id="forget-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="forget-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">

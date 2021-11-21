@@ -98,6 +98,9 @@ input[type="file"] {
 .font-weight-bold {
   font-weight: bold !important; }
 
+.btn-custom-sm {
+  font-size: 1rem !important; }
+
 .heading-auth {
   font-size: xx-large;
   color: #220080; }
@@ -327,11 +330,6 @@ input[type="file"] {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgba(56, 56, 56, 0.774);
   margin-bottom: 0.5rem; }
-
-.comment-box {
-  display: flex;
-  align-items: center;
-  justify-content: center; }
 
 .comment-input-field {
   border: none;
