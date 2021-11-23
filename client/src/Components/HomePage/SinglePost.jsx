@@ -12,6 +12,7 @@ const SinglePost = (props) => {
     const LoggedUser = useSelector((state) => {
         return state.User;
     })
+    
     // Data
     let [open, setOpen] = useState(false);
     let [snackbarObj, setSnackbarObj] = useState({ text: "hello world", backgroundColor: "black" });
@@ -119,6 +120,7 @@ const SinglePost = (props) => {
             .then(() => {
                 setNewComment("");
                 setCreateCommentOn(!isCreateCommentOn);
+                setShowCommentButton(false);
                 setFlag(++flagForReq);
                 setSnackbarObj({ backgroundColor: "green", text: "You commented on Post" });
                 setOpen(true);
