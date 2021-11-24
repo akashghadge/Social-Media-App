@@ -1,0 +1,109 @@
+.user-post-small-pic {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+
+.heading-div-post {
+    display: flex;
+    width: 100%;
+}
+
+.navlink-post-profile {
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.full-name-post-profile {
+    font-size: smaller;
+    text-transform: capitalize;
+    padding: 0.1rem;
+    color: rgba(56, 56, 56, 0.774);
+    margin-bottom: 0.5rem;
+}
+
+.decoration-none {
+    text-decoration: none !important;
+}
+
+.container-center-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-outline-default {
+    color: $color-main !important;
+    border-color: $color-main !important;
+    background-color: white !important;
+    box-shadow: none !important;
+
+    &:hover,
+    &:checked {
+        color: white !important;
+        background-color: $color-main !important;
+    }
+
+    border-radius: 0 !important;
+}
+
+.btn-default {
+    color: white !important;
+    background-color: $color-main !important;
+    box-shadow: none !important;
+}
+
+.same-height {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.modal-button {
+    font-style: italic;
+    color: $color-main;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.w-fit {
+    width: fit-content !important;
+}
+
+.list-style-none {
+    list-style: none !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.bg-default {
+    background-color: $color-main !important;
+}
+
+.text-default {
+    color: $color-main !important;
+}
+
+.b-radius-input {
+    border-radius: 1.3rem !important;
+}
+
+.b-radius-card {
+    border-radius: 1rem !important;
+}
+
+.font-weight-bold {
+    font-weight: bold !important;
+}
+
+.btn-custom-sm {
+    font-size: 1rem !important;
+}

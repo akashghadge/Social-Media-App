@@ -1,0 +1,108 @@
+.heading-dash {
+    font-size: xx-large;
+    color: rgb(34, 0, 128);
+}
+
+.text-dash {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.input-file-dash {
+    border-radius: 0.2rem;
+    padding: 0.1rem;
+    border: solid 1px black;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.input-file-dash-create-post {
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    border: solid 1px black;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.input-field-dash-lg {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 1rem;
+    font-family: cursive;
+    width: 50%;
+    margin: 1rem;
+}
+
+.input-field-dash {
+    border: none;
+    border-bottom: solid 3px black;
+    outline: none;
+    font-size: 0.7rem;
+    font-family: cursive;
+    width: 50%;
+    margin: 1rem;
+}
+
+.container-main-dash {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container-dash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-div-main {
+    display: flex;
+    height: auto;
+    width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px;
+    align-items: center;
+}
+
+.profile-div-col-1 {
+    height: 200px;
+    width: 50%;
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.profile-div-col-2 {
+    height: 200px;
+    width: 50%;
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+
+.profile-pic-main {
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+}
+
+.setting-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-info-stat {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.profile-info-stat span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}

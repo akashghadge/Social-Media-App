@@ -1,23 +1,11 @@
 import React, { useState } from "react"
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb"
+// loading and navigation
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    MatchOTPButton: {
-        color: "#00ff00",
-        backgroundColor: "white",
-        border: "solid 1px #00ff00",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#22ff22",
-        },
-    }
-
-}));
+import { NavLink } from "react-router-dom"
 const MatchOTP = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -33,7 +21,6 @@ const MatchOTP = () => {
     });
     function inputChange(event) {
         const { name, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -42,9 +29,8 @@ const MatchOTP = () => {
         })
     }
     function sendOtp(event) {
-        // console.log("sending otp");
         setLoading(true);
-        const urlOtpMatch = "http://localhost:5000/api/mail/verification";
+        const urlOtpMatch = "/api/mail/verification";
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -69,26 +55,33 @@ const MatchOTP = () => {
     }
     return (
         <>
-            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Please Enter Your Email and OTP</h1>
+            <Pagebreadcrumb heading="Mail Verification" base="Home" url="" />
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="cotainer-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
                     <>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">Email :</span>
-                                <input type="email" className="matchOTPInputField" id="emailMatchOTP" name="email" placeholder="" value={allCurrentData.email} onChange={inputChange} required></input>
-                                <br></br>
-                                <span className="settingText" >OTP :</span>
-                                <input style={{ marginLeft: "0.5rem" }} type="number" name="otp" className="matchOTPInputField" id="otpMatchOTP" placeholder="" value={allCurrentData.otp} onChange={inputChange} required></input>
-                                <br></br>
-                                <div style={{ textAlign: "center", margin: "2rem" }}>
-                                    <Button className={classes.MatchOTPButton} type="submit" onClick={sendOtp}>Match OTP</Button>
+                        <div className="container-fluid px-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h1 className="heading-auth mt-2 mb-4">Mail Verification</h1>
+                                    <div className="row">
+                                        <div className="form-floating mb-3 col-12 col-md-6 px-1">
+                                            <input type="email" className="form-control" id="emailMatchOTP" name="email" placeholder="" value={allCurrentData.email} onChange={inputChange} placeholder="." required></input>
+                                            <label htmlFor="emailMatchOTP">Enter Email</label>
+                                        </div>
+                                        <div className="form-floating mb-3 col-12 col-md-6 px-1">
+                                            <input type="number" name="otp" className="form-control" id="otpMatchOTP" placeholder="123456" value={allCurrentData.otp} onChange={inputChange} required></input>
+                                            <label htmlFor="otpMatchOTP" >Enter OTP</label>
+                                        </div>
+                                    </div>
+                                    <div className="text-center mt-3 d-flex justify-content-center">
+                                        <button className="btn btn-outline-success d-block w-50 w-md-25" type="submit" onClick={sendOtp}>Match OTP</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

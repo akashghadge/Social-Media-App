@@ -3,52 +3,307 @@
   padding: 0;
   box-sizing: border-box; }
 
-.signButton {
-  outline: none;
-  color: white;
-  background-color: #3d81ff;
-  border: 1px solid #3d81ff;
-  border-radius: 0.2rem;
-  width: 5rem;
-  height: 2.5rem;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 700;
+html {
+  background-color: #fafafa; }
+
+body {
+  background-color: transparent !important; }
+
+input[type="file"] {
+  display: none; }
+
+.row {
+  --bs-gutter-x: 0rem !important; }
+
+.user-post-small-pic {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%; }
+
+.heading-div-post {
+  display: flex;
+  width: 100%; }
+
+.navlink-post-profile {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold; }
+
+.full-name-post-profile {
+  font-size: smaller;
+  text-transform: capitalize;
+  padding: 0.1rem;
+  color: rgba(56, 56, 56, 0.774);
+  margin-bottom: 0.5rem; }
+
+.decoration-none {
+  text-decoration: none !important; }
+
+.container-center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.btn-outline-default {
+  color: #220080 !important;
+  border-color: #220080 !important;
+  background-color: white !important;
+  box-shadow: none !important;
+  border-radius: 0 !important; }
+  .btn-outline-default:hover, .btn-outline-default:checked {
+    color: white !important;
+    background-color: #220080 !important; }
+
+.btn-default {
+  color: white !important;
+  background-color: #220080 !important;
+  box-shadow: none !important; }
+
+.same-height {
+  display: flex;
+  flex-direction: column;
+  flex: 1; }
+
+.bg-transparent {
+  background-color: transparent !important; }
+
+.modal-button {
+  font-style: italic;
+  color: #220080;
   font-size: 1rem;
-  transition: all 0.3s; }
-  .signButton:hover {
-    outline: none;
-    border: none;
-    background-color: #3d81ff;
-    box-shadow: 0px 0px 5px 2px #3d81ff;
-    transform: scale(1.05); }
+  cursor: pointer; }
 
-.submitButton {
-  outline: none;
-  color: white;
-  background-color: #3d81ff;
-  border: 1px solid #3d81ff;
+.w-fit {
+  width: fit-content !important; }
+
+.list-style-none {
+  list-style: none !important; }
+
+.cursor-pointer {
+  cursor: pointer !important; }
+
+.bg-default {
+  background-color: #220080 !important; }
+
+.text-default {
+  color: #220080 !important; }
+
+.b-radius-input {
+  border-radius: 1.3rem !important; }
+
+.b-radius-card {
+  border-radius: 1rem !important; }
+
+.font-weight-bold {
+  font-weight: bold !important; }
+
+.btn-custom-sm {
+  font-size: 1rem !important; }
+
+.heading-auth {
+  font-size: xx-large;
+  color: #220080; }
+
+.navlink-auth {
+  text-decoration: none;
+  text-align: center;
+  font-style: italic;
+  color: #220080; }
+  .navlink-auth:hover {
+    color: #220080; }
+
+.upload-box-auth {
   border-radius: 0.2rem;
-  width: 5rem;
-  height: 2.5rem;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 700;
+  padding: 0.5rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer; }
+
+.heading-chat {
+  text-align: center;
+  margin-top: 1rem; }
+
+.container-chat {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px;
+  align-items: center; }
+
+.col-chat-1 {
+  width: 30%; }
+
+.col-chat-2 {
+  width: 70%; }
+
+.col-chat-1,
+.col-chat-2 {
+  height: 100vh;
+  text-align: center;
+  flex: 1 1 20px;
+  position: relative; }
+
+.chat-window-main {
+  background-color: #f1f1f1; }
+
+.chat-window {
+  height: 60vh;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-bottom: 1rem; }
+
+.chat-window::-webkit-scrollbar {
+  overflow: hidden; }
+
+.chat-message-text {
+  font-size: 0.7rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgba(56, 56, 56, 0.774);
+  margin: 0; }
+
+.chat-message-box {
+  bottom: 0; }
+
+.input-field-chat {
+  width: 50%;
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
   font-size: 1rem;
-  transition: all 0.3s; }
-  .submitButton:hover {
-    outline: none;
-    border: none;
-    background-color: #34ff34;
-    box-shadow: 0px 0px 5px 2px #34ff34;
-    transform: scale(1.05); }
+  font-family: cursive;
+  margin-right: 0.5rem; }
 
-.SignHeading {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0.5rem;
-  color: #3d81ff; }
+.active-chat-member {
+  background: linear-gradient(to right, #220080 1%, rgba(34, 0, 128, 0.5) 1%, #fafafa 90%);
+  font-weight: bold;
+  cursor: pointer; }
 
-.postContainer {
+.chat-message-section-user,
+.chat-message-section-user-2 {
+  background-color: white;
+  padding: 0.9rem;
+  margin-bottom: 0;
+  max-width: 400px; }
+
+.chat-message-section-user {
+  border-radius: 15px 15px 0px 15px;
+  margin-left: 1rem; }
+
+.chat-message-section-user-2 {
+  margin-right: 1rem;
+  border-radius: 15px 15px 15px 0px; }
+
+.chat-prev-no-chats {
+  background-color: white;
+  border-radius: 15px;
+  text-align: center;
+  width: 80%;
+  padding: 0.7rem; }
+
+@media (max-width: 350px) {
+  .chat-message-section-user,
+  .chat-message-section-user-2 {
+    max-width: 200px; } }
+
+.heading-dash {
+  font-size: xx-large;
+  color: #220080; }
+
+.text-dash {
+  font-size: 1rem;
+  text-align: center; }
+
+.input-file-dash {
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-left: 1rem; }
+
+.input-file-dash-create-post {
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  border: solid 1px black;
+  font-weight: bold;
+  margin-left: 1rem; }
+
+.input-field-dash-lg {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 1rem;
+  font-family: cursive;
+  width: 50%;
+  margin: 1rem; }
+
+.input-field-dash {
+  border: none;
+  border-bottom: solid 3px black;
+  outline: none;
+  font-size: 0.7rem;
+  font-family: cursive;
+  width: 50%;
+  margin: 1rem; }
+
+.container-main-dash {
+  width: 100vw;
+  height: 100vh; }
+
+.container-dash {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.profile-div-main {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px;
+  align-items: center; }
+
+.profile-div-col-1 {
+  height: 200px;
+  width: 50%;
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px; }
+
+.profile-div-col-2 {
+  height: 200px;
+  width: 50%;
+  text-align: center;
+  flex: 1 1 200px;
+  margin: 10px; }
+
+.profile-pic-main {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%; }
+
+.setting-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.profile-info-stat {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 0; }
+
+.profile-info-stat span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block; }
+
+.container-post {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,351 +311,83 @@
   padding: 0.2rem;
   margin-bottom: 1rem; }
 
-.singlePostImage {
-  height: 18rem;
-  width: 20rem;
-  border-radius: 1.5rem;
-  box-shadow: 0px 7px 10px 0px gray;
-  margin: 1rem; }
+.image-post {
+  height: 100%;
+  width: 30rem;
+  max-height: 30rem;
+  margin: 1rem;
+  border-radius: 1rem; }
 
-.singlePostHeading {
-  display: flex;
-  width: 100%; }
+.post-box-content-limiter {
+  width: 20rem; }
 
-.singlePostHeadingColunm2 {
-  margin-left: 1rem; }
+.desc-post {
+  margin-left: 1.2rem;
+  font-size: 1rem; }
 
-.singlePostUserPic {
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%; }
-
-.singlePostUsername {
-  text-decoration: none;
-  font-family: 'Times New Roman', Times, serif;
-  color: black;
-  font-size: 1.2rem;
-  font-weight: bold; }
-
-.singlePostName {
-  font-size: smaller;
-  text-transform: capitalize;
-  padding: 0.1rem;
-  color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
-
-.singlePostDesc {
-  font-size: 0.9rem;
-  font-family: cursive;
-  font-style: italic; }
-
-.singlePostDate {
+.date-post {
   font-size: 0.6rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgba(56, 56, 56, 0.774);
   margin-bottom: 0.5rem; }
 
-.singlePostCommentBox {
-  display: flex;
-  align-items: center;
-  justify-content: center; }
-
-.singlePostCommentInput {
+.comment-input-field {
   border: none;
   border-bottom: solid 3px black;
   outline: none;
-  font-size: 1rem;
-  font-family: cursive; }
+  font-size: 1rem; }
 
-.singlePostCommentsCollection {
-  margin-left: 1rem; }
+.comment-text {
+  font-size: 1rem; }
 
-.singlePostSingleComment {
-  padding: 0.7rem; }
-
-.singlePostCommentUsername {
+.comment-username {
   text-decoration: none;
   color: black;
   font-size: 0.8rem; }
 
-.singlePostCommentText {
-  font-size: 1rem;
-  font-family: cursive; }
+@media (max-width: 1050px) {
+  .image-post {
+    max-width: 25rem;
+    max-height: 25rem; } }
 
-.singlePostCommentDate {
-  font-size: 0.5rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
+@media (max-width: 768px) {
+  .image-post {
+    max-width: 20rem;
+    max-height: 20rem; }
+  .post-box-content-limiter {
+    max-width: 17rem; } }
 
-.allUserParent {
-  margin-top: 20px; }
+@media (max-width: 450px) {
+  .image-post {
+    max-width: 15rem;
+    max-height: 20rem; }
+  .post-box-content-limiter {
+    max-width: 14rem; } }
 
-.allUserContainer {
+.all-user-container {
   display: flex;
   width: 100%;
   overflow: scroll;
   overflow-y: hidden; }
+  .all-user-container::-webkit-scrollbar {
+    overflow: hidden;
+    padding: 0;
+    margin: 0; }
 
-.allUserContainer::-webkit-scrollbar {
-  overflow: hidden; }
-
-.allUserProfile {
-  margin: 0 1rem;
-  text-align: center;
-  text-decoration: none; }
-
-.allUserProfileUsername {
-  text-decoration: none;
-  color: black;
-  font-size: 0.8rem; }
-
-.allUserProfileImage {
+.all-user-image {
   height: 4rem;
   width: 4rem;
   border-radius: 50%; }
 
-.deletePostMyPosts {
-  width: 100%;
-  height: 2rem;
-  outline: none;
-  color: red;
-  border-radius: 0.2rem;
-  background-color: white;
-  border: solid 1px red; }
-  .deletePostMyPosts:hover {
-    background-color: red;
-    color: white;
-    border: none;
-    box-shadow: 0px 0px 10px 0px red; }
+.active-feed-type {
+  border-bottom: solid 2px #130047;
+  font-weight: 500; }
 
-.profilePic {
-  width: 12rem;
-  height: 12rem;
-  border-radius: 50%; }
-
-.profileParentDiv {
-  display: flex;
-  height: auto;
-  width: 90%;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 10px;
-  align-items: center; }
-
-.profileCenterColunm1 {
-  height: 200px;
-  width: 50%;
-  text-align: center;
-  flex: 1 1 200px;
-  margin: 10px; }
-
-.profileCenterColunm2 {
-  height: 200px;
-  width: 50%;
-  text-align: center;
-  flex: 1 1 200px;
-  margin: 10px; }
-
-.profileFirstLastName {
-  text-transform: capitalize;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: rgba(56, 56, 56, 0.774); }
-
-.profileUsername {
-  font-size: 2rem; }
-
-.profileNavlink {
-  text-decoration: none;
-  color: black;
-  font-size: 0.5rem;
-  margin: 0.8rem; }
-
-.profileNavlinkPost {
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-  margin: 0.8rem;
-  font-weight: bold;
-  transition: all 0.5 ease; }
-
-.profileNavlinkContainer {
-  justify-content: center;
-  display: flex;
-  padding: 0.8rem; }
-
-.profileFollowButtonContainer {
-  margin-top: 1rem; }
-
-.profileAbout {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.7rem;
-  color: black;
-  margin-top: 0.5rem; }
-
-.profileEmail {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: rgba(56, 56, 56, 0.774); }
-
-.createPostParentMain {
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem; }
-
-.createPostParent {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.createPostInputFile {
-  font-family: 'Times New Roman', Times, serif;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-  border: solid 1px black;
-  font-weight: bold;
-  margin-left: 1rem; }
-
-input[type="file"] {
-  display: none; }
-
-.createPostTexts {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem; }
-
-.createPostInputText {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  font-size: 0.7rem;
-  font-family: cursive;
-  width: 50%;
-  margin: 1rem; }
-
-.notificationContainer {
-  text-align: center; }
-
-.chatParentDiv {
-  display: flex;
-  height: auto;
-  width: 90%;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 10px;
-  align-items: center; }
-
-.chatColumn2,
-.chatColumn1 {
-  height: 100vh;
-  text-align: center;
-  flex: 1 1 20px;
-  position: relative; }
-
-.chatColumn1 {
-  width: 30%; }
-
-.chatColumn2 {
-  width: 70%; }
-
-.chatChatWindowShow {
-  height: 60vh;
-  width: 100%;
-  overflow: scroll;
-  overflow-x: hidden; }
-
-.chatChatWindowShow::-webkit-scrollbar {
-  overflow: hidden; }
-
-.chatInputBox {
-  bottom: 0; }
-
-.chatWindowInput {
-  width: 50%;
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.chatWindowChatsText {
-  font-size: 0.6rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgba(56, 56, 56, 0.774);
-  margin-bottom: 0.5rem; }
-
-.settingMainHeading {
-  text-align: center;
-  font-size: 2rem; }
-
-.settingInputFields {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.settingContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.settingContainerChild {
-  padding: 1rem; }
-
-.settingText {
-  padding: 0.2rem; }
-
-.settingNavLink {
-  text-decoration: none;
-  text-align: center;
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic; }
-
-.forgetPasswordInputField {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.matchOTPInputField {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-right: 0.5rem; }
-
-.signINUPHead {
-  margin: 1rem;
-  font-size: xx-large;
+.heading-home {
   color: #220080; }
 
-.signINUPInputFields {
-  border: none;
-  border-bottom: solid 3px black;
-  outline: none;
-  width: 40%;
-  max-width: 200px;
-  font-size: 1rem;
-  font-family: cursive;
-  margin-left: 0.5rem; }
-
-.signINUPText {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1rem;
-  text-align: center; }
-
-.signINUPInputFileField {
-  font-family: 'Times New Roman', Times, serif;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-  border: solid 1px black;
-  font-weight: bold;
-  margin-left: 1rem; }
+.btn-activity {
+  width: 6rem;
+  height: 6rem;
+  margin: 0.5rem !important;
+  border-radius: 0.5rem !important; }

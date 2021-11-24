@@ -3,7 +3,7 @@ import axios from "axios";
 const GetAuth = () => {
     return new Promise
         (function (resolve, reject) {
-            const urlAuth = "http://localhost:5000/api/dashboard/me";
+            const urlAuth = "/api/dashboard/me";
             let token = localStorage.getItem("token");
             axios
                 .post(urlAuth, {

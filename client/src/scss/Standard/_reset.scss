@@ -1,0 +1,19 @@
+// starter code
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #fafafa;
+}
+
+body {
+    background-color: transparent !important;
+}
+
+// create post
+input[type="file"] {
+    display: none;
+}

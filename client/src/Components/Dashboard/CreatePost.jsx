@@ -1,54 +1,47 @@
 import React, { useState, useEffect } from "react"
 import GetAuth from "../../helper/auth.helper";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import PageBreadcrumb from "../SmallComponents/PageBreadcrumb"
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    profileButtonFollow: {
-        color: "#00ff00",
-        backgroundColor: "white",
-        border: "solid 1px #00ff00",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#22ff22",
-        },
-    }
-
-}));
+import { useHistory } from "react-router-dom"
 const CreatePost = () => {
-    const classes = useStyles();
+    // declarations
+    let history = useHistory();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
     });
     let [open, setOpen] = useState(false);
-    function handleClickCloseSnackBar() {
-        setOpen(false);
-    }
-
-    // setting loading true when we request add new  in database
-    let [isLoading, setLoading] = useState(false);
-    let [user, setUser] = useState({});
-    useEffect(() => {
-        GetAuth()
-            .then((data) => {
-                setUser(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
-
-
     let [allCurrentData, setAllCurrentData] = useState({
         photo: "",
         desc: "",
         postedById: ""
     });
+    let [photo, setPhoto] = useState(null);
+    // setting loading true when we request add new  in database
+    let [isLoading, setLoading] = useState(false);
+    let [user, setUser] = useState({});
+
+    // lifecycle
+    useEffect(() => {
+        setLoading(true);
+        GetAuth()
+            .then((data) => {
+                setUser(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                history.push("/sign");
+                setLoading(false);
+            })
+    }, []);
+
+    // methods
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     function inputChange(event) {
         const { id, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -56,26 +49,28 @@ const CreatePost = () => {
             }
         })
     }
-
-
-    let [photo, setPhoto] = useState(null);
     function fileInputChange(e) {
         setPhoto(e.target.files[0]);
     }
     function SendPost(e) {
+        if (user.id == undefined || user.id == null) {
+            setSnackbarObj({ text: "Please Sign To Create Post", backgroundColor: "red" });
+            setOpen(true);
+            return;
+        }
         if (allCurrentData.desc.length == 0) {
             // notification
             setSnackbarObj({ text: "Post Must Contain description", backgroundColor: "red" });
             setOpen(true);
             return;
         }
-        setLoading(true);
         const urlUploadCloud = "https://api.cloudinary.com/v1_1/asghadge/image/upload";
-        const urlServerUploadPost = "http://localhost:5000/api/post/new";
+        const urlServerUploadPost = "/api/post/new";
         let formdata = new FormData();
         formdata.append("file", photo);
         formdata.append("upload_preset", "social-media");
         formdata.append("cloud_name", "asghadge");
+        setLoading(true);
         fetch(urlUploadCloud,
             {
                 method: "post",
@@ -85,7 +80,7 @@ const CreatePost = () => {
             .then((data) => {
                 let postData = {
                     postedById: user.id,
-                    photo: data.zzz,
+                    photo: data.url,
                     desc: allCurrentData.desc
                 }
                 const requestOptions = {
@@ -117,33 +112,38 @@ const CreatePost = () => {
     }
     return (
         <>
-            <div className="createPostParentMain">
-                {
-                    (isLoading) ?
-                        <>
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
-                            </div>
-                        </>
-                        :
-                        <div className="createPostParent">
-                            <div className="createPostContainer">
-                                <h1 style={{ marginBottom: "2rem" }}>Create Post</h1>
-                                <span className="createPostTexts">Upload Image</span>
-                                <label for="postPic" class="createPostInputFile">
-                                    Upload Image
-                                </label>
-                                <input type="file" id="postPic" className="createPostInputFile" onChange={fileInputChange} accept="image/*">
-                                </input>
-                                <br></br>
-                                <span className="createPostTexts" >Description</span>
-                                <input type="text" className="createPostInputText" id="desc" onChange={inputChange} value={allCurrentData.desc} required></input>
-                                <br></br>
-                                <Button className={classes.profileButtonFollow} type="submit" onClick={SendPost}>SendPost</Button>
-                            </div>
+            <PageBreadcrumb heading="Upload Post" base="Dashboard" url="profile" />
+            <div className="container-fluid px-5">
+                <div className="card">
+                    <div className="card-body row">
+                        <h1 className="heading-auth mt-2 mb-4">Create Post</h1>
+                        <div className="col-12 col-md-6 mb-3 container-center-all">
+                            <span className="text-dash">Share Image</span>
+                            <label for="postPic" class="input-file-dash-create-post">
+                                Upload Image
+                            </label>
+                            <input type="file" id="postPic" className="input-file-dash-create-post" onChange={fileInputChange} accept="image/*">
+                            </input>
                         </div>
-                }
+                        <div className="form-floating mb-3 col-12 col-md-6">
+                            <textarea type="text" className="form-control" id="desc" placeholder="add description" onChange={inputChange} value={allCurrentData.desc} required></textarea>
+                            <label htmlFor="desc" >Description</label>
+                        </div>
+                        {
+                            (isLoading) ?
+                                <>
+                                    <div className="container-center-all">
+                                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                    </div>
+                                </> :
+                                <div className="text-center my-3">
+                                    <button className="btn-success btn" type="submit" onClick={SendPost}>Share Post</button>
+                                </div>
+                        }
+                    </div>
+                </div>
             </div>
+
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />

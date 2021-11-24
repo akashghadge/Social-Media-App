@@ -1,0 +1,34 @@
+.all-user-container {
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.all-user-image {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+}
+
+.active-feed-type {
+    border-bottom: solid 2px $color-main-dark;
+    font-weight: 500;
+}
+
+.heading-home {
+    color: $color-main
+}
+
+.btn-activity {
+    width: 6rem;
+    height: 6rem;
+    margin: 0.5rem !important;
+    border-radius: 0.5rem !important;
+}

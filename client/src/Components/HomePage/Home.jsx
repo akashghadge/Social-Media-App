@@ -8,16 +8,19 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import saveUser from "../../actions/saveUser"
 import ReactLoading from "react-loading"
+import Followersuggestions from "./FollowerSuggestions";
+import Activities from "./Activities";
 
 
 const Home = () => {
     // redux stuff
     const dispatch = useDispatch();
     let [loading, setLoading] = useState(false);
+    let [sortByValue, setSortByValue] = useState("all-sort");
     useEffect(() => {
         let token = localStorage.getItem("token");
         setLoading(true);
-        const urlProfileDetails = "http://localhost:5000/api/dashboard/profile";
+        const urlProfileDetails = "/api/dashboard/profile";
         axios.post(urlProfileDetails, { token: token })
             .then((data) => {
                 // redux storing the user for all usecases
@@ -30,19 +33,51 @@ const Home = () => {
             })
     }, []);
 
+    function sortChange(e) {
+        setSortByValue(e.target.id);
+    }
+
     return (
         <>
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
                     <>
-                        <AllUsers></AllUsers>
-                        <Post></Post>
+                        <div className="row container-center-all">
+                            <div className="col-md-6 col-12">
+                                <AllUsers></AllUsers>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-md-3 col-12 d-none d-md-block">
+                                <Activities></Activities>
+                            </div>
+                            <div className="col-md-6 col-12">
+                                <div className="container-center-all m-0">
+                                    <hr width="95%"></hr>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <h3 className="mx-4 my-2 font-weight-bold">
+                                        Feeds
+                                    </h3>
+                                    <div className="d-flex mx-4 my-2 font-20 cursor-pointer">
+                                        <p onClick={sortChange} id="all-sort" className={`${sortByValue === "all-sort" ? 'active-feed-type' : ''} mx-1`}>All</p>
+                                        <p onClick={sortChange} id="top-sort" className={`${sortByValue === "top-sort" ? 'active-feed-type' : ''} mx-1`}>Top</p>
+                                        <p onClick={sortChange} id="date-sort" className={`${sortByValue === "date-sort" ? 'active-feed-type' : ''} mx-1`}>Recent</p>
+                                    </div>
+                                </div>
+                                <Post sortBy={sortByValue}></Post>
+                            </div>
+                            <div className="col-md-3 col-12 d-none d-md-block">
+                                <Followersuggestions></Followersuggestions>
+                            </div>
+                        </div>
                     </>
             }
         </>
