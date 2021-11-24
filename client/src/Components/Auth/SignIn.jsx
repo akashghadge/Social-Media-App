@@ -4,24 +4,9 @@ import { useHistory, NavLink } from "react-router-dom";
 // mui
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    profileButtonFollow: {
-        color: "#0000ff",
-        backgroundColor: "white",
-        border: "solid 1px #0000ff",
-        margin: "2rem",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#2222ff",
-        },
-    }
-
-}));
+import ForgetPassword from "./ForgetPassword";
 const SignIn = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -38,7 +23,6 @@ const SignIn = () => {
     });
     function inputChange(event) {
         const { id, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -51,7 +35,7 @@ const SignIn = () => {
     function SendUser(event) {
         event.preventDefault()
         setLoading(true);
-        axios.post("http://localhost:5000/api/user/in", {
+        axios.post("/api/user/in", {
             username: allCurrentData.username,
             password: allCurrentData.password
         })
@@ -73,7 +57,16 @@ const SignIn = () => {
                 setOpen(true);
                 setLoading(false);
             })
-
+    }
+    function openSnackBarForgetPassword(flag) {
+        if (flag) {
+            setSnackbarObj({ text: `Link Send Successfully please check email`, backgroundColor: "green" })
+            setOpen(true);
+        }
+        else {
+            setSnackbarObj({ text: `Fail send link please enter valid email`, backgroundColor: "red" })
+            setOpen(true);
+        }
     }
 
     return (
@@ -85,26 +78,34 @@ const SignIn = () => {
                     </div>
                 </> :
                     <>
-                        <div className="container my-5 px-5">
-                            <h1 className="signINUPHead">Sign In</h1>
-                            <div className="row widthSignIn my-4" style={{ wordSpacing: "10px" }}>
-                                <div className="">
-                                    <span className="signINUPText">Username</span>
-                                    <input type="text" className="signINUPInputFields" id="username" placeholder="akash@3" onChange={inputChange} value={allCurrentData.username} required style={{ boxShadow: "none" }}></input>
-                                </div>
-                                <div className="">
-                                    <span className="signINUPText">Password</span>
-                                    <input type="password" className="signINUPInputFields" id="password" onChange={inputChange} value={allCurrentData.password} required style={{ boxShadow: "none" }}></input>
-                                </div>
-                            </div>
-                            <div className="my-3 mx-2">
-                                <Button id="addContactUs" className={classes.profileButtonFollow} onClick={SendUser}>Save</Button>
-                            </div>
+                        <h1 className="heading-auth mt-2 mb-4">Sign In</h1>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="username" placeholder="akash@3" onChange={inputChange} value={allCurrentData.username} required></input>
+                            <label htmlFor="username">Enter Username</label>
                         </div>
-                        <div>
-                            <NavLink className="settingNavLink" to="/forget-password">
-                                Forget Password
-                            </NavLink>
+                        <div className="form-floating mb-3">
+                            <input type="password" className="form-control" id="password" onChange={inputChange} placeholder="*" value={allCurrentData.password} required></input>
+                            <label htmlFor="password">Enter Password</label>
+                        </div>
+                        <div className="d-flex justify-content-center mb-3">
+                            <button className="btn btn-default d-block w-50" onClick={SendUser}>Login</button>
+                        </div>
+                        <p className="modal-button text-center d-block" data-bs-toggle="modal" data-bs-target="#forget-modal">
+                            Forget Password
+                        </p>
+
+                        <div class="modal fade" id="forget-modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Forget Password</h5>
+                                        <button type="button" class="btn-close btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ForgetPassword openSnackBarForgetPassword={openSnackBarForgetPassword}></ForgetPassword>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         {/* snackbar */}

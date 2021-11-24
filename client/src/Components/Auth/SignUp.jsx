@@ -8,23 +8,7 @@ import { useHistory } from "react-router-dom"
 // snack bar code
 import ReactLoading from "react-loading"
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
-const useStyles = makeStyles((theme) => ({
-    profileButtonFollow: {
-        color: "#0000ff",
-        backgroundColor: "white",
-        border: "solid 1px #0000ff",
-        margin: "2rem",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#2222ff",
-        },
-    }
-
-}));
 const SignUp = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -48,7 +32,6 @@ const SignUp = () => {
     });
     function inputChange(event) {
         const { id, value } = event.target
-        // console.log(id, value);
         setAllCurrentData((prev) => {
             return {
                 ...prev,
@@ -73,9 +56,8 @@ const SignUp = () => {
             setOpen(true);
             return;
         }
-        setLoading(true);
         const urlUploadCloud = "https://api.cloudinary.com/v1_1/asghadge/image/upload";
-        const urlServerUploadUser = "http://localhost:5000/api/user/add";
+        const urlServerUploadUser = "/api/user/add";
         let formdata = new FormData();
         formdata.append("file", photo);
         formdata.append("upload_preset", "social-media");
@@ -103,62 +85,70 @@ const SignUp = () => {
                 fetch(urlServerUploadUser, requestOptions)
                     .then((res) => res.json())
                     .then((data) => {
-                        // console.log(data);
-                        setLoading(false);
                         history.push("/match-otp");
                     })
                     .catch((err) => {
-                        // console.log(err)
+                        console.log(err)
                         setSnackbarObj({ text: "Error Occured", backgroundColor: "red" });
                         setOpen(true);
-                        setLoading(false);
                     })
             })
             .catch((err) => {
-                // console.log(err)
+                console.log(err)
                 setSnackbarObj({ text: "Error Occured", backgroundColor: "red" });
                 setOpen(true);
-                setLoading(false);
             })
     }
 
 
     return (
         <>
-            {
-                (isLoading) ?
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
-                    </div> :
-                    <div className="">
-                        <h1 className="signINUPHead">Sign Up</h1>
-                        {/* <span>Profile Photo :</span> */}
-                        <span className="createPostTexts">Upload Image</span>
-                        <label for="ProfilePic" class="signINUPInputFileField">
-                            Upload
-                        </label>
-                        <input type="file" id="ProfilePic" className="signINUPInputFileField" onChange={fileInputChange} accept="image/*">
-                        </input>
-                        <br></br>
-                        <br></br>
-                        <span className="signINUPText" >First name</span>
-                        <input type="text" className="signINUPInputFields" id="fname" placeholder="" value={allCurrentData.fname} onChange={inputChange} required style={{ boxShadow: "none" }}></input>
-                        <br></br>
-                        <span className="signINUPText" >Last name</span>
-                        <input type="text" className="signINUPInputFields" id="lname" placeholder="" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
-                        <br></br>
-                        <span className="signINUPText" style={{ marginRight: "1.4rem" }}>Email</span>
-                        <input type="email" className="signINUPInputFields" id="email" placeholder="you@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
-                        <br></br>
-                        <span className="signINUPText">Username</span>
-                        <input type="text" className="signINUPInputFields" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
-                        <br></br>
-                        <span className="signINUPText">Password</span>
-                        <input type="password" className="signINUPInputFields" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
-                        <br></br>
-                        <Button className={classes.profileButtonFollow} onClick={SendUser}><Save></Save></Button>
+            <div className="container">
+                <h1 className="heading-auth mt-2 mb-4">Sign Up</h1>
+                <div className="row">
+                    <div className="col-12 col-md-6 px-1">
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="fname" placeholder="john" value={allCurrentData.fname} onChange={inputChange} required></input>
+                            <label htmlFor="fname" >First name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="email" className="form-control" id="email" placeholder="john@example.com" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.email} required></input>
+                            <label htmlFor="email" style={{ marginRight: "1.4rem" }}>Email</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="password" className="form-control" placeholder="*" id="password" onChange={inputChange} style={{ boxShadow: "none" }} value={allCurrentData.password} required></input>
+                            <label htmlFor="password">Password</label>
+                        </div>
                     </div>
-            }
+                    <div className="col-12 col-md-6 px-1">
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="lname" placeholder="doe" value={allCurrentData.lname} onChange={inputChange} style={{ boxShadow: "none" }} required></input>
+                            <label htmlFor="lname" >Last name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="username" placeholder="akash@3" style={{ boxShadow: "none" }} onChange={inputChange} value={allCurrentData.username} required></input>
+                            <label htmlFor="username">Username</label>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="ProfilePic" class="upload-box-auth mt-2">
+                                Upload
+                            </label>
+                            <input type="file" id="ProfilePic" className="upload-box-auth" onChange={fileInputChange} accept="image/*">
+                            </input>
+                            <span className="text-sm text-muted">Profile Picture</span>
+                        </div>
+                    </div>
+                </div>
+                {
+                    (isLoading) ?
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                        </div> :
+                        <div className="d-flex justify-content-center mb-3">
+                            <button className="btn btn-default d-block w-50" onClick={SendUser}>Create Account</button>
+                        </div>
+                }
+            </div>
             {/* snackbar */}
             <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
                 text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />

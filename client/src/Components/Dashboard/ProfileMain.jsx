@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ProfileMain = () => {
     const classes = useStyles();
-    // console.log(LoggedUser);
     const dispatch = useDispatch();
     const LoggedUser = useSelector((state) => {
         return state.User;
@@ -54,10 +53,9 @@ const ProfileMain = () => {
     useEffect(() => {
         setLoading(true);
         let token = localStorage.getItem("token");
-        const urlProfileDetails = "http://localhost:5000/api/dashboard/profile";
+        const urlProfileDetails = "/api/dashboard/profile";
         axios.post(urlProfileDetails, { token: token })
             .then((data) => {
-                console.log(data);
                 setAllCurrentData(data.data);
                 setFollowers(data.data.followers);
                 setFollowing(data.data.following);
@@ -76,13 +74,12 @@ const ProfileMain = () => {
     useEffect(() => {
         setLoadingPost(true);
         let token = localStorage.getItem("token");
-        const urlForPosts = "http://localhost:5000/api/post/myposts";
+        const urlForPosts = "/api/post/myposts";
         const payload = {
             token: token
         };
         axios.post(urlForPosts, payload)
             .then((data) => {
-                console.log(data);
                 setMyPosts(data.data);
                 setLoadingPost(false);
             })
@@ -97,44 +94,58 @@ const ProfileMain = () => {
             {
                 isLoading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </> :
-                    <div className="profileParentDiv">
-                        <div className="profileCenterColunm1">
-                            <img className="profilePic" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
+
+                    <div className="row">
+                        <div className="col-12 col-md-6 container-center-all">
+                            <img className="profile-pic-main mt-3 mt-md-0" src={allCurrentData.PicUrl} width="100px" height="100px" alt="profile-pic"></img>
                         </div>
-                        <div className="profileCenterColunm2">
-                            <h1 className="profileUsername">{allCurrentData.username}</h1>
-                            <p className="profileFirstLastName">{allCurrentData.fname} {allCurrentData.lname}</p>
-                            <p className="profileEmail">{allCurrentData.email}</p>
-                            <p className="profileAbout">{allCurrentData.about}</p>
-                            <div className="profileNavlinkContainer">
-                                <a className="profileNavlinkPost" href="#profileMyPostContainer">{myPosts.length} Posts</a>
-                                <NavLink className="profileNavlink" exact to={`/profile/${allCurrentData._id}/followers/`}>
-                                    <h1>{followers.length} Followers</h1>
-                                </NavLink>
-                                <NavLink className="profileNavlink" exact to={`/profile/${allCurrentData._id}/following/`}>
-                                    <h1>{following.length} Following</h1>
-                                </NavLink>
+                        <div className="col-12 col-md-6 p-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="text-center">
+                                        <h3 className="mb-0">{allCurrentData.username}</h3>
+                                        <p className="text-muted mb-0">{allCurrentData.fname} {allCurrentData.lname}</p>
+                                        <p className="">{allCurrentData.email}</p>
+                                        <p className="px-4">{allCurrentData.about}</p>
+                                        <div className="row">
+                                            <a className="col-4 profile-info-stat" href="#profileMyPostContainer"><span> {myPosts.length}</span> Posts</a>
+                                            <NavLink className="col-4 profile-info-stat" exact to={`/profile/${allCurrentData._id}/followers/`}>
+                                                <p>
+                                                    <span>
+                                                        {followers.length}
+                                                    </span>
+                                                    Followers
+                                                </p>
+                                            </NavLink>
+                                            <NavLink className="col-4 profile-info-stat" exact to={`/profile/${allCurrentData._id}/following/`}>
+                                                <p>
+                                                    <span> {following.length}</span>
+                                                    Following
+                                                </p>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
             }
-            <hr style={{ width: "90%", margin: "auto", marginBottom: "1rem", marginTop: "1rem" }}></hr>
+            {/* post */}
             <div id="profileMyPostContainer">
-                {/* post */}
                 {
                     loadingPost ?
                         <>
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <div className="container-center-all">
                                 <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                             </div>
                         </>
                         :
                         myPosts.map((val, i) => {
-                            return <MyPost val={val} key={i} handleChangeInPost={handleChangeInPost}></MyPost>
+                            return <MyPost val={val} key={val._id} handleChangeInPost={handleChangeInPost}></MyPost>
                         })
                 }
             </div>

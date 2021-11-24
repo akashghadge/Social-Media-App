@@ -4,23 +4,10 @@ import { useParams } from "react-router-dom"
 // mui
 // snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    forgetPasswordButton: {
-        color: "#00ff00",
-        backgroundColor: "white",
-        border: "solid 1px #00ff00",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#22ff22",
-        },
-    }
+import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb";
 
-}));
 const ResetPassword = () => {
-    const classes = useStyles();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
@@ -30,6 +17,8 @@ const ResetPassword = () => {
     function handleClickCloseSnackBar() {
         setOpen(false);
     }
+
+
     let { token } = useParams();
     let [password, setPassword] = useState("");
     function inputChange(e) {
@@ -41,14 +30,13 @@ const ResetPassword = () => {
             return setOpen(true);
         }
         setLoading(true);
-        const urlForReset = "http://localhost:5000/api/mail/reset-password/";
+        const urlForReset = "/api/mail/reset-password/";
         const sendData = {
             token: token,
             newPassword: password
         };
         axios.post(urlForReset, sendData)
             .then((data) => {
-                // console.log(data);
                 setSnackbarObj({ text: "Email is Sent", backgroundColor: "green" });
                 setOpen(true);
                 setLoading(false);
@@ -59,32 +47,39 @@ const ResetPassword = () => {
                 setLoading(false);
             });
     }
+    
     return (
         <>
-            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Enter New Password</h1>
+            <Pagebreadcrumb heading="Reset Password" base="Home" url=""></Pagebreadcrumb>
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="cotainer-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </> :
                     <>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">Enter New Password</span>
-                                <input type="password" className="forgetPasswordInputField" value={password} onChange={inputChange}></input>
-                                <br></br>
-                                <div style={{ textAlign: "center", marginTop: "3rem" }}>
-                                    <Button className={classes.forgetPasswordButton} onClick={changePassword}>Chnage Password</Button>
+                        <div className="container-fluid px-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h1 className="heading-auth mt-2 mb-4">Set New Password</h1>
+                                    <div className="p-4">
+                                        <div className="form-floating mb-3">
+                                            <input type="password" id="reset-password" placeholder="temp" className="form-control" value={password} onChange={inputChange}></input>
+                                            <label htmlFor="reset-password">Enter New Password</label>
+                                        </div>
+                                        <div className="text-center mt-3">
+                                            <button className="btn btn-outline-success" onClick={changePassword}>Set Password</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {/* snackbar */}
-                        <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
-                            text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
                     </>
             }
+            {/* snackbar */}
+            <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
+                text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
         </>
     )
 }

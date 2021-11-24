@@ -12,7 +12,7 @@ const io = socketio(server, {
     cors: {
         origins: ["http://localhost:3000/"]
     }
-})
+}) 
 
 // must needed packages
 const cros = require("cors");
@@ -64,8 +64,6 @@ app.get("*", (req, res) => {
 })
 
 
-
-
 server.listen(port, () => {
-    console.log("Server is listening on port :", port);
+    console.log("Server is listening on port ", port);
 })

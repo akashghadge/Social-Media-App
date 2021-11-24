@@ -95,7 +95,7 @@ router.post("/mail/forget-password", async (req, res) => {
                         const dataForEmail = {
                             subject: "Password Reset Request",
                             text: `<p>Click link to reset your password</p>
-                            <a href="http://localhost:3000/reset-password/${token}">here</a>
+                            <a href="http://social-media-app-akash.herokuapp.com/reset-password/${token}">here</a>
                             `  }
 
                         SendMailGen(email, dataForEmail)
@@ -138,6 +138,16 @@ router.post("/mail/reset-password", async (req, res) => {
                     console.log(err);
                     res.status(500).json(err);
                 })
+        })
+})
+
+router.get("/mail/test", async (req, res) => {
+    SendMail("asghadge6@gmail.com")
+        .then((data) => {
+            res.status(200).json(data);
+        })
+        .catch((err) => {
+            res.status(500).json(err);
         })
 })
 module.exports = router;

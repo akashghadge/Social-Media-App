@@ -40,7 +40,7 @@ const SinglePost = (props) => {
             setSnackbarObj(ErrorObject);
             return setOpen(true);
         }
-        const urlAddLike = "http://localhost:5000/api/post/like/add";
+        const urlAddLike = "/api/post/like/add";
         let token = localStorage.getItem("token");
 
         const body = {
@@ -74,7 +74,7 @@ const SinglePost = (props) => {
             setSnackbarObj(ErrorObject);
             return setOpen(true);
         }
-        const urlRemoveLike = "http://localhost:5000/api/post/like/remove";
+        const urlRemoveLike = "/api/post/like/remove";
         let token = localStorage.getItem("token");
         const body = {
             token: token,
@@ -102,7 +102,7 @@ const SinglePost = (props) => {
     function onCommentButton(e, postId) {
         setCommentLoading(true);
         setCommentButton(!commentButton);
-        const urlComment = "http://localhost:5000/api/post/comment";
+        const urlComment = "/api/post/comment";
         const body = {
             idOfPost: postId
         };
@@ -128,7 +128,7 @@ const SinglePost = (props) => {
 
     // send comment
     function addNewComment(e, idOfPost) {
-        const urlForAddNewComment = "http://localhost:5000/api/post/comment/add";
+        const urlForAddNewComment = "/api/post/comment/add";
         let token = localStorage.getItem("token");
         const body =
         {
@@ -156,10 +156,9 @@ const SinglePost = (props) => {
     }
     // deletee the post
     function deletePost(e) {
-        const urlForDeletePost = `http://localhost:5000/api/post/delete/${props.val._id}`
+        const urlForDeletePost = `/api/post/delete/${props.val._id}`
         axios.post(urlForDeletePost, {})
             .then((data) => {
-                console.log(data);
                 setFlag(++flagForReq);
                 setSnackbarObj(
                     {
@@ -195,7 +194,7 @@ const SinglePost = (props) => {
             idOfComment: idOfComment,
             idOfCommentor: LoggedUser._id
         }
-        const urlForRemoveComment = "http://localhost:5000/api/post/comment/remove";
+        const urlForRemoveComment = "/api/post/comment/remove";
         axios.post(urlForRemoveComment, payload)
             .then((data) => {
                 setFlag(++flagForReq);
@@ -214,86 +213,118 @@ const SinglePost = (props) => {
     }
     return (
         <>
-            <div className="postContainer">
-                <div className="singlePost">
-                    <div className="singlePostHeading">
-                        <div className="singlePostHeadingColunm1">
-                            <img src={props.val.postedBy.PicUrl} className="singlePostUserPic"></img>
+            <div className="container-center-all mx-3 my-4">
+                <div className="card b-radius-card">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-3 container-center-all">
+                                <img src={props.val.postedBy.PicUrl} className="user-post-small-pic"></img>
+                            </div>
+                            <div className="col-6 d-flex align-item-center">
+                                <div className="text-truncate">
+                                    <NavLink className="navlink-post-profile" exact to={`profile/${props.val.postedBy._id}`}>
+                                        <h3 className="navlink-post-profile mb-0">{props.val.postedBy.username}</h3>
+                                    </NavLink>
+                                    <p className="full-name-post-profile">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
+                                </div>
+                            </div>
+                            <div className="col-3 container-center-all">
+                                <p className="date-post">{moment(props.val.created).format("H:mm a, MMMM Do YYYY")}</p>
+                            </div>
                         </div>
-                        <div className="singlePostHeadingColunm2">
-                            <NavLink className="singlePostUsername" exact to={`profile/${props.val.postedBy._id}`}>
-                                <h3 className="singlePostUsername">{props.val.postedBy.username}</h3>
-                            </NavLink>
-                            <p className="singlePostName">{`${props.val.postedBy.fname} ${props.val.postedBy.lname}`}</p>
+                        {/* <hr></hr> */}
+                        <div className="container-center-all">
+                            <img src={props.val.photo} className="image-post" alt="profile-pic"></img>
                         </div>
-                    </div>
-                    <hr></hr>
-                    <img src={props.val.photo} className="singlePostImage" width="100px" height="100px" alt="profile-pic"></img>
-                    <h3 className="singlePostDesc">{props.val.desc}</h3>
-                    {/* do in production */}
-                    {/* created time */}
-                    <p className="singlePostDate">{moment(props.val.created).format("H:mm a, MMMM Do YYYY")}</p>
-                    {/* like section */}
-                    {
-                        (props.val.likes.includes(LoggedUser._id))
-                            ?
-                            <Button onClick={(e) => { removeLike(e, props.val._id) }}> <Favorite style={{ color: "red" }}></Favorite>:{props.val.likes.length}</Button> :
-                            <Button onClick={(e) => { addLike(e, props.val._id) }}><FavoriteBorder></FavoriteBorder> :{props.val.likes.length}</Button>
-                    }
-                    {/* comment section */}
-                    {
-                        <Button onClick={(e) => {
-                            onCommentButton(e, props.val._id)
-                        }}> <ChatBubbleOutline></ChatBubbleOutline>: {props.val.comments.length}</Button>
-                    }
-                    {/* create comment */}
-                    {
-                        <Button onClick={(e) => {
-                            createCommentButton(e, props.val._id);
-                        }}><AddComment></AddComment></Button>
-                    }
-                    <div className="singlePostCommentsCollection">
+                        <div className="image-post m-0">
+                            <p className="desc-post text-muted">{props.val.desc}</p>
+                        </div>
+                        {/* do in production */}
+                        {/* like section */}
                         {
+                            (props.val.likes.includes(LoggedUser._id))
+                                ?
+                                <Button onClick={(e) => { removeLike(e, props.val._id) }}>
+                                    <Favorite style={{ color: "red" }}></Favorite>
+                                    <span className="mx-2">
+                                        {props.val.likes.length}
+                                    </span>
+                                </Button> :
+                                <Button onClick={(e) => { addLike(e, props.val._id) }}>
+                                    <FavoriteBorder></FavoriteBorder>                            <span className="mx-2">
+                                        {props.val.likes.length}
+                                    </span>
+                                </Button>
+                        }
+                        {/* comment section */}
+                        {
+                            <Button onClick={(e) => { onCommentButton(e, props.val._id) }}>
+                                <ChatBubbleOutline></ChatBubbleOutline>
+                                <span className="mx-2">
+                                    {props.val.comments.length}
+                                </span>
+                            </Button>
+                        }
+                        {/* create comment */}
+                        {
+                            <Button onClick={(e) => {
+                                createCommentButton(e, props.val._id);
+                            }}><AddComment></AddComment></Button>
+                        }
+                        <div className="ml-3">
+                            {
 
-                            (commentButton) ?
-                                commentLoading ? <>
-                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                        <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
-                                    </div>
-                                </> :
-                                    commentInfo.map((comment, i) => {
-                                        return (
-                                            <>
-                                                <div className="singlePostSingleComment">
-                                                    <h3 className="singlePostCommentText">{comment.text}</h3>
-                                                    <NavLink className="singlePostCommentUsername" exact to={`profile/${comment.postedBy._id}`}>
-                                                        <p>{comment.postedBy.username}</p>
-                                                    </NavLink>
-                                                    <p className="singlePostCommentDate">{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
-                                                    <Button onClick={(e) => {
-                                                        deleteComment(e, comment._id, comment.postedBy._id)
-                                                    }}><Delete style={{ color: "red", fontSize: "0.8rem" }}></Delete></Button>
-                                                </div>
-                                            </>
-                                        )
-                                    })
-                                : null
-                        }
+                                (commentButton) ?
+                                    commentLoading ? <>
+                                        <div className="container-center-all">
+                                            <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
+                                        </div>
+                                    </> :
+                                        commentInfo.map((comment, i) => {
+                                            return (
+                                                <>
+                                                    <div className="p-1 post-box-content-limiter">
+                                                        <h6 className="comment-text">{comment.text}</h6>
+                                                        <div className="row justify-content-between">
+                                                            <div className="col">
+                                                                <NavLink className="comment-username text-muted" exact to={`profile/${comment.postedBy._id}`}>
+                                                                    <p className="m-0">{comment.postedBy.username}</p>
+                                                                </NavLink>
+                                                                <p className="date-post text-muted m-0">{moment(comment.created).format("H:mm a, MMMM Do YYYY")}</p>
+                                                            </div>
+                                                            <div className="col">
+                                                                {
+                                                                    LoggedUser._id === comment.postedBy._id ?
+                                                                        <button className="btn" onClick={(e) => {
+                                                                            deleteComment(e, comment._id, comment.postedBy._id)
+                                                                        }}>
+                                                                            <Delete style={{ color: "red", fontSize: "0.8rem" }}></Delete>
+                                                                        </button> : null
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            )
+                                        })
+                                    : null
+                            }
+                        </div>
+                        <div className="comment-box">
+                            {
+                                (isCreateCommentOn) ?
+                                    <>
+                                        <input className="comment-input-field" type="text" onChange={newCommentHandle} value={newComment}></input>
+                                        <Button onClick={(e) => {
+                                            addNewComment(e, props.val._id);
+                                        }} ><Send></Send></Button>
+                                    </>
+                                    : null
+                            }
+                        </div>
+                        {/* delete post */}
+                        <button className="btn btn-outline-danger mt-3" style={{ width: "100%" }} onClick={deletePost}>Delete</button>
                     </div>
-                    <div className="singlePostCommentBox">
-                        {
-                            (isCreateCommentOn) ?
-                                <>
-                                    <input className="singlePostCommentInput" type="text" onChange={newCommentHandle} value={newComment}></input>
-                                    <Button onClick={(e) => {
-                                        addNewComment(e, props.val._id);
-                                    }} ><Send></Send></Button>
-                                </>
-                                : null
-                        }
-                    </div>
-                    {/* delete post */}
-                    <button className="deletePostMyPosts" onClick={deletePost}>Delete</button>
                 </div>
             </div>
             {/* snackbar */}

@@ -1,88 +1,53 @@
 import React, { useState } from "react"
 import axios from 'axios';
-// mui
-// snack bar code
-import SnackBarCustom from "../SmallComponents/SnackBarCustom"
-import { Button } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 // loading effect 
 import ReactLoading from "react-loading"
-const useStyles = makeStyles((theme) => ({
-    forgetPasswordButton: {
-        color: "#00ff00",
-        backgroundColor: "white",
-        border: "solid 1px #00ff00",
-        '&:hover': {
-            color: "white",
-            backgroundColor: "#22ff22",
-        },
-    }
 
-}));
-const ForgetPassword = () => {
+const ForgetPassword = (props) => {
+    // loading state
     let [loading, setLoading] = useState(false);
-    const classes = useStyles();
-    let [snackbarObj, setSnackbarObj] = useState({
-        text: "hello world",
-        backgroundColor: "black"
-    });
-    let [open, setOpen] = useState(false);
-    function handleClickCloseSnackBar() {
-        setOpen(false);
-    }
     let [email, setEmail] = useState("");
     function changeEmail(e) {
         setEmail(e.target.value);
-        // console.log(email);
     }
     function sendResetLink(e) {
         setLoading(true);
-        const urlSendResetLink = "http://localhost:5000/api/mail/forget-password";
+        const urlSendResetLink = "/api/mail/forget-password";
         axios
             .post(urlSendResetLink, {
                 email: email
             })
             .then((data) => {
-                // console.log(data);
-                setSnackbarObj({ text: "mail send succeefully", backgroundColor: "green" });
-                // loading effect
+                props.openSnackBarForgetPassword(1);
                 setLoading(false);
-                setOpen(true);
             })
             .catch((err) => {
-                // console.log(err);
-                setSnackbarObj({ text: "mail send failed", backgroundColor: "red" });
-                // loading effect
+                props.openSnackBarForgetPassword(0);
                 setLoading(false);
-                setOpen(true);
             })
     }
     return (
         <>
-            <h1 style={{ margin: "1rem" }} className="settingMainHeading">Enter Your Email</h1>
             {
                 loading ?
                     <>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <div className="container-center-all">
                             <ReactLoading type={"bubbles"} color={"black"} height={"10%"} width={"10%"}></ReactLoading>
                         </div>
                     </>
                     :
                     <>
-                        <div className="settingContainer">
-                            <div className="settingContainerChild">
-                                <span className="settingText">Please Enter Your Email : </span>
-                                <input type="email" className="forgetPasswordInputField" value={email} onChange={changeEmail}></input>
-                                <br></br>
-                                <br></br>
-                                <div style={{ textAlign: "center" }}>
-                                    <Button className={classes.forgetPasswordButton} onClick={sendResetLink}>Reset Password</Button>
+                        <div className="d-flex justify-content-center">
+                            <div className="py-4">
+                                <div className="form-floating">
+                                    <input id="forget-password" type="email" className="form-control" placeholder="john@gmail.com" value={email} onChange={changeEmail}></input>
+                                    <label htmlFor="forget-password">Please Enter Email </label>
+                                </div>
+                                <div className="text-center mt-3">
+                                    <button className="btn btn-outline-success" onClick={sendResetLink}>Send Link</button>
                                 </div>
                             </div>
                         </div>
-                        {/* snackbar */}
-                        <SnackBarCustom vertical="top" horizontal="right" backgroundColor={snackbarObj.backgroundColor} color="white" open={open}
-                            text={snackbarObj.text} handleClickCloseSnackBar={handleClickCloseSnackBar} />
                     </>
             }
         </>

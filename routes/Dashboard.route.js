@@ -55,7 +55,19 @@ router.post("/edit", (req, res) => {
         })
 })
 
-
+router.post("/edit-dp", (req, res) => {
+    const { id, update } = req.body;
+    console.log(req.body);
+    User.findByIdAndUpdate(id, update)
+        .then((data) => {
+            console.log(data);
+            res.status(200).json(data);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(data);
+        })
+})
 
 
 

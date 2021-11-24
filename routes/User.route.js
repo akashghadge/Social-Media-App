@@ -1,81 +1,76 @@
 const { Router } = require("express");
 const router = Router();
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
 //models and middlewares  
 const User = require("../models/User.model");
 const TempUser = require("../models/TempUser.model");
-const SendMail = require("../middleware/SendMail");
+const { SendMail } = require("../middleware/SendMail");
 
 const { handleErrors } = require("../helpers/handleErrors");
 
-// user addding route
-router.post("/add", (req, res) => {
-    // geting data from request
-    console.log(req.body);
-    const fname = req.body.fname;
-    const lname = req.body.lname;
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = req.body.password;
-    const PicUrl = req.body.PicUrl;
-
-    // finding for exiting user if not add it
+async function isUserExists(email) {
     try {
-        User.find({ email: email })
-            .then(async (data) => {
-                // if user is exists in user database then return 404 error message
-                if (data.length != 0) {
-                    res.status(404).json("user already exists!!");
+        let user = await User.find({ email: email });
+        if (user.length !== 0)
+            return true;
+        return false;
+    }
+    catch (err) {
+        throw new Error(err)
+    }
+}
+
+async function isTempUserExists(email) {
+    try {
+        let user = await TempUser.find({ email: email });
+        if (user.length !== 0)
+            return true;
+        return false;
+    }
+    catch (err) {
+        throw new Error(err)
+    }
+}
+
+router.post("/add", async (req, res) => {
+    const { fname, lname, email, username, password } = req.body;
+    let PicUrl = req.body.PicUrl;
+
+    try {
+        if (await isUserExists(email)) {
+            return res.status(409).json("user already exits !!");
+        }
+        if (await isTempUserExists(email)) {
+            return res.status(409).json("temp user already exists !!");
+        }
+
+        SendMail(email)
+            .then(() => {
+                if (PicUrl == "") {
+                    PicUrl = "http://social-media-app-akash.herokuapp.com/public/images/blank.png";
                 }
-                else {
-                    TempUser.find({ email: email })
-                        .then((dataTemp) => {
-                            // check in temp database if user in temp then also return error message
-                            if (dataTemp.length != 0) {
-                                console.log("temp user already exists !!");
-                                res.status(404).json("temp user already exists !!");
-                            }
-                            else {
-                                // if user not in main and temp database then only create temp user and send mail
-                                SendMail(email)
-                                    .then((sendData) => {
-                                        let newTempUser = new TempUser({
-                                            fname: fname,
-                                            lname: lname,
-                                            email: email,
-                                            username: username,
-                                            password: password,
-                                            PicUrl: PicUrl,
-                                            createdAt: Date.now()
-                                        });
-                                        newTempUser.save()
-                                            .then((data) => {
-                                                console.log("temp user saved succefully");
-                                            })
-                                            .catch((err) => {
-                                                console.log("temp user is not created ", err);
-                                            })
-                                        res.status(200).json("otp send succefully");
-                                    })
-                                    .catch((err) => {
-                                        res.status(404).json("otp not send");
-                                    })
-                            }
-                        })
-                        .catch((err) => {
-                            res.status(500).json("server error for finding temp user");
-                        })
-                }
+                let newTempUser = new TempUser({
+                    fname: fname,
+                    lname: lname,
+                    email: email,
+                    username: username,
+                    password: password,
+                    PicUrl: PicUrl,
+                    createdAt: Date.now()
+                });
+                newTempUser.save()
+                    .catch((err) => {
+                        res.status(500).json("temp user is not created");
+                    })
+                res.status(200).json("otp send succefully");
             })
             .catch((err) => {
-                console.log(err);
-                res.status(500).json("server error for finding user");
+                res.status(500).json("OTP not send");
             })
     } catch (err) {
         let error = handleErrors(err);;
-        console.log(error);
         res.status(404).json(error);
     }
 
@@ -83,34 +78,23 @@ router.post("/add", (req, res) => {
 
 
 router.post("/in", async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    // getting user data
+    const { username, password } = req.body;
     const user = await User.findOne({ username: username });
     if (user) {
         const validPassword = await bcrypt.compare(password, user.password);
         if (validPassword) {
-            /**
-             *issuesing the token
-             */
             let payload = {
                 username: username,
                 id: user._id
             }
 
-            //create the access token with the shorter lifespan
-            let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 900 });
-            console.log(username, "has sign in");
-            res.status(200).json({
-                "jwt": accessToken
-            })
+            let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 });
+            res.status(200).json({ "jwt": accessToken })
         }
         else {
-            console.log("invalid password");
             res.status(400).json("invalid password");
         }
     } else {
-        console.log("invalid username");
         res.status(401).json("invalid username");
     }
 })
@@ -121,26 +105,13 @@ router.post("/public-profile", async (req, res) => {
     try {
         let publicUser = await User.findById(id).select("-password -expireToken -resetToken -email -followers -following");
         if (!publicUser) {
-            return res.status(400).json("user not found");
+            return res.status(404).json("user not found");
         }
-        console.log(publicUser);
         res.status(200).json(publicUser);
     }
     catch (err) {
-        console.log(err);
         res.status(500).json("internal server error")
     }
-})
-
-
-// TODO delete this part later
-router.post("/all", async (req, res) => {
-    let data = await User.find({});
-    res.status(200).json(data);
-})
-router.get("/allUsers", async (req, res) => {
-    let data = await User.find({});
-    res.status(200).json(data);
 })
 
 router.get("/all-users-homepage", async (req, res) => {
