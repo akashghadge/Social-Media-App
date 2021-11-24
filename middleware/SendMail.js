@@ -62,7 +62,7 @@ const SendMailGen = (toMail, dataTosend) => {
         (function (resolve, reject) {
             const transport = mailer.createTransport(
                 {
-                    service: "gmail",
+                    service: "hotmail",
                     auth: {
                         user: process.env.E_USER,
                         pass: process.env.E_PASS
