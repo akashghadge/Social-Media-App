@@ -19,7 +19,7 @@ const SendMail = (toMail) => {
 
             const transport = mailer.createTransport(
                 {
-                    service: "gmail",
+                    service: "hotmail",
                     auth: {
                         user: process.env.E_USER,
                         pass: process.env.E_PASS

@@ -140,4 +140,20 @@ router.post("/mail/reset-password", async (req, res) => {
                 })
         })
 })
+
+router.get("/mail/test", async (req, res) => {
+    const dataForEmail = {
+        subject: "Password Reset Request",
+        text: `<p>Click link to reset your password</p>
+        <a href="http://social-media-app-akash.herokuapp.com/reset-password/akash">here</a>
+        `  }
+
+    SendMail("asghadge6@gmail.com", dataForEmail)
+        .then((data) => {
+            res.status(200).json(data);
+        })
+        .catch((err) => {
+            res.status(500).json(err);
+        })
+})
 module.exports = router;
