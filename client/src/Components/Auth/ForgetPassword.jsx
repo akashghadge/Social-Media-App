@@ -1,7 +1,6 @@
 import React, { useState } from "react"
-import axios from 'axios';
-// loading effect 
 import ReactLoading from "react-loading"
+import http from "../../helper/http";
 
 const ForgetPassword = (props) => {
     // loading state
@@ -12,11 +11,10 @@ const ForgetPassword = (props) => {
     }
     function sendResetLink(e) {
         setLoading(true);
-        const urlSendResetLink = "/api/mail/forget-password";
-        axios
-            .post(urlSendResetLink, {
-                email: email
-            })
+        const body = {
+            email: email
+        };
+        http.RequestForgetPassword(body)
             .then((data) => {
                 props.openSnackBarForgetPassword(1);
                 setLoading(false);

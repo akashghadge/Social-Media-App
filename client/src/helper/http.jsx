@@ -26,6 +26,9 @@ export default {
     async RemoveComment(body) {
         return axios.post(this.baseURL + "api/post/comment/remove", body);
     },
+    async LogIn(body) {
+        return axios.post(this.baseURL + "api/user/in", body);
+    },
     async CreateUser(body) {
         return axios.post(this.baseURL + "api/user/create", body);
     },
@@ -34,5 +37,14 @@ export default {
             method: "post",
             body: formdata
         })
+    },
+    async RequestForgetPassword(body) {
+        return axios.post(this.baseURL + "api/mail/forget-password", body);
+    },
+    async MatchOTP(body) {
+        return axios.post(this.baseURL + "api/mail/verification", body);
+    },
+    async changePasswordAPI(body) {
+        return axios.post(this.baseURL + "api/mail/reset-password", body);
     }
 }
