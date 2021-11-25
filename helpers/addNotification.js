@@ -11,10 +11,10 @@ const addNote = (obj) => {
             });
             newNote.save()
                 .then((data) => {
-                    console.log(data);
+                    resolve(data)
                 })
                 .catch((err) => {
-                    console.log(err);
+                    reject(err)
                 })
         })
 }
