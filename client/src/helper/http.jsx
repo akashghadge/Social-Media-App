@@ -1,4 +1,3 @@
-import { AddComment } from "@material-ui/icons";
 import axios from "axios";
 
 export default {
@@ -26,5 +25,14 @@ export default {
     },
     async RemoveComment(body) {
         return axios.post(this.baseURL + "api/post/comment/remove", body);
+    },
+    async CreateUser(body) {
+        return axios.post(this.baseURL + "api/user/create", body);
+    },
+    async PostImage(formdata) {
+        return fetch("https://api.cloudinary.com/v1_1/asghadge/image/upload", {
+            method: "post",
+            body: formdata
+        })
     }
 }
