@@ -75,6 +75,7 @@ const SignUp = () => {
     function SendUser() {
         if (isError())
             return;
+        setLoading(true);
         let formdata = getFormData();
         http.PostImage(formdata)
             .then((res) => res.json())
@@ -87,11 +88,13 @@ const SignUp = () => {
                     .catch(() => {
                         setSnackbarObj({ text: "Error Occured", backgroundColor: "red" });
                         setOpen(true);
+                        setLoading(false);
                     })
             })
             .catch(() => {
                 setSnackbarObj({ text: "Error Occured", backgroundColor: "red" });
                 setOpen(true);
+                setLoading(false);
             })
     }
 
