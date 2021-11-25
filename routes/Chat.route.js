@@ -1,20 +1,18 @@
+//models and middlewares  
 const { Router } = require("express");
 const Conversation = require("../models/Conversation.model");
 const router = Router();
-
-//models and middlewares  
 const User = require("../models/User.model");
 
 router.post("/user-list", async (req, res) => {
     const { id } = req.body;
-    User.find({ _id: { $ne: id } }).select("username _id")
-        .then((data) => {
-            console.log(data);
-            res.status(200).json(data);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+    try {
+        let data = await User.find({ _id: { $ne: id } }).select("username _id");
+        res.status(200).json(data);
+    }
+    catch (err) {
+        res.status(500).json({ m: "Error Occured" });
+    }
 })
 
 router.post("/prev-messages", async (req, res) => {
@@ -24,18 +22,18 @@ router.post("/prev-messages", async (req, res) => {
         RecId: RecId
     };
     try {
-        let data = await Conversation.findOne(filter).populate("SenderId", "username").populate("RecId", "username").populate({
-            path: "chats",
-            populate: {
-                path: "sender",
-                select: "username"
-            }
-        }).exec();
-        // console.log(data);
+        let data = await Conversation.findOne(filter)
+            .populate("SenderId", "username").populate("RecId", "username")
+            .populate({
+                path: "chats",
+                populate: {
+                    path: "sender",
+                    select: "username"
+                }
+            }).exec();
         res.status(200).json(data);
     }
     catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 })

@@ -47,16 +47,6 @@ router.post("/mail/verification", (req, res) => {
         })
 })
 
-//for resending the mail 
-router.post("/mail/resend", async (req, res) => {
-    const email = req.body.email;
-    SendMail(email).then(() => {
-        res.status(200).json("mail send");
-    }).catchl(() => {
-        res.status(404).json("error occured");
-    })
-})
-
 // sending random token url for user to update password
 router.post("/mail/forget-password", async (req, res) => {
     const { email } = req.body;
