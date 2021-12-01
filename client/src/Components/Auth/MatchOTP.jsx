@@ -1,10 +1,9 @@
 import React, { useState } from "react"
-// snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb"
-// loading and navigation
 import ReactLoading from "react-loading"
-import { NavLink } from "react-router-dom"
+import http from "../../helper/http"
+
 const MatchOTP = () => {
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
@@ -12,13 +11,13 @@ const MatchOTP = () => {
     });
     let [loading, setLoading] = useState(false);
     let [open, setOpen] = useState(false);
-    function handleClickCloseSnackBar() {
-        setOpen(false);
-    }
     let [allCurrentData, setAllCurrentData] = useState({
         email: "",
         otp: 0,
     });
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     function inputChange(event) {
         const { name, value } = event.target
         setAllCurrentData((prev) => {
@@ -28,16 +27,9 @@ const MatchOTP = () => {
             }
         })
     }
-    function sendOtp(event) {
+    function sendOtp() {
         setLoading(true);
-        const urlOtpMatch = "/api/mail/verification";
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(allCurrentData)
-        };
-        fetch(urlOtpMatch, requestOptions)
-            .then((res) => res.json())
+        http.MatchOTP(allCurrentData)
             .then((data) => {
                 let c = "red";
                 if (data.flag) {
@@ -47,7 +39,7 @@ const MatchOTP = () => {
                 setOpen(true);
                 setLoading(false);
             })
-            .catch((err) => {
+            .catch(() => {
                 setSnackbarObj({ text: "OTP mismatch", backgroundColor: "red" });
                 setLoading(false);
                 setOpen(true);

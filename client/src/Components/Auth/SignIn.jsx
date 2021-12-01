@@ -1,26 +1,27 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { useHistory, NavLink } from "react-router-dom";
-// mui
-// snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
 import ForgetPassword from "./ForgetPassword";
+import http from "../../helper/http";
 const SignIn = () => {
+    let history = useHistory();
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
     });
     let [loading, setLoading] = useState(false);
     let [open, setOpen] = useState(false);
-    function handleClickCloseSnackBar() {
-        setOpen(false);
-    }
-    let history = useHistory();
     let [allCurrentData, setAllCurrentData] = useState({
         username: "",
         password: ""
     });
+
+
+    function handleClickCloseSnackBar() {
+        setOpen(false);
+    }
     function inputChange(event) {
         const { id, value } = event.target
         setAllCurrentData((prev) => {
@@ -30,22 +31,15 @@ const SignIn = () => {
             }
         })
     }
-
-
     function SendUser(event) {
         event.preventDefault()
         setLoading(true);
-        axios.post("/api/user/in", {
-            username: allCurrentData.username,
-            password: allCurrentData.password
-        })
+
+        http.LogIn(allCurrentData)
             .then((data) => {
                 let token = data.data.jwt;
                 localStorage.setItem("token", token);
-                setAllCurrentData({
-                    username: "",
-                    password: ""
-                })
+                setAllCurrentData({ username: "", password: "" })
                 setSnackbarObj({ text: `hello ${allCurrentData.username}`, backgroundColor: "green" })
                 setOpen(true);
                 setLoading(false);

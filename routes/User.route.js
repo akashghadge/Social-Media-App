@@ -9,6 +9,7 @@ const TempUser = require("../models/TempUser.model");
 const { SendMail } = require("../middleware/SendMail");
 
 const { handleErrors } = require("../helpers/handleErrors");
+const blankImage = "http://social-media-app-akash.herokuapp.com/public/images/blank.png";
 
 async function isUserExists(email) {
     try {
@@ -34,49 +35,73 @@ async function isTempUserExists(email) {
     }
 }
 
-router.post("/add", async (req, res) => {
-    const { fname, lname, email, username, password } = req.body;
-    let PicUrl = req.body.PicUrl;
+// router.post("/add", async (req, res) => {
+//     const { fname, lname, email, username, password } = req.body;
+//     let PicUrl = req.body.PicUrl;
 
+//     try {
+//         if (await isUserExists(email)) {
+//             return res.status(409).json("user already exits !!");
+//         }
+//         if (await isTempUserExists(email)) {
+//             return res.status(409).json("temp user already exists !!");
+//         }
+
+//         SendMail(email)
+//             .then(() => {
+//                 if (PicUrl == "") {
+//                     PicUrl = "http://social-media-app-akash.herokuapp.com/public/images/blank.png";
+//                 }
+//                 let newTempUser = new TempUser({
+//                     fname: fname,
+//                     lname: lname,
+//                     email: email,
+//                     username: username,
+//                     password: password,
+//                     PicUrl: PicUrl,
+//                     createdAt: Date.now()
+//                 });
+//                 newTempUser.save()
+//                     .catch((err) => {
+//                         res.status(500).json("temp user is not created");
+//                     })
+//                 res.status(200).json("otp send succefully");
+//             })
+//             .catch((err) => {
+//                 res.status(500).json("OTP not send");
+//             })
+//     } catch (err) {
+//         let error = handleErrors(err);;
+//         res.status(404).json(error);
+//     }
+
+// })
+
+
+router.post("/create", async (req, res) => {
+    const { fname, lname, email, username, password } = req.body;
+    const PicUrl = req.body.PicUrl == "" ? blankImage : req.body.PicUrl;
     try {
         if (await isUserExists(email)) {
             return res.status(409).json("user already exits !!");
         }
-        if (await isTempUserExists(email)) {
-            return res.status(409).json("temp user already exists !!");
-        }
-
-        SendMail(email)
-            .then(() => {
-                if (PicUrl == "") {
-                    PicUrl = "http://social-media-app-akash.herokuapp.com/public/images/blank.png";
-                }
-                let newTempUser = new TempUser({
-                    fname: fname,
-                    lname: lname,
-                    email: email,
-                    username: username,
-                    password: password,
-                    PicUrl: PicUrl,
-                    createdAt: Date.now()
-                });
-                newTempUser.save()
-                    .catch((err) => {
-                        res.status(500).json("temp user is not created");
-                    })
-                res.status(200).json("otp send succefully");
-            })
-            .catch((err) => {
-                res.status(500).json("OTP not send");
-            })
-    } catch (err) {
-        let error = handleErrors(err);;
+        let newUser = new User({
+            fname: fname,
+            lname: lname,
+            email: email,
+            username: username,
+            password: password,
+            PicUrl: PicUrl,
+            createdAt: Date.now()
+        });
+        await newUser.save();
+        res.status(201).json(newUser);
+    }
+    catch (err) {
+        let error = handleErrors(err);
         res.status(404).json(error);
     }
-
 })
-
-
 router.post("/in", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username: username });

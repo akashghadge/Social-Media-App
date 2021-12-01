@@ -1,41 +1,46 @@
 import axios from "axios";
 import React, { useState } from "react"
 import { useParams } from "react-router-dom"
-// mui
-// snack bar code
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
 import Pagebreadcrumb from "../SmallComponents/PageBreadcrumb";
+import http from "../../helper/http";
 
 const ResetPassword = () => {
+    const { token } = useParams();
+    // data
     let [snackbarObj, setSnackbarObj] = useState({
         text: "hello world",
         backgroundColor: "black"
     });
     let [loading, setLoading] = useState(false);
     let [open, setOpen] = useState(false);
+    let [password, setPassword] = useState("");
+
+    // methods
     function handleClickCloseSnackBar() {
         setOpen(false);
     }
-
-
-    let { token } = useParams();
-    let [password, setPassword] = useState("");
     function inputChange(e) {
         setPassword(e.target.value);
     }
-    function changePassword(e) {
+    function isError() {
         if (password.length <= 5) {
             setSnackbarObj({ text: "Password should contain atleast 6 letters", backgroundColor: "red" })
-            return setOpen(true);
+            setOpen(true);
+            return true;
         }
+        return false;
+    }
+    function changePassword(e) {
+        if (isError())
+            return;
         setLoading(true);
-        const urlForReset = "/api/mail/reset-password/";
         const sendData = {
             token: token,
             newPassword: password
         };
-        axios.post(urlForReset, sendData)
+        http.changePasswordAPI(sendData)
             .then((data) => {
                 setSnackbarObj({ text: "Email is Sent", backgroundColor: "green" });
                 setOpen(true);
@@ -47,7 +52,7 @@ const ResetPassword = () => {
                 setLoading(false);
             });
     }
-    
+
     return (
         <>
             <Pagebreadcrumb heading="Reset Password" base="Home" url=""></Pagebreadcrumb>

@@ -1,13 +1,12 @@
+// socket.io code sepration
 const Conversation = require("../models/Conversation.model");
-const User = require("../models/User.model");
 async function addMessageToDB(SenderId, RecId, text) {
     try {
-
         const filter1 = {
             SenderId: SenderId,
             RecId: RecId
         };
-        let updatedData1 = await Conversation.updateOne(filter1, {
+        await Conversation.updateOne(filter1, {
             $push: {
                 chats: {
                     sender: SenderId,
@@ -22,7 +21,7 @@ async function addMessageToDB(SenderId, RecId, text) {
             SenderId: RecId,
             RecId: SenderId
         };
-        let updatedData2 = await Conversation.updateOne(filter2, {
+        await Conversation.updateOne(filter2, {
             $push: {
                 chats: {
                     sender: SenderId,
