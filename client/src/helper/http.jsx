@@ -46,5 +46,5 @@ export default {
     },
     async changePasswordAPI(body) {
         return axios.post(this.baseURL + "api/mail/reset-password", body);
-    }
+    },
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import axios from "axios"
-import { useHistory, NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SnackBarCustom from "../SmallComponents/SnackBarCustom"
 import ReactLoading from "react-loading"
 import ForgetPassword from "./ForgetPassword";
 import http from "../../helper/http";
+
 const SignIn = () => {
     let history = useHistory();
     let [snackbarObj, setSnackbarObj] = useState({
