@@ -12,11 +12,21 @@ const ChatMain = () => {
     const LoggedUser = useSelector((state) => {
         return state.User;
     })
+
+
     let [totalUsers, setTotalUsers] = useState([]);
+    let [chatUser, setChatUser] = useState("");
+    function isLoggedIn() {
+        return (!LoggedUser._id);
+    }
     useEffect(() => {
-        if (!LoggedUser._id) {
+        if (isLoggedIn()) {
             history.push("/profile");
         }
+        const payload = {
+            id: LoggedUser._id
+        }
+        // make it get request
         axios.post("/api/chat/user-list", { id: LoggedUser._id })
             .then((data) => {
                 setTotalUsers(data.data);
@@ -26,10 +36,8 @@ const ChatMain = () => {
             })
     }, [])
 
-    let [chatUser, setChatUser] = useState("");
     function changeChatUser(e, newChatUser, newChatUsername) {
-        const newChatUserObj =
-        {
+        const newChatUserObj = {
             id: newChatUser,
             username: newChatUsername
         }
