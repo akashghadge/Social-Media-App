@@ -36,7 +36,7 @@ const UserSchema = new Schema
         },
         PicUrl: {
             type: String,
-            default: "http://social-media-app-akash.herokuapp.com/public/images/blank.png"
+            default: "http://social-media-app-8szj.onrender.com/public/images/blank.png"
         },
         resetToken: {
             type: String
