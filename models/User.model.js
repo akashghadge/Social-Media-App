@@ -32,7 +32,7 @@ const UserSchema = new Schema
         {
             type: String,
             minLength: [6, 'minimum password length is 6 charecters'],
-            requireed: [true, 'please enter username']
+            required: [true, 'please enter username']
         },
         PicUrl: {
             type: String,
