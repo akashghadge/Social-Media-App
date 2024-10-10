@@ -16,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "caniuse-lite": "^1.0.30001279",
     "concurrently": "^6.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
