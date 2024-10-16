@@ -32,11 +32,11 @@ const UserSchema = new Schema
         {
             type: String,
             minLength: [6, 'minimum password length is 6 charecters'],
-            requireed: [true, 'please enter username']
+            required: [true, 'please enter username']
         },
         PicUrl: {
             type: String,
-            default: "http://social-media-app-akash.herokuapp.com/public/images/blank.png"
+            default: "http://social-media-app-8szj.onrender.com/public/images/blank.png"
         },
         resetToken: {
             type: String

@@ -1,6 +1,5 @@
 import axios from "axios";
-
-export default {
+const expo = {
     baseURL: "/",
     async getAllUsers() {
         const { data } = await axios.get(this.baseURL + "api/user/all-users-homepage");
@@ -48,3 +47,5 @@ export default {
         return axios.post(this.baseURL + "api/mail/reset-password", body);
     },
 }
+
+export default expo;
