@@ -31,14 +31,14 @@ require("./DB/conn");
 
 
 // api routers
-const verify = require("../middleware/verify");
-const EmailRoute = require("../routes/Email.route");
-const User = require("../routes/User.route");
-const Dashboard = require("../routes/Dashboard.route");
-const Post = require("../routes/Post.route");
-const Follow = require("../routes/Follow.route")
-const Chat = require("../routes/Chat.route");
-const NotificationNew = require("../routes/Notification.route");
+const verify = require("./middleware/verify");
+const EmailRoute = require("./routes/Email.route");
+const User = require("./routes/User.route");
+const Dashboard = require("./routes/Dashboard.route");
+const Post = require("./routes/Post.route");
+const Follow = require("./routes/Follow.route")
+const Chat = require("./routes/Chat.route");
+const NotificationNew = require("./routes/Notification.route");
 
 // routes setting
 app.use("/api/", EmailRoute);
