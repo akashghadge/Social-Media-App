@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
-    "compile:sass": "node-sass src/scss/main.scss src/index.css -w",
+    "compile:sass": "node-sass src/scss/main.scss src/indexCSS.css -w",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
