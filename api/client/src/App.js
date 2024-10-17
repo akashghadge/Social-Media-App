@@ -1,4 +1,4 @@
-import './App.css';
+import './AppCSS.css';
 import MatchOTP from './Components/Auth/MatchOTP';
 import Sign from './Components/Auth/Sign';
 import NavbarM from "./Components/Navbar/NavbarM";
